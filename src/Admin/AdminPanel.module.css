@@ -1,0 +1,26 @@
+.container {
+  padding: var(--spacing-3xl);
+  color: var(--white);
+  font-family: var(--font-family);
+  background: var(--green);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing-2xl);
+}
+
+.table th, .table td {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--gray-bg);
+  text-align: center;
+}
+
+select {
+  padding: var(--spacing-xs);
+  border-radius: var(--rounded-sm);
+  background: var(--dark-gray);
+  color: var(--white);
+  cursor: pointer;
+}

@@ -1,0 +1,13 @@
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 60px 20px;
+  background-color: var(--dark-gray);
+  flex-wrap: wrap;
+}
+
+.feature {
+  text-align: center;
+  max-width: 250px;
+  margin-bottom: 20px;
+}

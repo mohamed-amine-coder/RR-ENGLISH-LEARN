@@ -1,0 +1,14 @@
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--dark-gray);
+}
+
+.social-icons {
+  margin-bottom: 10px;
+}
+
+.social-icons svg {
+  margin: 0 10px;
+  cursor: pointer;
+}

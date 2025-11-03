@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+
+:root {
+  /* ===== الألوان ===== */
+  --dark-gray: #222;
+  --gray-bg: #2e2e2e;
+  --orange: #ff7b00;
+  --green: #29b864;
+  --blue: #0077ff;
+  --muted-red: #d16c6c;
+  --white: #fff;
+  --black: #111;
+
+  /* ===== الخط ===== */
+  --font-family: 'Tajawal', sans-serif;
+
+  /* ===== المقاييس ===== */
+  --font-xs: 0.75rem;   /* 12px */
+  --font-sm: 0.875rem;  /* 14px */
+  --font-md: 1rem;      /* 16px */
+  --font-lg: 1.125rem;  /* 18px */
+  --font-xl: 1.25rem;   /* 20px */
+  --font-2xl: 1.5rem;   /* 24px */
+  --font-3xl: 1.875rem; /* 30px */
+  --font-4xl: 2.25rem;  /* 36px */
+  --font-5xl: 3rem;     /* 48px */
+
+  /* ===== المسافات ===== */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* ===== الحدود (border-radius) ===== */
+  --rounded-sm: 4px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-xl: 16px;
+
+  /* ===== الظلال (shadows) ===== */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.15);
+
+  /* ===== الحد الأقصى للعرض ===== */
+  --max-width: 1200px;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background: var(--dark-gray);
+  color: var(--white);
+}
+
+button {
+  font-family: var(--font-family);
+}
