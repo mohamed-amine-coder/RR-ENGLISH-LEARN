@@ -1,61 +1,148 @@
+/* StartSection.module.css */
+
 .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+  font-family: var(--font-family);
+  text-align: right;
+  direction: rtl;
+  min-height: 60vh; /* باش ياخد مساحة مزيانة فالشاشة */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: var(--spacing-3xl);
-  background: var(--gray-bg);
-  color: var(--white);
-  min-height: 80vh;
-  direction: rtl;
-}
-
-.title {
-  font-size: var(--font-4xl);
-  font-weight: 700;
-  margin-bottom: var(--spacing-md);
-}
-
-.subtitle {
-  font-size: var(--font-lg);
-  margin-bottom: var(--spacing-2xl);
-  color: var(--orange);
-}
-
-.buttons {
-  display: flex;
-  gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-3xl);
-  flex-wrap: wrap;
   justify-content: center;
 }
 
-.button {
+/* --- Header Section --- */
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--dark-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.wave {
+  display: inline-block;
+  animation: wave 2s infinite;
+  transform-origin: 70% 70%;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.subtitle strong {
+  color: var(--primary-color);
+  display: block;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+/* --- Grid System --- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* عمودين */
+  gap: var(--spacing-lg);
+}
+
+/* --- Action Cards --- */
+.card {
+  background: #fff;
+  border: 2px solid #f0f0f0;
+  border-radius: 20px;
+  padding: 30px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.iconWrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  background: var(--blue);
-  color: var(--white);
-  border: none;
-  padding: var(--spacing-md) var(--spacing-2xl);
-  border-radius: var(--rounded-lg);
-  cursor: pointer;
-  font-size: var(--font-lg);
-  font-weight: 600;
-  transition: transform 0.2s, background 0.3s;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.button:hover {
-  background: var(--green);
-  transform: translateY(-3px);
+.cardContent h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--dark-color);
 }
 
-.icon {
-  font-size: 1.5rem;
+.cardContent p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #777;
+  line-height: 1.5;
 }
 
-.motivation {
-  font-size: var(--font-md);
-  font-weight: 500;
-  color: var(--muted-red);
+.arrowIcon {
+  position: absolute;
+  top: 30px;
+  left: 30px; /* بما أننا RTL، السهم يكون فاليسار */
+  color: #ddd;
+  transition: all 0.3s ease;
+  transform: rotate(180deg); /* تدوير السهم ليشير لليسار */
+}
+
+.card:hover .arrowIcon {
+  color: var(--primary-color);
+  transform: rotate(180deg) translateX(5px); /* حركة صغيرة */
+}
+
+/* --- Animation --- */
+@keyframes wave {
+  0% { transform: rotate( 0.0deg) }
+  10% { transform: rotate(14.0deg) }
+  20% { transform: rotate(-8.0deg) }
+  30% { transform: rotate(14.0deg) }
+  40% { transform: rotate(-4.0deg) }
+  50% { transform: rotate(10.0deg) }
+  60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr; /* عمود واحد فالموبايل */
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+  
+  .card {
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+  }
+
+  .arrowIcon {
+    display: none; /* إخفاء السهم فالموبايل لتوفير المساحة */
+  }
 }

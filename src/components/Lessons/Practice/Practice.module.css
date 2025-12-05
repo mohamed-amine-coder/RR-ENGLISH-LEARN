@@ -1,204 +1,581 @@
+/* Practice.module.css */
+
+/* --- Layout الهيكل العام --- */
 .container {
-  max-width: var(--max-width);
+  max-width: 700px;
   margin: 0 auto;
-  padding: var(--spacing-lg);
-}
-
-.introSticky {
-  /* position: sticky; */
-  top: 0;
-  z-index: 10;
-}
-
-.intro, .quiz, .write, .tf, .result {
-  margin-top: var(--spacing-lg);
-  animation: fadeIn 0.6s ease-in;
-  background-color: var(--gray-bg);
-  padding: var(--spacing-md);
-  border-radius: var(--rounded-lg);
-  box-shadow: var(--shadow-md);
-}
-.intro {
-  border: 2px solid var(--orange);
-  padding: 0 var(--spacing-md);
-  padding-bottom: 10px;
-}
-
-.text_element {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 30px; /* المسافة بين الصورة والنص */
-  margin-top: 20px;
-  flex-wrap: wrap; /* باش يكون Responsive */
-}
-
-/* الجهة ديال النص والصوت */
-.story {
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-  flex: 1;
-}
-
-.story p {
-  background-color: var(--orange);
-  border-radius: var(--rounded-lg);
-  padding: var(--spacing-md);
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  word-spacing: 1px;
-  font-size: var(--font-md);
-  line-height: 1.6;
-  color: var(--black);
-  max-width: 70%;
-}
-
-/* الصورة */
-.image img {
-  width: 200px;
-  max-width: 100%;
-  border-radius: var(--rounded-lg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* العنوان */
-.title h3 {
-  color: var(--orange);
-  border: 2px solid var(--orange);
-  background-color: var(--black);
-  padding: var(--spacing-sm);
-  border-radius: var(--rounded-md);
-  text-align: center;
-  font-size: var(--font-2xl);
-  margin-bottom: var(--spacing-sm);
-}
-
-
-.audio {
-  margin: var(--spacing-sm) 0;
-}
-
-.lessonContent {
-  margin-top: var(--spacing-lg);
-}
-
-.nextBtn {
-  background-color: var(--green);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--rounded-md);
-  color: var(--white);
-  font-size: var(--font-md);
-  cursor: pointer;
-  margin-top: var(--spacing-md);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.nextBtn:hover {
-  background-color: var(--orange);
-}
-
-.options, .tfButtons {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
-}
-
-.optionBtn {
-  padding: var(--spacing-sm);
-  border-radius: var(--rounded-md);
-  border: 1px solid #555;
-  cursor: pointer;
-  background-color: var(--gray-bg);
-  color: var(--white);
-  transition: border 0.2s ease, transform 0.2s ease;
-}
-
-.optionBtn:hover {
-  border-color: var(--white);
-}
-
-.optionBtnSelected {
-  background-color: var(--green);
-}
-
-.inputField {
-  padding: var(--spacing-sm);
-  width: 100%;
-  border-radius: var(--rounded-md);
-  border: 1px solid #555;
-  margin-top: var(--spacing-sm);
-  background-color: var(--dark-gray);
-  color: var(--white);
-}
-
-.progress {
-  background-color: #555;
-  height: 8px;
-  border-radius: var(--rounded-sm);
-  margin-bottom: var(--spacing-md) a;
+  position: relative;
+  direction: rtl; /* الواجهة عربية */
+  text-align: right;
+  font-family: var(--font-family);
   overflow: hidden;
 }
 
-.progressBar {
-  background-color: var(--green);
+/* --- Top Bar --- */
+.topBar {
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  margin-top: 2%;
+  border-radius: var(--spacing-md);
+  gap: 15px;
+  background: var(--primary-color);
+  position: sticky;
+  top: 0;
+  width: 90%;
+  margin: 10px auto;
+  z-index: 10;
+  flex-direction: row; 
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #e5e5e5;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: none; /* إخفاء زر الإغلاق */
+}
+
+.closeButton:hover {
+  color: var(--dark-color);
+}
+
+/* زر عرض النص */
+.storyToggleBtn {
+  background: #f0f7ff;
+  border: 2px solid #84d8ff;
+  color: #1cb0f6;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.storyToggleBtn:hover {
+  background: #ddf4ff;
+  transform: translateY(-2px);
+}
+
+.progressContainer {
+  flex: 1;
+  background: #e5e5e5;
+  height: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  direction: ltr; /* لملء الشريط من اليسار */
+}
+
+.progressFill {
   height: 100%;
-  width: 0%;
-  transition: width 0.3s ease;
+  background: var(--success-color);
+  border-radius: 10px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tfButtons button:first-child {
-  background-color: var(--green);
+/* --- Card Body --- */
+.practiceCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  padding-bottom: 100px; /* مساحة للفوتر */
 }
 
-.tfButtons button:last-child {
-  background-color: var(--muted-red);
+.cardBody {
+  flex: 1;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  max-height: calc(100vh - 180px);
 }
 
-.tfButtons button:hover {
-  transform: translateY(-2px) scale(1.02);
+/* --- Typography --- */
+.instructionTitle {
+  font-size: 1rem;
+  color: var(--dark-color);
+  opacity: 0.7;
+  padding-top: 10px;
+  margin: 15px auto;
+  font-weight: 700;
+  width: 100%;
+  text-align: right;
+  word-spacing: 5px;
 }
 
-.result h2 {
-  font-size: var(--font-2xl);
+.questionText {
+  font-size: 1.6rem;
+  color: var(--dark-color);
   text-align: center;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 30px;
+  line-height: 1.5;
+  font-weight: 800;
+  width: 100%;
+  unicode-bidi: plaintext; /* ضبط اتجاه النص تلقائياً */
+  direction: rtl; /* نص السؤال إنجليزي */
 }
 
-.fadeSlide {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: slideUp 0.5s forwards;
+/* --- Inputs & Options (English LTR) --- */
+.writeInput {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.3rem;
+  background: #f7f7f7;
+  border: 2px solid #e5e5e5;
+  border-radius: 16px;
+  outline: none;
+  color: var(--dark-color);
+  transition: border 0.2s;
+  direction: ltr; /* كتابة إنجليزية */
+  text-align: center;
+  font-family: sans-serif;
+  caret-color: var(--primary-color);
 }
 
-.optionBtnCorrect {
-  background-color: var(--green);
-  color: var(--white);
+.writeInput:focus {
+  border-color: #84d8ff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(132, 216, 255, 0.2);
 }
 
-.optionBtnWrong {
-  background-color: var(--muted-red);
-  color: var(--white);
+/* Shake Animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
 }
 
-.feedback {
-  margin-top: var(--spacing-sm);
-  font-size: var(--font-lg);
-  font-weight: 500;
+.shake {
+  animation: shake 0.4s ease-in-out;
+  border-color: var(--error-color) !important;
+  background: #fff5f5;
 }
 
+.hintButton {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;
+  font-family: var(--font-family);
+}
+.hintButton:hover { color: var(--secondary-color); }
 
-@keyframes slideUp {
-  to { opacity: 1; transform: translateY(0); }
+.optionCard {
+  background: #fff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 4px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  cursor: pointer;
+  transition: all 0.1s;
+  direction: ltr; /* خيارات إنجليزية */
+  text-align: left;
+  display: flex;
+  align-items: center;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.optionCard:hover:not(:disabled) { background: #f7f7f7; }
+.optionCard:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+.optionCard.selected { border-color: #84d8ff; background: #ddf4ff; color: #1cb0f6; border-bottom-color: #84d8ff; }
+.optionCard.correct { border-color: var(--success-color); background: #d7ffb8; color: #58a700; }
+.optionCard.wrong { border-color: var(--error-color); background: #ffdfe0; color: var(--error-color); }
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .optionsGrid {
+    grid-template-columns: 1fr 1fr;
+    direction: rtl; /* لترتيب الأعمدة من اليمين */
+  }
+}
+
+/* --- Footer Area --- */
+.footerArea {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: #fff;
+  border-top: 2px solid #e5e5e5;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  animation: slideUp 0.3s ease;
+  direction: rtl;
+}
+
+.footerArea.correct { background: #d7ffb8; border-top: none; color: #58a700; }
+.footerArea.wrong { background: #ffdfe0; border-top: none; color: #ea2b2b; }
+
+.footerContent {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.feedbackMessage {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: right;
+}
+
+.feedbackIcon {
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.feedbackText h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
+
+.actionButton {
+  background: var(--success-color);
+  color: #fff;
+  border: none;
+  border-bottom: 4px solid #46a35e;
+  border-radius: 16px;
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.1s;
+  min-width: 150px;
+  font-family: var(--font-family);
+}
+
+.actionButton:active { transform: translateY(4px); border-bottom: 0; margin-top: 4px; }
+.actionButton:disabled { background: #e5e5e5; border-bottom: 4px solid #cfcfcf; color: #afafaf; cursor: default; transform: none; margin-top: 0; }
+.actionButton.wrongState { background: #ff4b4b; border-bottom: 4px solid #ea2b2b; }
+
+/* --- TF Buttons --- */
+.tfContainer {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  direction: rtl;
+}
+
+.tfBtn {
+  flex: 1;
+  padding: 30px;
+  border-radius: 16px;
+  border: 2px solid #e5e5e5;
+  border-bottom: 4px solid #e5e5e5;
+  background: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.tfBtn.selected { border-color: var(--secondary-color); background: #fff5e6; }
+
+/* --- Modal Styles (للقصة) --- */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+}
+
+.storyModal {
+  background: #fff;
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modalHeader {
+  padding: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  direction: rtl;
+}
+
+.modalHeader h3 { margin: 0; color: var(--dark-color); }
+
+.closeModalBtn {
+  background: #f5f5f5;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+}
+
+.closeModalBtn:hover { background: #ff4b4b; color: #fff; }
+
+.modalBody {
+  padding: 25px;
+  overflow-y: auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  text-align: left;
+  direction: ltr; /* النص الإنجليزي يسار */
+}
+
+/* Animations */
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { transform: scale(0.9); } to { transform: scale(1); } }
+
+
+
+/* بعض التعديلات */
+/* Practice.module.css */
+
+/* --- 1. Container: حرر السكرول --- */
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  min-height: 100vh; /* شد الطول كامل */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-family);
+  /* ❌ مسح هادي: overflow: hidden; */
+  /* ✅ دير هادي: */
+  overflow: visible; 
+}
+
+/* --- 2. Top Bar: خليه لاصق (Sticky) --- */
+.topBar {
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  margin-top: 10px; /* مسافة صغيرة من الفوق */
+  border-radius: var(--spacing-md);
+  gap: 15px;
+  background: var(--primary-color);
+  
+  /* ✅ باش يلصق الفوق ملي تهبط */
+  position: sticky; 
+  top: 10px; 
+  z-index: 100;
+  
+  width: 95%; /* عرض مناسب */
+  margin: 10px auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* ظل باش يبان مفروز */
+}
+
+/* ... (باقي الستايلات ديال CloseButton و ProgressContainer خليهم) ... */
+
+/* --- 3. Practice Card & Body: حيد القيود --- */
+.practiceCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  
+  /* ✅ مساحة كبيرة لتحت باش الفوتر ما يغطيش المحتوى */
+  padding-bottom: 120px; 
+}
+
+.cardBody {
+  flex: 1;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* سنطر المحتوى إلا كان قليل */
+  align-items: center;
+  
+  /* ❌ مسح هادو بجوج: */
+  /* overflow-y: auto; */
+  /* max-height: calc(100vh - 180px); */
+  
+  /* ✅ خليه طبيعي: */
+  height: auto; 
+  min-height: 50vh; /* أقل طول باش يجي الوسط */
+}
+
+/* ... (باقي الستايلات ديال Typography و Inputs خليهم) ... */
+
+/* --- 4. Footer Area: تأكد أنه تابت لتحت --- */
+.footerArea {
+  position: fixed; /* لاصق فالشاشة */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: #fff; /* ضروري خلفية باش يغطي لي وراه */
+  border-top: 2px solid #e5e5e5;
+  z-index: 1000; /* فوق كلشي */
+  display: flex;
+  justify-content: center;
+  animation: slideUp 0.3s ease;
+  direction: rtl;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.05); /* ظل خفيف من الفوق */
+}
+.audioPlayer {
+  width: 100%;
+  margin-top: 15px;
+  display: block !important; /* فرض الظهور */
+  height: 40px; /* نعطوه طول باش يبان واخا ما خدامش */
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* ظلام أكثر للتركيز */
+  backdrop-filter: blur(4px);
+  z-index: 2000; /* فوق كلشي */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+}
+
+.storyModal {
+  background: #fff;
+  width: 100%;
+  max-width: 500px; /* عرض مناسب للقراءة */
+  max-height: 85vh;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modalHeader {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  direction: rtl;
+  background: #f9f9f9;
+}
+
+.modalHeader h3 { margin: 0; color: var(--dark-color); font-size: 1.1rem; }
+
+.closeModalBtn {
+  background: #eee;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: 0.2s;
+}
+.closeModalBtn:hover { background: #ff4b4b; color: #fff; }
+
+.modalBody {
+  padding: 20px;
+  overflow-y: auto; /* سكرول للنص الطويل */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.storyImage {
+  width: 30%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.storyText {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  background: #f0f7ff;
+  padding: 15px;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-color);
+  direction: ltr; /* الإنجليزية يسار */
+  text-align: left;
+}
+
+/* 🟢 إصلاح الأوديو */
+.audioPlayer {
+  width: 100%;
+  height:  70px; /* ارتفاع ثابت */
+  border-radius: 50px; /* تدويرة زوينة */
+  margin-top: 10px;
+  display: block !important; /* فرض الظهور */
+  margin: 10px 0;
+  outline: none;
+}
+
+/* تحسين شكل الأوديو في Chrome */
+.audioPlayer::-webkit-media-controls-panel {
+  background-color: #f1f3f4;
 }

@@ -1,69 +1,71 @@
 import React, { useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import { FaCheck, FaTimes } from "react-icons/fa";
 import styles from "./Practice.module.css";
 
 const PracticeTF = ({ questions, onNext, onAnswer }) => {
   const [current, setCurrent] = useState(0);
-  const [selected, setSelected] = useState(null); // true/false بعد الاختيار
-  const [feedback, setFeedback] = useState("");
+  const [selected, setSelected] = useState(null);
+  const [status, setStatus] = useState("idle");
 
   const handleSelect = (value) => {
-    if (selected !== null) return; // منع تغيير الاختيار بعد الضغط
+    if (status !== "idle") return; // منع النقر المتكرر
+
     setSelected(value);
 
-    if (value === questions[current].answer) {
-      setFeedback("صح");
-      onAnswer();
-    } else {
-      setFeedback("غلط");
-    }
+    // التحقق الفوري
+    const isCorrect = value === questions[current].answer;
+    setStatus(isCorrect ? "correct" : "wrong");
+    
+    if (isCorrect) onAnswer();
   };
 
-  const handleNext = () => {
+  const handleContinue = () => {
     setSelected(null);
-    setFeedback("");
+    setStatus("idle");
     if (current + 1 < questions.length) setCurrent(current + 1);
     else onNext();
   };
 
   return (
-    <div className={styles.tf}>
-      <p className={styles.fadeSlide}>{questions[current].question}</p>
-      <div className={styles.tfButtons}>
-        <button
-          onClick={() => handleSelect(true)}
-          className={
-            selected === true && feedback === "صح"
-              ? styles.optionBtnCorrect
-              : selected === true && feedback === "غلط"
-              ? styles.optionBtnWrong
-              : ""
-          }
-        >
-          صح
-        </button>
-        <button
-          onClick={() => handleSelect(false)}
-          className={
-            selected === false && feedback === "صح"
-              ? styles.optionBtnCorrect
-              : selected === false && feedback === "غلط"
-              ? styles.optionBtnWrong
-              : ""
-          }
-        >
-          خطأ
-        </button>
+    <>
+      <div className={styles.cardBody}>
+        <div className={styles.instructionTitle}>قرا وفكر واش صحيح ولا غلط ؟</div>
+        <h2 className={styles.questionText}>{questions[current].question}</h2>
+        
+        <div className={styles.tfContainer}>
+          <div 
+            className={`${styles.tfBtn} ${selected === true ? styles.selected : ''}`}
+            onClick={() => handleSelect(true)} // تحقق فوري
+          >
+            <span style={{fontSize:'2rem'}}>👍</span> بصح
+          </div>
+          <div 
+            className={`${styles.tfBtn} ${selected === false ? styles.selected : ''}`}
+            onClick={() => handleSelect(false)} // تحقق فوري
+          >
+            <span style={{fontSize:'2rem'}}>👎</span> لا غلط
+          </div>
+        </div>
       </div>
 
-      {feedback && <p className={styles.feedback}>{feedback}</p>}
+      {/* الفوتر يظهر فقط بعد الإجابة */}
+      <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`} style={{display: status === 'idle' ? 'none' : 'flex'}}>
+        <div className={styles.footerContent}>
+             <div className={styles.feedbackMessage}>
+               <div className={styles.feedbackIcon} style={{color: status === 'correct' ? '#58a700' : '#ea2b2b'}}>
+                 {status === 'correct' ? <FaCheck /> : <FaTimes />}
+               </div>
+               <div className={styles.feedbackText}>
+                 <h3>{status === 'correct' ? 'صحيح!' : 'للأسف خطأ'}</h3>
+               </div>
+             </div>
 
-      {selected !== null && (
-        <button className={styles.nextBtn} onClick={handleNext}>
-          التالي <FaArrowRight />
-        </button>
-      )}
-    </div>
+            <button className={`${styles.actionButton} ${status === 'wrong' ? styles.wrongState : ''}`} onClick={handleContinue}>
+              تابع
+            </button>
+        </div>
+      </div>
+    </>
   );
 };
 

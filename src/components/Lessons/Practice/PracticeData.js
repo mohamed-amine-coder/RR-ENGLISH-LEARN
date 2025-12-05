@@ -1,244 +1,557 @@
-// import img1 from "/public/images/story1.jpg";
-// import img2 from "/public/images/story2.jpg";
-// import img3 from "/public/images/story3.jpg";
-// import img4 from "/public/images/story4.jpg";
-// import img5 from "/public/images/story5.jpg";
-// import img6 from "/public/images/story6.jpg";
-// import img7 from "/public/images/story7.jpg";
-// import img8 from "/public/images/story8.jpg";
-// import img9 from "/public/images/story9.jpg";
-// import img10 from "/public/images/story10.jpg";
 
-// import audio1 from "/public/audio/story1.mp3";
-// import audio2 from "/public/audio/story2.mp3";
-// import audio3 from "/public/audio/story3.mp3";
-// import audio4 from "/public/audio/story4.mp3";
-// import audio5 from "/public/audio/story5.mp3";
-// import audio6 from "/public/audio/story6.mp3";
-// import audio7 from "/public/audio/story7.mp3";
-// import audio8 from "/public/audio/story8.mp3";
-// import audio9 from "/public/audio/story9.mp3";
-// import audio10 from "/public/audio/story10.mp3";
+// const imgPlaceholder = "https://placehold.co/600x400/0077ff/ffffff?text=Lesson+Image";
 
+// export const lessonsData = [
+  
+//   // --- Lesson 1: Greetings & Introduction ---
+//   {
+//     id: "lesson_1",
+//     intro: {
+//       title: "Lesson 1 – Nice to meet you",
+//       story: "Hello! My name is Amine. I am 20 years old. I am from Morocco, specifically from Casablanca. I am a new student at the university. I am very happy to meet you all today.",
+//       image: imgPlaceholder, 
+//       audio: "" 
+//     },
+//     quiz: [
+//       { question: "شحال فعمو أمين؟", options: ["10 years", "20 years", "30 years"], answer: "20 years" },
+//       { question: "منين هو بالضبط؟", options: ["Rabat", "Marrakech", "Casablanca"], answer: "Casablanca" },
+//       { question: "شنو كيدير أمين؟", options: ["He is a doctor", "He is a student", "He is a teacher"], answer: "He is a student" }
+//     ],
+//     write: [
+//       { question: "كتب 'المغرب' بالإنجليزية", answer: "Morocco" },
+//       { question: "كتب 'طالب'", answer: "Student" }
+//     ],
+//     tf: [
+//       { question: "Amine is from France.", answer: false },
+//       { question: "He is happy to meet people.", answer: true },
+//       { question: "Amine is a new student.", answer: true }
+//     ]
+//   },
+
+//   // --- Lesson 2: Jobs & Occupation ---
+//   {
+//     id: "lesson_2",
+//     intro: {
+//       title: "Lesson 2 – Jobs in the Family",
+//       story: "My name is Layla. I am a teacher; I work in a primary school. My husband, Omar, is an engineer. He works in a big office in Tangier. We both love our jobs very much.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "شنو خدمة ليلى؟", options: ["Engineer", "Teacher", "Doctor"], answer: "Teacher" },
+//       { question: "فين خدام الزوج ديالها (عمر)؟", options: ["In a school", "In a hospital", "In an office"], answer: "In an office" },
+//       { question: "واش كيبغيو خدمتهم؟", options: ["No, they hate it", "Yes, they love it", "They are tired"], answer: "Yes, they love it" }
+//     ],
+//     write: [
+//       { question: "كتب 'أستاذ/ة'", answer: "Teacher" },
+//       { question: "كتب 'مكتب'", answer: "Office" }
+//     ],
+//     tf: [
+//       { question: "Layla works in a hospital.", answer: false },
+//       { question: "Omar is an engineer.", answer: true },
+//       { question: "They work in Tangier.", answer: true }
+//     ]
+//   },
+
+//   // --- Lesson 3: Family ---
+//   {
+//     id: "lesson_3",
+//     intro: {
+//       title: "Lesson 3 – Small Family",
+//       story: "I live in a small apartment with my family. I have one brother named Youssef and one little sister named Hiba. My father is tall and funny. My mother is very kind and she cooks delicious food.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "مع من ساكن؟", options: ["Alone (بوحدي)", "With friends", "With family"], answer: "With family" },
+//       { question: "شنو سمية الأخت الصغيرة؟", options: ["Sara", "Hiba", "Salma"], answer: "Hiba" },
+//       { question: "كيفاش داير الأب؟", options: ["Short and sad", "Tall and funny", "Angry"], answer: "Tall and funny" }
+//     ],
+//     write: [
+//       { question: "كتب 'خويا' (أخ)", answer: "Brother" },
+//       { question: "كتب 'أختي'", answer: "Sister" }
+//     ],
+//     tf: [
+//       { question: "The family lives in a big villa.", answer: false },
+//       { question: "The mother cooks bad food.", answer: false },
+//       { question: "Youssef is the brother's name.", answer: true }
+//     ]
+//   },
+
+//   // --- Lesson 4: Numbers & Money ---
+//   {
+//     id: "lesson_4",
+//     intro: {
+//       title: "Lesson 4 – At the Shop",
+//       story: "I need to buy a pen and a notebook. The pen is 2 Dirhams and the notebook is 8 Dirhams. The total price is 10 Dirhams. I give the shopkeeper a 20 Dirham note. He gives me 10 Dirhams back.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "شحال الثمن ديال الستيلو؟", options: ["2 Dirhams", "5 Dirhams", "8 Dirhams"], answer: "2 Dirhams" },
+//       { question: "شحال المجموع (Total)؟", options: ["15 Dirhams", "10 Dirhams", "20 Dirhams"], answer: "10 Dirhams" },
+//       { question: "شحال رجع ليا مول الحانوت (الصرف)؟", options: ["5 Dirhams", "10 Dirhams", "Nothing"], answer: "10 Dirhams" }
+//     ],
+//     write: [
+//       { question: "كتب رقم 'عشرة' بالحروف", answer: "Ten" },
+//       { question: "كتب 'دفتر'", answer: "Notebook" }
+//     ],
+//     tf: [
+//       { question: "The notebook costs 8 Dirhams.", answer: true },
+//       { question: "I pay with a 50 Dirham note.", answer: false },
+//       { question: "I buy a pen and a notebook.", answer: true }
+//     ]
+//   },
+
+//   // --- Lesson 5: Daily Routine ---
+//   {
+//     id: "lesson_5",
+//     intro: {
+//       title: "Lesson 5 – Morning Routine",
+//       story: "Every day, I wake up at 7:00 AM. First, I wash my face and brush my teeth. Then, I eat breakfast with my family. We usually eat bread with olive oil and drink mint tea. At 8:30 AM, I walk to school.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "فوقاش كنفيق؟", options: ["6:00 AM", "7:00 AM", "9:00 AM"], answer: "7:00 AM" },
+//       { question: "شنو كنشربو فالفطور؟", options: ["Coffee", "Orange Juice", "Mint tea"], answer: "Mint tea" },
+//       { question: "كيفاش كنمشي للمدرسة؟", options: ["By bus", "By car", "I walk"], answer: "I walk" }
+//     ],
+//     write: [
+//       { question: "كتب 'فطور'", answer: "Breakfast" },
+//       { question: "كتب 'كنمشي' (I ...)", answer: "Walk" }
+//     ],
+//     tf: [
+//       { question: "I wake up at 10 AM.", answer: false },
+//       { question: "We eat bread with olive oil.", answer: true },
+//       { question: "I brush my teeth before breakfast.", answer: true }
+//     ]
+//   },
+//   // --- Lesson 6: Colors & Clothes ---
+//   {
+//     id: "lesson_6",
+//     intro: {
+//       title: "Lesson 6 – Clothes & Shopping",
+//       story: "Sara is at the mall to buy new clothes. She sees a beautiful red dress, but it is very expensive. Next to it, there is a blue t-shirt and black jeans. They are cheap and look comfortable. Sara decides to buy the blue t-shirt and the black jeans because she likes the color blue.",
+//       image: imgPlaceholder, 
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "فين مشات سارة؟", options: ["The park", "The mall", "School"], answer: "The mall" },
+//       { question: "كيفاش داير الكسوة (Dress) لي شافتها؟", options: ["Cheap (رخيصة)", "Green (خضرة)", "Expensive (غالية)"], answer: "Expensive (غالية)" },
+//       { question: "شنو شرات سارة فاللخر؟", options: ["Red dress", "Blue t-shirt", "Yellow hat"], answer: "Blue t-shirt" },
+//       { question: "علاش اختارت التيشيرت؟", options: ["She likes blue", "It was expensive", "It was big"], answer: "She likes blue" }
+//     ],
+//     write: [
+//       { question: "كتب لون 'أحمر'", answer: "Red" },
+//       { question: "كتب لون 'أزرق'", answer: "Blue" },
+//       { question: "كتب 'غالي' (الثمن)", answer: "Expensive" }
+//     ],
+//     tf: [
+//       { question: "The red dress is cheap.", answer: false },
+//       { question: "Sara buys the black jeans.", answer: true },
+//       { question: "She is at the market to buy food.", answer: false }
+//     ]
+//   },
+
+//   // --- Lesson 7: Days & Time ---
+//   {
+//     id: "lesson_7",
+//     intro: {
+//       title: "Lesson 7 – My Weekly Schedule",
+//       story: "My name is Karim and I have a busy week. On Monday, I go to work at 8 o'clock in the morning. On Wednesday, I go to the gym to exercise. Friday is a special day; I go to the mosque and eat Couscous with my family. On Sunday, I do not work, I just relax at home.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "فوقاش كيمشي كريم للخدمة؟", options: ["Sunday", "Monday", "Friday"], answer: "Monday" },
+//       { question: "معاياش (الساعة) كيبدا الخدمة؟", options: ["8 o'clock", "10 o'clock", "9 o'clock"], answer: "8 o'clock" },
+//       { question: "شنو كيدير نهار الجمعة؟", options: ["Plays football", "Eats Couscous", "Sleeps"], answer: "Eats Couscous" },
+//       { question: "شنو كيدير نهار الأحد؟", options: ["Works hard", "Goes to gym", "Relaxes"], answer: "Relaxes" }
+//     ],
+//     write: [
+//       { question: "كتب 'الاثنين'", answer: "Monday" },
+//       { question: "كتب 'الجمعة'", answer: "Friday" },
+//       { question: "كتب 'وقت'", answer: "Time" }
+//     ],
+//     tf: [
+//       { question: "Karim goes to work on Sunday.", answer: false },
+//       { question: "On Wednesday, he goes to the gym.", answer: true },
+//       { question: "He eats Couscous on Monday.", answer: false }
+//     ]
+//   },
+
+//   // --- Lesson 8: Describing People ---
+//   {
+//     id: "lesson_8",
+//     intro: {
+//       title: "Lesson 8 – My Best Friend",
+//       story: "This is my best friend, Omar. He is a very tall and strong man. He has short black hair and big brown eyes. Omar is very funny; he always makes me laugh. He is also kind because he helps people. He is wearing a white shirt and glasses today.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "كيفاش داير عمر فالشكل؟", options: ["Short and fat", "Tall and strong", "Small and weak"], answer: "Tall and strong" },
+//       { question: "شنو لون عينيه؟", options: ["Blue", "Green", "Brown"], answer: "Brown" },
+//       { question: "كيفاش دايرة الشخصية ديالو؟", options: ["Funny and kind", "Angry and sad", "Serious"], answer: "Funny and kind" },
+//       { question: "شنو لابس اليوم؟", options: ["Red jacket", "White shirt", "Black hat"], answer: "White shirt" }
+//     ],
+//     write: [
+//       { question: "كتب 'طويل'", answer: "Tall" },
+//       { question: "كتب 'شعر'", answer: "Hair" },
+//       { question: "كتب 'ضريف/لطيف'", answer: "Kind" }
+//     ],
+//     tf: [
+//       { question: "Omar has long blonde hair.", answer: false },
+//       { question: "He is wearing glasses.", answer: true },
+//       { question: "Omar is a funny person.", answer: true }
+//     ]
+//   },
+
+//   // --- Lesson 9: Food & Drinks ---
+//   {
+//     id: "lesson_9",
+//     intro: {
+//       title: "Lesson 9 – At the Restaurant",
+//       story: "It is 1:00 PM and I am very hungry. I go to a nice restaurant for lunch. I look at the menu and order chicken with rice and a green salad. I also want a cold drink, so I ask for fresh orange juice. The food is delicious and hot.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "كيفاش كنت كنحس؟", options: ["Tired", "Hungry (جيعان)", "Thirsty"], answer: "Hungry (جيعان)" },
+//       { question: "شنو طلبت للغدا؟", options: ["Pizza", "Chicken with rice", "Burger"], answer: "Chicken with rice" },
+//       { question: "شنو شربت؟", options: ["Water", "Tea", "Orange juice"], answer: "Orange juice" },
+//       { question: "كيفاش كانت الماكلة؟", options: ["Bad", "Delicious (بنينة)", "Cold"], answer: "Delicious (بنينة)" }
+//     ],
+//     write: [
+//       { question: "كتب 'دجاج'", answer: "Chicken" },
+//       { question: "كتب 'عصير'", answer: "Juice" },
+//       { question: "كتب 'بنين/لذيذ'", answer: "Delicious" }
+//     ],
+//     tf: [
+//       { question: "I order pizza for lunch.", answer: false },
+//       { question: "I drink hot tea.", answer: false },
+//       { question: "The food is delicious.", answer: true }
+//     ]
+//   },
+
+//   // --- Lesson 10: Weather ---
+//   {
+//     id: "lesson_10",
+//     intro: {
+//       title: "Lesson 10 – Strange Weather",
+//       story: "Today the weather is very strange in my city. In the morning, it was sunny and hot, so I wore a t-shirt. But now in the afternoon, it is cloudy and very windy. I think it will rain soon. I need to go home and get my umbrella.",
+//       image: imgPlaceholder,
+//       audio: ""
+//     },
+//     quiz: [
+//       { question: "كيفاش كان الجو فالصباح؟", options: ["Sunny and hot", "Cold and snowy", "Rainy"], answer: "Sunny and hot" },
+//       { question: "شنو لبست فالصباح؟", options: ["Jacket", "T-shirt", "Coat"], answer: "T-shirt" },
+//       { question: "كيفاش ولا الجو دابا؟", options: ["Cloudy and windy", "Sunny", "Good"], answer: "Cloudy and windy" },
+//       { question: "شنو خاصني نجيب من الدار؟", options: ["Money", "Food", "Umbrella (مظلة)"], answer: "Umbrella (مظلة)" }
+//     ],
+//     write: [
+//       { question: "كتب 'شمس'", answer: "Sun" },
+//       { question: "كتب 'مطر/شتا'", answer: "Rain" },
+//       { question: "كتب 'سخون'", answer: "Hot" }
+//     ],
+//     tf: [
+//       { question: "It was cold in the morning.", answer: false },
+//       { question: "It is windy in the afternoon.", answer: true },
+//       { question: "I need an umbrella because it will rain.", answer: true }
+//     ]
+//   }
+// ];
+
+const imgPlaceholder = "https://placehold.co/600x400/0077ff/ffffff?text=Unit+Image";
 export const lessonsData = [
+  // --- Lesson 0: Onboarding (كيفاش تقرا معنا) ---
   {
-    id: "lesson_1",
+    id: "lesson_0",
     intro: {
-      title: "Lesson 1 – Greetings",
-      story: "Lina is a Moroccan girl who greets her neighbors and teachers every morning with a smile.",
-      // image: img1,
-      // audio: audio1
+      title: "Unit 0 || هذا ماشي درس فقط، هادي مقدمة باش تعرف كيفاش تقرا معنا",
+      // قصة بسيطة جداً تشرح طريقة العمل
+      story: "Welcome! This is RR English. Here, we learn English simply. First, read the story. Next, listen to the audio. Then, answer the questions. Don't worry about mistakes. Making mistakes is good for learning. Are you ready? Let's start!",
+      image: imgPlaceholder, // دير صورة فيها شعار المنصة أو شخص يرحب
+      audio: "/PracticeAudios/unit0.mp3" // تسجيل بصوتك يشرح بالدارجة والإنجليزية
     },
     quiz: [
-      { question: "شنو كتقول للناس فالصباح؟", options: ["Hello", "Goodbye", "Thanks"], answer: "Hello" },
-      { question: "شنو كتقول باش تشكر واحد؟", options: ["Thanks", "Sorry", "Please"], answer: "Thanks" },
-      { question: "شنو كتقول ملي كتودع واحد؟", options: ["Goodbye", "Hello", "See you"], answer: "Goodbye" }
+      { 
+        question: "شنو هي أول خطوة باش تعلم هنا؟", 
+        options: ["Read and Listen", "Sleep", "Close the app"], 
+        answer: "Read and Listen" 
+      },
+      { 
+        question: "واش مسموح تغلط فـ RR English؟", 
+        options: ["No, never!", "Yes, mistakes are good", "I don't know"], 
+        answer: "Yes, mistakes are good" 
+      },
+      { 
+        question: "شنو اللغة باش كنشرحو ليك؟", 
+        options: ["Japanese", "Darija & English", "Only French"], 
+        answer: "Darija & English" 
+      }
     ],
     write: [
-      { question: "كتب 'سلام'", answer: "Hello" },
-      { question: "كتب 'شكراً'", answer: "Thanks" }
+      { 
+        question: "باش تبدا، كتب كلمة 'Start' لتحت", 
+        answer: "Start" 
+      },
+      { 
+        question: "كتب سمية المنصة 'RR'", 
+        answer: "RR" 
+      }
     ],
     tf: [
-      { question: "'Hello' معناها سلام", answer: true },
-      { question: "'Thanks' معناها وداعا", answer: false }
+      { 
+        question: "This platform is for learning French.", 
+        answer: false // تأكد واش الكود ديالك كيقبل true/false كـ Boolean ولا String
+      },
+      { 
+        question: "You can learn English here.", 
+        answer: true 
+      }
     ]
   },
+  // --- Unit 1: Introductions ---
   {
-    id: "lesson_2",
+    id: "unit_1",
     intro: {
-      title: "Lesson 2 – Family",
-      story: "Adam lives with his parents and sister. They share meals and stories in the evening.",
-      // image: img2,
-      // audio: audio2
+      title: "Unit 1 – Hello, New Friend!",
+      story: "Hello! I am Ali. I am from Morocco. I am a student. I am twenty years old. This is my friend, Sara. She is nice. We are happy here. We want to learn English. It is a good language. Thank you very much. Goodbye and see you soon!",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit1.mp3"
     },
     quiz: [
-      { question: "شنو الكلمة ديال 'ماما' بالإنجليزية؟", options: ["Mother", "Brother", "Friend"], answer: "Mother" },
-      { question: "شنو الكلمة ديال 'خو' بالإنجليزية؟", options: ["Brother", "Sister", "Cousin"], answer: "Brother" },
-      { question: "شنو الكلمة ديال 'بنت' بالإنجليزية؟", options: ["Daughter", "Son", "Aunt"], answer: "Daughter" }
+      { question: "شحال في عمر علي؟", options: ["10 years", "20 years", "30 years"], answer: "20 years" },
+      { question: "منين هو علي؟", options: ["Egypt", "France", "Morocco"], answer: "Morocco" },
+      { question: "شنو كيدير علي في حياتو؟", options: ["He is a teacher", "He is a student", "He is a doctor"], answer: "He is a student" }
     ],
     write: [
-      { question: "كتب 'أب'", answer: "Father" },
-      { question: "كتب 'أخت'", answer: "Sister" }
+      { question: "كتب 'صديق' بالإنجليزية", answer: "Friend" },
+      { question: "كتب 'طالب' بالإنجليزية", answer: "Student" }
     ],
     tf: [
-      { question: "'Brother' معناها خو", answer: true },
-      { question: "'Mother' معناها بنت", answer: false }
+      { question: "Ali is thirty years old.", answer: "False" },
+      { question: "Sara is Ali's friend.", answer: "True" }
     ]
   },
+
+  // --- Unit 2: Family ---
   {
-    id: "lesson_3",
+    id: "unit_2",
     intro: {
-      title: "Lesson 3 – Numbers 1 to 5",
-      story: "Sara counts apples at the market and practices numbers every day to help her mother.",
-      // image: img3,
-      // audio: audio3
+      title: "Unit 2 – My Family",
+      story: "I love my family very much. My father is Ahmed. He is a good man. My mother is Fatima. She cooks good food. I have one brother and one sister. We live in a small house. We are very happy together. On Friday, we eat couscous. My family is my life.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit2.mp3"
     },
     quiz: [
-      { question: "شنو الرقم 'واحد' بالإنجليزية؟", options: ["One", "Two", "Three"], answer: "One" },
-      { question: "شنو الرقم 'ثلاثة' بالإنجليزية؟", options: ["Three", "Four", "Five"], answer: "Three" },
-      { question: "شنو الرقم 'خمس' بالإنجليزية؟", options: ["Five", "Six", "Two"], answer: "Five" }
+      { question: "شنو سميت الأب ديالو؟", options: ["Omar", "Ahmed", "Ali"], answer: "Ahmed" },
+      { question: "شنو كياكلو نهار الجمعة؟", options: ["Pizza", "Tacos", "Couscous"], answer: "Couscous" },
+      { question: "كيفاش دايرة الدار فين ساكنين؟", options: ["Big house", "Small house", "Apartment"], answer: "Small house" }
     ],
     write: [
-      { question: "كتب 'واحد'", answer: "One" },
-      { question: "كتب 'أربع'", answer: "Four" }
+      { question: "كتب 'أم' بالإنجليزية", answer: "Mother" },
+      { question: "كتب 'أخ' بالإنجليزية", answer: "Brother" }
     ],
     tf: [
-      { question: "'Two' هي جوج", answer: true },
-      { question: "'Five' هي ثلاث", answer: false }
+      { question: "His mother is named Fatima.", answer: "True" },
+      { question: "He has three brothers.", answer: "False" }
     ]
   },
+
+  // --- Unit 3: Home ---
   {
-    id: "lesson_4",
+    id: "unit_3",
     intro: {
-      title: "Lesson 4 – Colors",
-      story: "Youssef paints a small house and picks bright colors to make it happy and lively.",
-      // image: img4,
-      // audio: audio4
+      title: "Unit 3 – My Home",
+      story: "Welcome to my home. It is not big, but it is nice. The living room has a blue sofa and a TV. We watch movies there. My bedroom has a bed and a desk. I sleep and study there. The kitchen is clean. We eat lunch at 2:00 PM. I feel safe and warm in my house. It is a great place for me.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit3.mp3"
     },
     quiz: [
-      { question: "شنو اللون ديال السما بالإنجليزية؟", options: ["Blue", "Red", "Green"], answer: "Blue" },
-      { question: "شنو اللون ديال الدم بالإنجليزية؟", options: ["Red", "Blue", "Yellow"], answer: "Red" },
-      { question: "شنو اللون ديال الورق الأبيض بالإنجليزية؟", options: ["White", "Black", "Brown"], answer: "White" }
+      { question: "شنو اللون ديال السداري (sofa)؟", options: ["Red", "Blue", "Black"], answer: "Blue" },
+      { question: "معاش كيتغداو؟", options: ["1:00 PM", "2:00 PM", "3:00 PM"], answer: "2:00 PM" },
+      { question: "فين كينعس ويقرا؟", options: ["Kitchen", "Living room", "Bedroom"], answer: "Bedroom" }
     ],
     write: [
-      { question: "كتب 'أخضر'", answer: "Green" },
-      { question: "كتب 'أسود'", answer: "Black" }
+      { question: "كتب 'مطبخ' بالإنجليزية", answer: "Kitchen" },
+      { question: "كتب 'مكتب' بالإنجليزية", answer: "Desk" }
     ],
     tf: [
-      { question: "'Blue' معناها أزرق", answer: true },
-      { question: "'White' معناها أحمر", answer: false }
+      { question: "The house is very big.", answer: "False" },
+      { question: "The kitchen is clean.", answer: "True" }
     ]
   },
+
+  // --- Unit 4: Routine ---
   {
-    id: "lesson_5",
+    id: "unit_4",
     intro: {
-      title: "Lesson 5 – Food",
-      story: "Khadija cooks bread and tea and loves to share food with her neighbors and friends.",
-      // image: img5,
-      // audio: audio5
+      title: "Unit 4 – My Day",
+      story: "Every day, I wake up at 7:00 AM. I wash my face and brush my teeth. I eat bread and drink tea for breakfast. Then, I go to the university by bus. I study hard in class. At 1:00 PM, I eat lunch with my friends. In the evening, I go back home. I do my homework and help my mom. I watch a little TV, then I go to sleep at 11:00 PM.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit4.mp3"
     },
     quiz: [
-      { question: "شنو الكلمة ديال 'خبز' بالإنجليزية؟", options: ["Bread", "Milk", "Rice"], answer: "Bread" },
-      { question: "شنو الكلمة ديال 'شاي' بالإنجليزية؟", options: ["Tea", "Coffee", "Juice"], answer: "Tea" },
-      { question: "شنو الكلمة ديال 'تفاحة' بالإنجليزية؟", options: ["Apple", "Banana", "Orange"], answer: "Apple" }
+      { question: "معاش كيفيق الصباح؟", options: ["6:00 AM", "7:00 AM", "8:00 AM"], answer: "7:00 AM" },
+      { question: "باش كيمشي للجامعة؟", options: ["By car", "By bus", "On foot"], answer: "By bus" },
+      { question: "شنو كيدير قبل ما ينعس؟", options: ["Watches TV", "Plays football", "Cooks dinner"], answer: "Watches TV" }
     ],
     write: [
-      { question: "كتب 'حليب'", answer: "Milk" },
-      { question: "كتب 'عشاء'", answer: "Dinner" }
+      { question: "كتب 'فطور' بالإنجليزية", answer: "Breakfast" },
+      { question: "كتب 'وجه' بالإنجليزية", answer: "Face" }
     ],
     tf: [
-      { question: "'Tea' هي شاي", answer: true },
-      { question: "'Rice' هي تفاحة", answer: false }
+      { question: "He drinks coffee for breakfast.", answer: "False" },
+      { question: "He sleeps at 11:00 PM.", answer: "True" }
     ]
   },
+
+  // --- Unit 5: Jobs ---
   {
-    id: "lesson_6",
+    id: "unit_5",
     intro: {
-      title: "Lesson 6 – School",
-      story: "Ibrahim goes to school every day. He studies, plays, and reads with his friends.",
-      // image: img6,
-      // audio: audio6
+      title: "Unit 5 – Jobs and Work",
+      story: "Work is very important in life. My uncle is a doctor. He helps sick people at the hospital. My aunt is a teacher in a school. She loves kids. I want to be a manager one day. I want to work in a big office. A good job gives you money and a good life. You must study hard now to find a good job later. Many people work in shops, banks, or online. Every job is good if you work hard.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit5.mp3"
     },
     quiz: [
-      { question: "شنو الكلمة ديال 'مدرسة' بالإنجليزية؟", options: ["School", "Hospital", "Market"], answer: "School" },
-      { question: "شنو الكلمة ديال 'كتاب' بالإنجليزية؟", options: ["Book", "Bag", "Pen"], answer: "Book" },
-      { question: "شنو الكلمة ديال 'أستاذ' بالإنجليزية؟", options: ["Teacher", "Student", "Driver"], answer: "Teacher" }
+      { question: "شنو هي الخدمة ديال خالو/عمو؟", options: ["Teacher", "Doctor", "Manager"], answer: "Doctor" },
+      { question: "فين باغي يخدم هو من بعد؟", options: ["In a school", "In a hospital", "In a big office"], answer: "In a big office" },
+      { question: "علاش خاصك تقرا مزيان دابا؟", options: ["To find a good job", "To sleep more", "To watch TV"], answer: "To find a good job" }
     ],
     write: [
-      { question: "كتب 'قلم'", answer: "Pen" },
-      { question: "كتب 'حقيبة'", answer: "Bag" }
+      { question: "كتب 'مستشفى' بالإنجليزية", answer: "Hospital" },
+      { question: "كتب 'مال/فلوس' بالإنجليزية", answer: "Money" }
     ],
     tf: [
-      { question: "'Teacher' معناها أستاذ", answer: true },
-      { question: "'Book' معناها سيارة", answer: false }
+      { question: "His aunt is a teacher.", answer: "True" },
+      { question: "He wants to be a doctor.", answer: "False" }
     ]
   },
+
+  // --- Unit 6: Food ---
   {
-    id: "lesson_7",
+    id: "unit_6",
     intro: {
-      title: "Lesson 7 – Time and Day",
-      story: "Nora checks the clock, wakes up early, and plans her day to study in the afternoon.",
-      // image: img7,
-      // audio: audio7
+      title: "Unit 6 – Food and Drink",
+      story: "Food is very important for our body. I eat three meals every day: breakfast, lunch, and dinner. For breakfast, I like milk and bread with olive oil. It gives me energy. For lunch, my favorite dish is chicken with potatoes. It is very delicious. I also like to eat fresh salad and green apples. We must drink a lot of water every day because it is good for health. On the weekend, we sometimes eat pizza or fish outside. Good food makes you strong and happy.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit6.mp3"
     },
     quiz: [
-      { question: "شنو الكلمة ديال 'نهار' بالإنجليزية؟", options: ["Day", "Night", "Week"], answer: "Day" },
-      { question: "شنو الكلمة ديال 'ليل' بالإنجليزية؟", options: ["Night", "Morning", "Hour"], answer: "Night" },
-      { question: "شنو الكلمة ديال 'ساعة' بالإنجليزية؟", options: ["Hour", "Minute", "Second"], answer: "Hour" }
+      { question: "شحال من وجبة كياكل فنهار؟", options: ["Two meals", "Three meals", "Four meals"], answer: "Three meals" },
+      { question: "شنو عزيز عليه فالفطور؟", options: ["Eggs and cheese", "Milk and bread", "Pizza"], answer: "Milk and bread" },
+      { question: "علاش خاصنا نشربو الماء؟", options: ["It is good for health", "It tastes sweet", "It is expensive"], answer: "It is good for health" }
     ],
     write: [
-      { question: "كتب 'صباح'", answer: "Morning" },
-      { question: "كتب 'مساء'", answer: "Evening" }
+      { question: "كتب 'دجاج' بالإنجليزية", answer: "Chicken" },
+      { question: "كتب 'ماء' بالإنجليزية", answer: "Water" }
     ],
     tf: [
-      { question: "'Night' معناها ليل", answer: true },
-      { question: "'Day' معناها ساعة", answer: false }
+      { question: "He eats pizza every day.", answer: "False" },
+      { question: "His favorite lunch is chicken with potatoes.", answer: "True" }
     ]
   },
+
+  // --- Unit 7: Clothes ---
   {
-    id: "lesson_8",
+    id: "unit_7",
     intro: {
-      title: "Lesson 8 – Places",
-      story: "Rachid walks to the market and the park and knows many places in his neighborhood.",
-      // image: img8,
-      // audio: audio8
+      title: "Unit 7 – Clothes and Colors",
+      story: "I like to wear comfortable clothes. In the summer, the weather is hot, so I wear a white T-shirt and blue shorts. I also wear sunglasses to protect my eyes. In the winter, it is cold and rainy. I wear a heavy black jacket, long pants, and warm boots. My sister loves colors. She has a red dress and a yellow scarf. When we go to a wedding, men wear a traditional Djellaba and women wear a Kaftan. Buying new clothes is fun, but you do not need expensive brands to look good. Clean clothes are the best.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit7.mp3"
     },
     quiz: [
-      { question: "شنو الكلمة ديال 'سوق' بالإنجليزية؟", options: ["Market", "Park", "School"], answer: "Market" },
-      { question: "شنو الكلمة ديال 'حديقة' بالإنجليزية؟", options: ["Park", "Hospital", "Bank"], answer: "Park" },
-      { question: "شنو الكلمة ديال 'مستشفى' بالإنجليزية؟", options: ["Hospital", "Pharmacy", "Library"], answer: "Hospital" }
+      { question: "شنو كيلبس فالصيف؟", options: ["Black jacket", "White T-shirt", "Heavy boots"], answer: "White T-shirt" },
+      { question: "شنو كيلبسوا الرجال فالعرس؟", options: ["Suit", "Djellaba", "Jeans"], answer: "Djellaba" },
+      { question: "شنو أهم حاجة فالحوايج؟", options: ["Expensive brands", "Clean clothes", "Many colors"], answer: "Clean clothes" }
     ],
     write: [
-      { question: "كتب 'بنك'", answer: "Bank" },
-      { question: "كتب 'مكتبة'", answer: "Library" }
+      { question: "كتب 'شتاء' بالإنجليزية", answer: "Winter" },
+      { question: "كتب 'فستان/كسوة' بالإنجليزية", answer: "Dress" }
     ],
     tf: [
-      { question: "'Market' هي سوق", answer: true },
-      { question: "'Park' هي مطار", answer: false }
+      { question: "He wears sunglasses in winter.", answer: "False" },
+      { question: "His sister likes colors.", answer: "True" }
     ]
   },
+
+  // --- Unit 8: City ---
   {
-    id: "lesson_9",
+    id: "unit_8",
     intro: {
-      title: "Lesson 9 – Actions",
-      story: "Omar helps his family at home. He eats, reads, and cleans to support others.",
-      // image: img9,
-      // audio: audio9
+      title: "Unit 8 – My City",
+      story: "I live in a beautiful city in Morocco. It has many old buildings and a big market. In the center of the city, there is a large mosque and a nice park. Many tourists visit my city to take photos and eat local food. The streets are busy in the morning. People go to work by bus, taxi, or car. To go to the train station, you go straight and turn right. It is not far from my house. I like my city because the people are kind and friendly. We help each other. It is a wonderful place to live.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit8.mp3"
     },
     quiz: [
-      { question: "شنو الكلمة ديال 'يأكل' بالإنجليزية؟", options: ["Eat", "Run", "Sleep"], answer: "Eat" },
-      { question: "شنو الكلمة ديال 'يقرا' بالإنجليزية؟", options: ["Read", "Write", "Sing"], answer: "Read" },
-      { question: "شنو الكلمة ديال 'يلعب' بالإنجليزية؟", options: ["Play", "Work", "Cook"], answer: "Play" }
+      { question: "شنو كاين فوسط المدينة؟", options: ["A beach", "A large mosque", "A mountain"], answer: "A large mosque" },
+      { question: "كيفاش كيمشيو الناس للخدمة؟", options: ["By plane", "By boat", "By bus, taxi, or car"], answer: "By bus, taxi, or car" },
+      { question: "علاش عزيزة عليه مدينتو؟", options: ["People are friendly", "It is very big", "It has no cars"], answer: "People are friendly" }
     ],
     write: [
-      { question: "كتب 'يمشي'", answer: "Walk" },
-      { question: "كتب 'يلعب'", answer: "Play" }
+      { question: "كتب 'سوق' بالإنجليزية", answer: "Market" },
+      { question: "كتب 'شارع' بالإنجليزية", answer: "Street" }
     ],
     tf: [
-      { question: "'Read' معناها يقرا", answer: true },
-      { question: "'Eat' معناها يقرأ", answer: false }
+      { question: "The train station is far away.", answer: "False" },
+      { question: "Tourists visit to take photos.", answer: "True" }
     ]
   },
+
+  // --- Unit 9: Health ---
   {
-    id: "lesson_10",
+    id: "unit_9",
     intro: {
-      title: "Lesson 10 – Emotions",
-      story: "Meriem shares her feelings with friends. She says when she is happy or sad and listens carefully.",
-      // image: img10,
-      // audio: audio10
+      title: "Unit 9 – Health and Body",
+      story: "Health is the most important thing in life. We have one body, so we must take care of it. I have two eyes to see, two ears to hear, and two legs to walk. To stay healthy, I do exercise three times a week. I like to run in the morning. If you feel sick or have a fever, you must go to the doctor. The doctor gives you medicine to feel better. You should also brush your teeth every night and wash your hands before eating. Sleeping for eight hours is also very important for your brain and body.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit9.mp3"
     },
     quiz: [
-      { question: "شنو الكلمة ديال 'فرحان' بالإنجليزية؟", options: ["Happy", "Sad", "Angry"], answer: "Happy" },
-      { question: "شنو الكلمة ديال 'حزين' بالإنجليزية؟", options: ["Sad", "Happy", "Tired"], answer: "Sad" },
-      { question: "شنو الكلمة ديال 'خايف' بالإنجليزية؟", options: ["Afraid", "Calm", "Bored"], answer: "Afraid" }
+      { question: "شحال من مرة كيدير الرياضة؟", options: ["Every day", "Three times a week", "Once a month"], answer: "Three times a week" },
+      { question: "شنو خاصك دير يلا مرضتي؟", options: ["Go to the doctor", "Eat pizza", "Go to school"], answer: "Go to the doctor" },
+      { question: "شحال خاصنا نعسو من ساعة؟", options: ["5 hours", "8 hours", "12 hours"], answer: "8 hours" }
     ],
     write: [
-      { question: "كتب 'متعب'", answer: "Tired" },
-      { question: "كتب 'معصب'", answer: "Angry" }
+      { question: "كتب 'طبيب' بالإنجليزية", answer: "Doctor" },
+      { question: "كتب 'دواء' بالإنجليزية", answer: "Medicine" }
     ],
     tf: [
-      { question: "'Happy' معناها فرحان", answer: true },
-      { question: "'Sad' معناها مبسوط", answer: false }
+      { question: "We use our ears to see.", answer: "False" },
+      { question: "Washing hands is important.", answer: "True" }
     ]
-  }
+  },
+
+  // --- Unit 10: School ---
+  {
+    id: "unit_10",
+    intro: {
+      title: "Unit 10 – School and Learning",
+      story: "School is the place where we learn new things every day. I go to school from Monday to Friday. My backpack has my books, notebooks, and pens. My favorite subject is English because I want to speak with people from other countries. I also like Science and History. My teachers are very helpful and smart. They want us to succeed. In the classroom, we must listen and be quiet. During the break, I play with my classmates in the yard. Education is the key to a good future. If you study hard now, you can have a great job later. Learning never stops.",
+      image: imgPlaceholder,
+      audio: "/PracticeAudios/unit10.mp3"
+    },
+    quiz: [
+      { question: "أشنو هي المادة المفضلة ديالو؟", options: ["Math", "English", "Sport"], answer: "English" },
+      { question: "شنو كيهز فالمحفظة ديالو؟", options: ["Toys", "Food", "Books and pens"], answer: "Books and pens" },
+      { question: "كيفاش دايرين الأساتذة ديالو؟", options: ["Helpful and smart", "Angry", "Lazy"], answer: "Helpful and smart" }
+    ],
+    write: [
+      { question: "كتب 'مستقبل' بالإنجليزية", answer: "Future" },
+      { question: "كتب 'أستاذ' بالإنجليزية", answer: "Teacher" }
+    ],
+    tf: [
+      { question: "He goes to school on Sunday.", answer: "False" },
+      { question: "He plays in the yard during the break.", answer: "True" }
+    ]
+  },
+  
+  // ... (Units 11 to 20 continue below)
 ];

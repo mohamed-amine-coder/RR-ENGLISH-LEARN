@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الأستاذة - RR English</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0077ff;
+            --primary-light: #e6f0ff;
+            --secondary: #ff7b00;
+            --secondary-light: #fff0e6;
+            --success: #29b864;
+            --bg: #f8faff;
+            --text: #2d3748;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* يمنع السكرول */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* الحاوية الرئيسية */
+        .dashboard {
+            width: 95vw;
+            height: 90vh;
+            background: var(--white);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-rows: auto 1fr auto; /* هيدر - محتوى - فوتر */
+            overflow: hidden;
+            border: 1px solid #eef2f6;
+        }
+
+        /* 1. Header */
+        .header {
+            padding: 20px 40px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+        }
+
+        .brand h1 { font-size: 1.5rem; color: var(--primary); margin: 0; font-weight: 900; }
+        .brand p { font-size: 0.9rem; color: #718096; margin: 0; }
+        
+        .role-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* 2. Main Grid Content */
+        /* Scenarios Grid */
+.scenarios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.scenario-card {
+    background: #f8fbff;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.scenario-card:hover {
+    background: #fff;
+    border-color: var(--secondary);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.s-title { font-size: 0.8rem; font-weight: bold; color: #718096; margin-bottom: 5px; text-transform: uppercase; }
+.s-money { font-size: 1.4rem; font-weight: 900; color: var(--secondary); display: block; margin-bottom: 5px; direction: ltr; }
+.s-time { font-size: 0.75rem; color: #4a5568; background: #edf2f7; padding: 3px 8px; border-radius: 20px; display: inline-block; }
+    
+        .content-grid {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr; /* 3 أعمدة */
+            gap: 25px;
+            overflow-y: auto; /* سكرول داخلي خفيف إذا لزم الأمر */
+        }
+
+        /* Card Styles */
+        .panel {
+            background: var(--bg);
+            border-radius: 20px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: underline var(--success) 3px;
+        }
+
+        .panel-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: block;
+        }
+
+        /* Column 1: Money (The Deal) */
+        .deal-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+        .deal-card:hover { transform: translateY(-3px); }
+        .price { font-size: 2rem; font-weight: 900; color: var(--primary); line-height: 1; direction: ltr; }
+        .unit { font-size: 0.85rem; color: #718096; margin-top: 5px; }
+        
+        .calc-box {
+            background: var(--secondary-light);
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: #d97706;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        /* Column 2: Workflow (Timeline) */
+        .timeline {
+            position: relative;
+            padding-right: 20px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #cbd5e0;
+        }
+        .step {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .step:last-child { margin-bottom: 0; }
+        
+        .step-dot {
+            position: absolute;
+            right: -24px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--white);
+        }
+        .step h4 { font-size: 1rem; margin: 0 0 5px 0; }
+        .step p { font-size: 0.85rem; color: #718096; line-height: 1.5; margin: 0; }
+
+        /* Column 3: FAQ & Support */
+        .faq-item {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        .faq-q { font-weight: 700; color: var(--text); margin-bottom: 5px; display: block; }
+        .faq-a { color: #718096; }
+
+        /* 3. Footer */
+        .footer {
+            padding: 20px 40px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fcfcfc;
+        }
+
+        .footer-text { font-size: 0.9rem; color: #718096; }
+        
+        .cta-btn {
+            background: var(--success);
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(41, 184, 100, 0.3);
+            transition: transform 0.2s;
+        }
+        .cta-btn:hover { transform: scale(1.05); }
+        *{
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        
+        <!-- <header class="header">
+            <div class="brand">
+                <h1>RR English Team</h1>
+                <p>مرحباً بكِ في الفريق! 👋</p>
+            </div>
+            <div class="role-badge">Conversation Coach</div>
+        </header> -->
+
+        <main class="content-grid">
+            
+            <div class="panel">
+                <div class="panel-title">العرض المالي (The Deal) 💸</div>
+                
+                <div class="deal-card">
+                    <div class="price">15 DH</div>
+                    <div class="unit">لكل حصة (30 دقيقة)</div>
+                </div>
+
+                <div class="deal-card">
+                    <div class="price">30 DH</div>
+                    <div class="unit">لكل ساعة خدمتيها </div>
+                </div>
+                
+                <div class="deal-card">
+                    <div class="price">120 DH</div>
+                    <div class="unit">شهرياً (لكل مجموعة)</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title" style="--secondary: #0077ff">كيفاش كدوز الحصة؟ 🔄</div>
+                <div class="timeline">
+                    <div class="step">
+                        <div class="step-dot"></div>
+                        <h4>1. قبل الحصة (Preparation)</h4>
+                        <p> غادي ندير ليك بلاصة فالمنصة فين غادي تبقاي تلقاي "السكريبت" واجد (الموضوع، الأسئلة، الكلمات).</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-dot"></div>
+                        <h4>2. أثناء الحصة (Execution)</h4>
+                        <p>مكالمة واتساب صوتية (30 دقيقة). كتسيّري النقاش بين 2 طلبة وتصححي ليهم الأغلاط وتعطيهم تمارين جديدة.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-dot"></div>
+                        <h4>3. بعد الحصة (Feedback)</h4>
+                        <p>أوديو قصير ليا (30 ثانية) فيه كيفاش دازو الطلبة. وهانتي ساليتي!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title" style="--secondary: #29b864">ملاحظات مهمة ✅</div>
+                
+                <div class="faq-item">
+                    <span class="faq-q">❓ واش ضروري الكاميرا؟</span>
+                    <span class="faq-a">لا، غير الصوت. خدي راحتك.</span>
+                </div>
+                                <div class="calc-box" style="background:transparent; padding:0; margin-top: auto;">
+                    <p style="font-size:0.9rem; font-weight:bold; margin-bottom:10px; color:#2d3748;">📈 شحال تقدري تصوري؟</p>
+                    
+                <div class="scenarios">
+                    <div class="scenario-card">
+                        <div class="s-title">البداية الخفيفة</div>
+                        <span class="s-money">360 DH</span>
+                        <span class="s-time">35 دقيقة / يومياً</span>
+                    </div>
+
+                    <div class="scenario-card" style="border-color: #ffd8a8; background: #fffaf0;">
+                        <div class="s-title" style="color:#d97706">المستوى المتوسط</div>
+                        <span class="s-money">720 DH</span>
+                        <span class="s-time">ساعة وشوية / يومياً</span>
+                    </div>
+
+                    <div class="scenario-card">
+                        <div class="s-title">المستوى العالي</div>
+                        <span class="s-money">1200 DH</span>
+                        <span class="s-time">2 سوايع / يومياً</span>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- <footer class="footer">
+            <div class="footer-text">جاهزة لتجربة جديدة وممتعة؟</div>
+            <a href="#" class="cta-btn">يلاه نبداو التجربة 🚀</a>
+        </footer> -->
+
+    </div>
+
+</body>
+</html>

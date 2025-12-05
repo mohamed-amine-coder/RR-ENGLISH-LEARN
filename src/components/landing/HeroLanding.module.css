@@ -1,0 +1,454 @@
+/* HomeLanding.module.css */
+
+.wrapper {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  /* خلفية هادئة جداً */
+  background-image: radial-gradient(#f1f1f1 1px, transparent 1px);
+  background-size: 20px 20px;
+  padding: 30px 20px;
+  direction: rtl;
+  font-family: var(--font-family);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr; /* اليسار (الصورة) أصغر من اليمين (النص) */
+  gap: 60px;
+  align-items: center;
+}
+
+/* --- Visual Side (Left) --- */
+.visualSide {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Phone Frame */
+.phoneFrame {
+  width: 280px;
+  height: 500px;
+  background: #1a1a1a;
+  border-radius: 40px;
+  border: 8px solid #1a1a1a;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 25px;
+  background: #1a1a1a;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  z-index: 3;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slideImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.slideImg.active {
+  opacity: 1;
+}
+
+/* Blob Background */
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,119,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  z-index: 0;
+  border-radius: 50%;
+}
+
+/* --- Content Side (Right) --- */
+.contentSide {
+  z-index: 2;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.badge {
+  display: inline-block;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  border: 1px solid #e0e7ff;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--dark-color);
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.highlight {
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+/* --- Steps List --- */
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.stepCard {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+}
+
+/* تمييز الخطوة الحالية حسب الصورة المعروضة */
+.highlightStep {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.08);
+  transform: translateX(-5px); /* حركة خفيفة لليسار */
+}
+
+.iconBox {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.stepText h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--dark-color);
+  margin: 0 0 4px 0;
+}
+
+.stepText p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* --- Action Area --- */
+.actionArea {
+  margin-top: 20px;
+}
+
+.loginBox {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  max-width: 400px;
+  text-align: center;
+  
+}
+
+.ctaText {
+  font-weight: 700;
+  color: var(--dark-color);
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* Welcome Back State */
+.welcomeBack {
+  background: #f0fdf4;
+  border: 1px solid #dcfce7;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+}
+
+.userIcon {
+  font-size: 2rem;
+  color: #25D366;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.welcomeBack h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+}
+
+.resumeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--secondary-color);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+
+.resumeBtn:hover { transform: translateY(-2px); }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .visualSide {
+    order: -1; /* الصورة الفوق فالموبايل */
+    display: flex; /* تأكد أنها ظاهرة */
+  }
+  
+  .phoneFrame {
+    width: 260px; /* تصغير الهاتف قليلاً */
+    height: 520px;
+  }
+
+  .stepsList {
+    align-items: center; /* سنطراج الكاردات */
+  }
+
+  .stepCard {
+    width: 100%;
+    max-width: 400px;
+    text-align: right; /* المحتوى داخل الكارد يبقى يمين */
+  }
+
+  .loginBox, .welcomeBack {
+    margin: 0 auto;
+  }
+}
+
+/* HomeLanding.module.css */
+
+/* ... (نفس الستايلات الأساسية للـ wrapper و container و visualSide) ... */
+
+/* --- Content Side --- */
+.contentSide { z-index: 2; }
+
+/* المقارنة (The Anti-Institute Banner) */
+.antiInstitute {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-wrap: wrap;
+}
+
+.badWay {
+  color: #ef4444; /* أحمر */
+  background: #fef2f2;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0.8;
+  text-decoration: line-through; /* خط فوق الكلام */
+}
+
+.goodWay {
+  color: #10b981; /* أخضر */
+  background: #ecfdf5;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #d1fae5;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--dark-color);
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.highlight {
+  background: linear-gradient(120deg, #e0f2fe 0%, #e0f2fe 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 90%;
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  max-width: 95%;
+}
+
+.uniqueValue {
+  background: #fff7ed; /* برتقالي فاتح جداً */
+  color: #c2410c;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* Power Points Grid */
+.powerPoints {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.pointItem {
+  background: #fff;
+  border: 1px solid #f3f4f6;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: transform 0.2s;
+}
+
+.pointItem:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.pIcon {
+  font-size: 1.4rem;
+  background: #fafafa;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pointItem h4 { margin: 0 0 4px 0; font-size: 0.95rem; font-weight: 800; color: #333; }
+.pointItem p { margin: 0; font-size: 0.8rem; color: #666; line-height: 1.4; }
+
+/* Action Area */
+.actionArea {
+  margin-top: 10px;
+}
+
+.loginBox {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid #eff6ff;
+  box-shadow: 0 10px 30px -5px rgba(0, 119, 255, 0.1);
+  max-width: 400px;
+  text-align: center;
+}
+
+.ctaText {
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+/* Floating Caption for Phone */
+.floatingCaption {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { transform: translateX(-50%) scale(0.9); opacity: 0; }
+  to { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+  .visualSide { order: -1; display: flex; }
+  .phoneFrame { width: 260px; height: 520px; }
+  .antiInstitute { justify-content: center; }
+  .powerPoints { text-align: right; } /* النقاط تبقى يمين باش تقرا */
+  .loginBox { margin: 0 auto; }
+}

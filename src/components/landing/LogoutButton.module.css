@@ -1,0 +1,70 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: 1px solid #ff7b00;
+  color: #ff7b00;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #ff7b00;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.confirmBox {
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  width: 180px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.yesBtn,
+.noBtn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.yesBtn {
+  background-color: #ff7b00;
+  color: #fff;
+}
+
+.yesBtn:hover {
+  background-color: #e96d00;
+}
+
+.noBtn {
+  background-color: #444;
+  color: #fff;
+}
+
+.noBtn:hover {
+  background-color: #555;
+}

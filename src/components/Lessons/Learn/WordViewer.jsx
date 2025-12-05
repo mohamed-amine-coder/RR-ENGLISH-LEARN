@@ -1,42 +1,62 @@
 import { useState } from 'react';
 import styles from './Learn.module.css';
-import { FaArrowRight, FaBookOpen, FaExchangeAlt, FaVolumeUp } from 'react-icons/fa';
+import { FaVolumeUp } from 'react-icons/fa';
 
 export default function WordViewer({ lesson, onComplete }) {
   const words = lesson.words;
   const [index, setIndex] = useState(0);
 
-  const handleNext = () => {
-    if (index < words.length - 1) {
-      setIndex(index + 1);
-    } else {
-      onComplete();
+  const handleSpeak = (text) => {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "en-US";
+    
+    // 1. تعديل السرعة (0.8 كتعني ثقيلة شوية)
+    utter.rate = 0.7; 
+
+    // 2. محاولة تغيير الصوت
+    // تنبيه: هادشي كيعتمد على الأصوات المثبتة فجهاز المستخدم
+    const voices = window.speechSynthesis.getVoices();
+    
+    // كنقلبو على صوت إنجليزي آخر من غير "Google US English" الافتراضي
+    // مثلاً، كنقلبو على صوت سميتو "Microsoft" أو غيره
+    const preferredVoice = voices.find(v => v.lang === "en-US" && !v.name.includes("Google"));
+    
+    if (preferredVoice) {
+      utter.voice = preferredVoice;
     }
+
+    speechSynthesis.speak(utter);
+  };
+
+  const handleNext = () => {
+    if (index < words.length - 1) setIndex(index + 1);
+    else onComplete();
   };
 
   const word = words[index];
 
   return (
-    <div className={`${styles.card} ${styles.slideIn}`}>
-      <div className={styles.wordHeader}>
-        <FaBookOpen className={styles.icon} />
-        <h2>{word.en}</h2>
+    <>
+      <div className={styles.cardBody}>
+        <div className={styles.instructionTitle}>كلمات جديدة</div>
+        
+        <div className={styles.speakerBtn} onClick={() => handleSpeak(word.en)}>
+           <FaVolumeUp />
+        </div>
+        
+        <h1 className={styles.mainWord}>{word.en}</h1>
+        <h2 className={styles.subWord}>{word.darija}</h2>
+        
+        <p style={{color: '#888', marginTop: '20px'}}>النطق: /{word.pronunciation}/</p>
       </div>
 
-      <div className={styles.wordDetails}>
-        <div className={styles.detailRow}>
-          <FaExchangeAlt className={styles.icon} />
-          <span>{word.darija}</span>
-        </div>
-        <div className={styles.detailRow}>
-          <FaVolumeUp className={styles.icon} />
-          <span className={styles.pronunciation}>{word.pronunciation}</span>
+      <div className={styles.footerArea}>
+        <div className={styles.footerContent} style={{justifyContent: 'center'}}>
+          <button className={styles.actionButton} onClick={handleNext}>
+            التالي
+          </button>
         </div>
       </div>
-
-      <button className={styles.nextButton} onClick={handleNext}>
-        التالي <FaArrowRight />
-      </button>
-    </div>
+    </>
   );
 }

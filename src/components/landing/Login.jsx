@@ -25,7 +25,7 @@ const Login = () => {
   return (
       <button className={styles.googleBtn} onClick={handleLogin}>
         <FcGoogle className={styles.icon} />
-        <span>تسجيل الدخول باستخدام Google</span>
+        <span>سجل دخولك مجانا</span>
       </button>
   );
 };

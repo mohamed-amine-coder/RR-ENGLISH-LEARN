@@ -1,62 +1,78 @@
 import { useState } from 'react';
 import styles from './Learn.module.css';
-import { FaArrowRight, FaPenFancy, FaExchangeAlt } from 'react-icons/fa';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 export default function SentenceWriting({ lesson, onComplete }) {
   const sentences = lesson.sentences;
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState('');
-  const [feedback, setFeedback] = useState(null);
+  const [status, setStatus] = useState("idle");
+  const [isShaking, setIsShaking] = useState(false);
 
   const current = sentences[index];
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const isCorrect = input.trim().toLowerCase() === current.en.toLowerCase();
-    setFeedback(isCorrect ? "✅ صحيح!" : `❌ غلط! الجواب هو: ${current.en}`);
-  }
+  const cleanText = (t) => t.trim().toLowerCase().replace(/[.,?!]/g, "");
 
-  function handleNext() {
+  const handleCheck = () => {
+    if (!input.trim()) return;
+    const isCorrect = cleanText(input) === cleanText(current.en);
+    
+    if (isCorrect) {
+      setStatus("correct");
+    } else {
+      setStatus("wrong");
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 500);
+    }
+  };
+
+  const handleNext = () => {
     setInput('');
-    setFeedback(null);
+    setStatus("idle");
     if (index < sentences.length - 1) {
       setIndex(index + 1);
     } else {
       onComplete();
     }
-  }
+  };
 
   return (
-    <div className={`${styles.card} ${styles.slideIn}`}>
-      <div className={styles.sentenceHeader}>
-        <FaPenFancy className={styles.icon} />
-        <h2>كتب الجملة بالإنجليزية</h2>
-      </div>
+    <>
+      <div className={styles.cardBody}>
+        <div className={styles.instructionTitle}>ترجم الجملة</div>
+        <h2 className={styles.subWord} style={{marginBottom: '30px'}}>{current.darija}</h2>
 
-      <div className={styles.sentencePrompt}>
-        <FaExchangeAlt className={styles.icon} />
-        <p>{current.darija}</p>
-      </div>
-
-      <form onSubmit={handleSubmit} className={styles.formBlock}>
         <textarea
+          className={`${styles.writeTextarea} ${isShaking ? styles.shake : ''}`}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="اكتب الجملة هنا"
-          rows={3}
-          className={styles.textarea}
+          placeholder="Type the sentence in English..."
+          disabled={status === "correct"}
         />
-        <button type="submit" disabled={!!feedback} className={styles.checkButton}>
-          تحقق
-        </button>
-      </form>
+      </div>
 
-      {feedback && <p className={styles.feedback}>{feedback}</p>}
-      {feedback && (
-        <button className={styles.nextButton} onClick={handleNext}>
-          التالي <FaArrowRight />
-        </button>
-      )}
-    </div>
+      <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`}>
+        <div className={styles.footerContent}>
+          {status !== 'idle' && (
+            <div className={styles.feedbackMessage}>
+              <div className={styles.feedbackIcon} style={{color: status === 'correct' ? '#58a700' : '#ea2b2b'}}>
+                 {status === 'correct' ? <FaCheck /> : <FaTimes />}
+              </div>
+              <div className={styles.feedbackText}>
+                 <h3>{status === 'correct' ? 'صحيح!' : 'الجواب:'}</h3>
+                 {status === 'wrong' && <p style={{margin:0, direction:'ltr'}}>{current.en}</p>}
+              </div>
+            </div>
+          )}
+          
+          <button 
+            className={styles.actionButton} 
+            onClick={status === 'wrong' || status === 'correct' ? handleNext : handleCheck}
+          >
+            {status === 'wrong' || status === 'correct' ? 'تابع' : 'تحقق'}
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
