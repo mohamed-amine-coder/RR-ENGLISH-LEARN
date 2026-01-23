@@ -61,7 +61,7 @@ export default function Footer() {
           {/* عنصر إضافي باش تبان "فرقة" */}
           <div className={styles.devTag} style={{cursor: 'default', opacity: 0.8}}>
             <FaLaptopCode className={styles.devIcon} /> 
-            <span>RR Studio</span>
+            <span>RR Studio "BETA Version"</span>
           </div>
 
         </div>
