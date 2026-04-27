@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RR English - VIP Speak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5; /* لون أزرق/بنفسجي عصري */
+            --primary-hover: #4338CA;
+            --bg-gradient: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+            --card-bg: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 620px;
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* شريط علوي للديكور */
+        .card-top-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), #818CF8);
+        }
+
+        /* البادج ديال الأكثر طلبا */
+        .badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #FEF3C7;
+            color: var(--warning);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .badge.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h2 {
+            color: var(--text-dark);
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* الثمن المتحرك */
+        .price-container {
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .price-val {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            transition: transform 0.2s ease;
+        }
+
+        .price-currency {
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* السلايدر (Slider) المتطور */
+        .slider-wrapper {
+            background: #F8FAFC;
+            padding: 25px 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .slider-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #FFF;
+            border: 3px solid var(--primary);
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+            transition: transform 0.1s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:active {
+            transform: scale(1.2);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #E0E7FF;
+            border-radius: 3px;
+        }
+
+        /* مميزات الباقة */
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .features li svg {
+            width: 20px;
+            height: 20px;
+            color: var(--success);
+            flex-shrink: 0;
+        }
+
+        /* زر الاشتراك */
+        .btn-action {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: #FFF;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 20px -3px rgba(79, 70, 229, 0.5);
+        }
+        
+        /* أنيماسيون خفيفة للزر */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-price {
+            animation: pulse 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pricing-card">
+        <div class="card-top-accent"></div>
+        
+        <div class="badge" id="popularBadge">
+            🔥 الأكثر طلباً
+        </div>
+
+        <div class="header">
+            <h2>ميزة Speak With Me</h2>
+            <p>طلق لسانك فواتساب مع أستاذ وزميل ليك. ختار شحال من حصة بغيتي فالسيمانة.</p>
+        </div>
+
+        <div class="price-container">
+            <span class="price-val" id="priceValue">49</span>
+            <span class="price-currency">درهم / للشهر</span>
+        </div>
+
+        <div class="slider-wrapper">
+            <div class="slider-info">
+                <span id="weeklyText">حصة فالسيمانة</span>
+                <span style="color: var(--primary);" id="monthlyText">4 حصص فالشهر</span>
+            </div>
+            <input type="range" id="planSlider" min="1" max="3" value="1" step="1">
+        </div>
+
+        <ul class="features">
+            <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                مكالمة واتساب (45 دقيقة للحصة)
+            </li>
+            <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                أجواء عائلية (نتا + طالب + أستاذ)
+            </li>
+            <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                تصحيح فوري للنطق
+            </li>
+        </ul>
+
+        <button class="btn-action">
+            نبدا نتعلم دابا
+            <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+        </button>
+    </div>
+
+    <script>
+        const slider = document.getElementById('planSlider');
+        const priceValue = document.getElementById('priceValue');
+        const weeklyText = document.getElementById('weeklyText');
+        const monthlyText = document.getElementById('monthlyText');
+        const badge = document.getElementById('popularBadge');
+
+        const plans = {
+            "1": { price: 49, weekly: "حصة فالسيمانة", monthly: "4 حصص فالشهر" },
+            "2": { price: 89, weekly: "2 حصص فالسيمانة", monthly: "8 حصص فالشهر" },
+            "3": { price: 119, weekly: "3 حصص فالسيمانة", monthly: "12 حصة فالشهر" }
+        };
+
+        // باش نلونو التراك (Track) ديال السلايدر على حساب القيمة
+        function updateSliderTrack(val) {
+            const percentage = ((val - 1) / 2) * 100;
+            slider.style.background = `linear-gradient(to left, #E0E7FF ${100 - percentage}%, var(--primary) ${100 - percentage}%, var(--primary) 100%)`;
+        }
+
+        slider.addEventListener('input', function(e) {
+            const val = e.target.value;
+            const plan = plans[val];
+
+            // تحريك الثمن بأنيماسيون خفيفة
+            priceValue.classList.remove('animate-price');
+            void priceValue.offsetWidth; // ريفريش للأنيماسيون
+            priceValue.classList.add('animate-price');
+            
+            priceValue.textContent = plan.price;
+            weeklyText.textContent = plan.weekly;
+            monthlyText.textContent = plan.monthly;
+
+            // إظهار البادج غير فالاختيار الوسطاني (باش نزعموهم ياخدوه)
+            if(val === "2") {
+                badge.classList.add('active');
+            } else {
+                badge.classList.remove('active');
+            }
+
+            updateSliderTrack(val);
+        });
+
+        // تشغيل التهيئة المبدئية
+        updateSliderTrack(slider.value);
+    </script>
+
+</body>
+</html>
