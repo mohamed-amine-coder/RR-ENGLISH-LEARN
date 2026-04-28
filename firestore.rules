@@ -2,20 +2,26 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // 1. دالة للتحقق من أنك أنت الآدمين
-    // ⚠️ ضروري: بدل هذا بالإيميل ديالك الحقيقي
-    function isAdmin() {
-      return request.auth != null && request.auth.token.email == "mohamedajimi55@gmail.com";
-    }
-
-    // 2. قواعد ملفات المستخدمين
+    // 1. قواعد المستخدمين: أي واحد يقدر يكتب ويقرا البروفايل ديالو فقط
     match /users/{userId} {
-      allow read, write: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow read, write: if request.auth != null && request.auth.uid == userId;
     }
 
-    // 3. قواعد عامة
+    // 2. قواعد الدروس (Learn): القراءة للمسجلين، والكتابة للأدمن فقط
+    match /learn_lessons/{document=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.email == "rrenglish66@gmail.com";
+    }
+
+    // 3. قواعد التمارين (Practice): القراءة للمسجلين، والكتابة للأدمن فقط
+    match /practice_lessons/{document=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.email == "rrenglish66@gmail.com";
+    }
+
+    // 4. الحماية القصوى: أي كوليكشن أخرى ما مذكوراش الفوق، ممنوع الدخول ليها
     match /{document=**} {
-      allow read, write: if isAdmin();
+      allow read, write: if false;
     }
   }
 }
