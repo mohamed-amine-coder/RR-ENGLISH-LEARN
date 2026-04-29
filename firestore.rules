@@ -2,26 +2,31 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // 1. قواعد المستخدمين: أي واحد يقدر يكتب ويقرا البروفايل ديالو فقط
-    match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    // دالة كتحقق واش نتا هو مول هاد الإيميل بالضبط
+    function isSuperAdmin() {
+      return request.auth != null && request.auth.token.email == "rrenglish66@gmail.com";
     }
 
-    // 2. قواعد الدروس (Learn): القراءة للمسجلين، والكتابة للأدمن فقط
+    // 1. أي واحد مسجل كيقرا ويعدل غير البروفايل ديالو، والأدمن عندو الحق فكلشي
+    match /users/{userId} {
+      allow read, write: if (request.auth != null && request.auth.uid == userId) || isSuperAdmin();
+    }
+
+    // 2. كوليكشن Learn: القراءة للجميع، والكتابة حصرياً للسوبر أدمن
     match /learn_lessons/{document=**} {
       allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.token.email == "rrenglish66@gmail.com";
+      allow write: if isSuperAdmin();
     }
 
-    // 3. قواعد التمارين (Practice): القراءة للمسجلين، والكتابة للأدمن فقط
+    // 3. كوليكشن Practice: القراءة للجميع، والكتابة حصرياً للسوبر أدمن
     match /practice_lessons/{document=**} {
       allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.token.email == "rrenglish66@gmail.com";
+      allow write: if isSuperAdmin();
     }
 
-    // 4. الحماية القصوى: أي كوليكشن أخرى ما مذكوراش الفوق، ممنوع الدخول ليها
+    // 4. قاعدة عامة للأدمن باش يقدر يدخل لأي حاجة أخرى (بحال المجلدات اللي يالاه غتكريهوم)
     match /{document=**} {
-      allow read, write: if false;
+      allow read, write: if isSuperAdmin();
     }
   }
 }
