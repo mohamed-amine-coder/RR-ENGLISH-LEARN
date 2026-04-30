@@ -8,6 +8,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Learn from "./components/Lessons/Learn/Learn.jsx";
 import Practice from "./components/Lessons/Practice/Practice.jsx";
 import SpeakWithMe from "./components/Lessons/SpeakWithMe/SpeakWithMe.jsx";
+import SpeakWithMeAI from "./components/Lessons/SpeakWithMe/SpeakWithMeAI.jsx";
 import Login from "./components/landing/Login.jsx";
 import UpgradePlan from "./components/landing/UpgradePlan.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/lessons/learn" element={<Learn />} />
         <Route path="/lessons/practice" element={<Practice />} />
         <Route path="/speak-with-me" element={<SpeakWithMe />} />
+        <Route path="/speak-with-me-AI" element={<SpeakWithMeAI />} />
         <Route path="/login" element={<Login />} />
         <Route path="/start" element={<StartSection />} />
         <Route path="/profile" element={<Profile />} />
