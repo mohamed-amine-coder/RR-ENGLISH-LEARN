@@ -4,8 +4,8 @@ import { auth, db } from "../../Auth/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { 
-  FaShieldAlt, FaBars, FaUser, FaTimes, 
-  FaHome, FaBookOpen, FaDumbbell, FaMicrophoneAlt // 🆕 الأيقونات الجديدة
+  FaShieldAlt, FaBars, FaUser, FaTimes, FaRobot,
+  FaHome, FaBookOpen, FaBrain, FaMicrophoneAlt // 🆕 الأيقونات الجديدة
 } from "react-icons/fa";
 import Logo from "../../../public/RR-LOGO.png";
 import styles from "./Navbar.module.css";
@@ -101,10 +101,13 @@ export default function Navbar() {
                 <FaBookOpen size={16} /> Learn
               </Link>
               <Link to="/lessons/practice" onClick={closeMenu}>
-                <FaDumbbell size={16} /> Practice
+                <FaBrain size={16} /> Practice
               </Link>
               <Link to="/speak-with-me" onClick={closeMenu}>
                 <FaMicrophoneAlt size={16} /> Speak
+              </Link>
+              <Link to="/speak-with-me-ai" onClick={closeMenu}>
+                <FaRobot size={16} /> AI-Chat
               </Link>
               
               {/* زر البروفايل */}

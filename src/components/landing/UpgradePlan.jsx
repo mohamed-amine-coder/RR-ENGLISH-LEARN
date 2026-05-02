@@ -157,7 +157,7 @@ const UpgradePlan = () => {
             onClick={handleSubscribe}
           >
             <FaWhatsapp size={24} />
-            تفعيل العرض قبل انتهاء الوقت
+              تواصل معانا
           </button>
           <p style={styles.guarantee}>جميع الحقوق محفوظة © 2024</p>
         </div>

@@ -1,54 +1,58 @@
-/* Practice.module.css */
-
-/* --- Layout الهيكل العام --- */
 .container {
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
-  direction: rtl; /* الواجهة عربية */
-  text-align: right;
+  direction: rtl;
   font-family: var(--font-family);
-  overflow: hidden;
 }
 
 /* --- Top Bar --- */
 .topBar {
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: 15px 20px;
   display: flex;
   align-items: center;
-  margin-top: 2%;
-  border-radius: var(--spacing-md);
   gap: 15px;
-  background: var(--primary-color);
+  background: white;
   position: sticky;
   top: 0;
-  width: 90%;
-  margin: 10px auto;
-  z-index: 10;
-  flex-direction: row; 
+  z-index: 100;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .closeButton {
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #e5e5e5;
+  color: #a0aab5;
   cursor: pointer;
-  transition: color 0.2s;
-  display: none; /* إخفاء زر الإغلاق */
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.closeButton:hover { color: #526577; }
+
+.progressContainer {
+  flex: 1;
+  background: #e5e5e5;
+  height: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  direction: ltr;
 }
 
-.closeButton:hover {
-  color: var(--dark-color);
+.progressFill {
+  height: 100%;
+  background: #58cc02;
+  border-radius: 10px;
+  transition: width 0.4s ease-in-out;
 }
 
-/* زر عرض النص */
 .storyToggleBtn {
-  background: #f0f7ff;
-  border: 2px solid #84d8ff;
+  background: #fff;
+  border: 2px solid #1cb0f6;
   color: #1cb0f6;
   border-radius: 12px;
   padding: 6px 12px;
@@ -56,81 +60,78 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
-  font-family: var(--font-family);
-  font-size: 0.85rem;
-  white-space: nowrap;
+  gap: 6px;
+  font-size: 0.9rem;
+  transition: all 0.1s;
 }
+.storyToggleBtn:hover { background: #ddf4ff; }
+.storyToggleBtn:active { transform: translateY(2px); }
 
-.storyToggleBtn:hover {
-  background: #ddf4ff;
-  transform: translateY(-2px);
-}
 
-.progressContainer {
-  flex: 1;
-  background: #e5e5e5;
-  height: 12px;
-  border-radius: 10px;
-  overflow: hidden;
-  direction: ltr; /* لملء الشريط من اليسار */
-}
-
-.progressFill {
-  height: 100%;
-  background: var(--success-color);
-  border-radius: 10px;
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* --- Card Body --- */
+/* --- Practice Card --- */
 .practiceCard {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: #fff;
-  padding-bottom: 100px; /* مساحة للفوتر */
+  padding-bottom: 120px; /* مساحة للفوتر */
 }
 
 .cardBody {
   flex: 1;
-  padding: var(--spacing-lg) var(--spacing-xl);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow-y: auto;
-  max-height: calc(100vh - 180px);
+  justify-content: center;
 }
 
-/* --- Typography --- */
 .instructionTitle {
-  font-size: 1rem;
-  color: var(--dark-color);
-  opacity: 0.7;
-  padding-top: 10px;
-  margin: 15px auto;
-  font-weight: 700;
+  font-size: 1.5rem;
+  color: #3c3c3c;
+  font-weight: 800;
+  margin-bottom: 20px;
   width: 100%;
   text-align: right;
-  word-spacing: 5px;
 }
 
 .questionText {
-  font-size: 1.6rem;
-  color: var(--dark-color);
+  font-size: 1.8rem;
+  color: #3c3c3c;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 30px;
   line-height: 1.5;
-  font-weight: 800;
-  width: 100%;
-  unicode-bidi: plaintext; /* ضبط اتجاه النص تلقائياً */
-  direction: rtl; /* نص السؤال إنجليزي */
 }
 
-/* --- Inputs & Options (English LTR) --- */
+/* --- Options & Inputs --- */
+.optionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  width: 100%;
+  direction: ltr; /* الاختيارات بالانجليزية */
+}
+
+.optionCard {
+  background: #fff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 4px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #3c3c3c;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.1s;
+}
+.optionCard:hover:not(:disabled) { background: #f7f7f7; }
+.optionCard:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+
+.optionCard.selected { border-color: #1cb0f6; background: #ddf4ff; color: #1cb0f6; border-bottom-color: #1899d6; }
+.optionCard.correct { border-color: #58cc02; background: #d7ffb8; color: #58a700; border-bottom-color: #58a700; }
+.optionCard.wrong { border-color: #ff4b4b; background: #ffdfe0; color: #ea2b2b; border-bottom-color: #ea2b2b; }
+
 .writeInput {
   width: 100%;
   padding: 18px;
@@ -139,443 +140,306 @@
   border: 2px solid #e5e5e5;
   border-radius: 16px;
   outline: none;
-  color: var(--dark-color);
-  transition: border 0.2s;
-  direction: ltr; /* كتابة إنجليزية */
+  color: #3c3c3c;
+  direction: ltr;
   text-align: center;
-  font-family: sans-serif;
-  caret-color: var(--primary-color);
+  transition: all 0.2s;
 }
+.writeInput:focus { border-color: #1cb0f6; background: #fff; }
 
-.writeInput:focus {
-  border-color: #84d8ff;
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(132, 216, 255, 0.2);
-}
-
-/* Shake Animation */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
-}
-
-.shake {
-  animation: shake 0.4s ease-in-out;
-  border-color: var(--error-color) !important;
-  background: #fff5f5;
-}
-
-.hintButton {
-  background: none;
-  border: none;
-  color: #aaa;
-  font-size: 0.9rem;
-  margin-top: 10px;
-  cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.2s;
-  font-family: var(--font-family);
-}
-.hintButton:hover { color: var(--secondary-color); }
-
-.optionCard {
-  background: #fff;
-  border: 2px solid #e5e5e5;
-  border-bottom: 4px solid #e5e5e5;
-  border-radius: 16px;
-  padding: 16px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--dark-color);
-  cursor: pointer;
-  transition: all 0.1s;
-  direction: ltr; /* خيارات إنجليزية */
-  text-align: left;
-  display: flex;
-  align-items: center;
-}
-
-.optionCard:hover:not(:disabled) { background: #f7f7f7; }
-.optionCard:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
-.optionCard.selected { border-color: #84d8ff; background: #ddf4ff; color: #1cb0f6; border-bottom-color: #84d8ff; }
-.optionCard.correct { border-color: var(--success-color); background: #d7ffb8; color: #58a700; }
-.optionCard.wrong { border-color: var(--error-color); background: #ffdfe0; color: var(--error-color); }
-
-.optionsGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  width: 100%;
-}
-
-@media (min-width: 600px) {
-  .optionsGrid {
-    grid-template-columns: 1fr 1fr;
-    direction: rtl; /* لترتيب الأعمدة من اليمين */
-  }
-}
-
-/* --- Footer Area --- */
-.footerArea {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: #fff;
-  border-top: 2px solid #e5e5e5;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  animation: slideUp 0.3s ease;
-  direction: rtl;
-}
-
-.footerArea.correct { background: #d7ffb8; border-top: none; color: #58a700; }
-.footerArea.wrong { background: #ffdfe0; border-top: none; color: #ea2b2b; }
-
-.footerContent {
-  width: 100%;
-  max-width: 700px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.feedbackMessage {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-align: right;
-}
-
-.feedbackIcon {
-  background: #fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.feedbackText h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
-
-.actionButton {
-  background: var(--success-color);
-  color: #fff;
-  border: none;
-  border-bottom: 4px solid #46a35e;
-  border-radius: 16px;
-  padding: 14px 30px;
-  font-size: 1.1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.1s;
-  min-width: 150px;
-  font-family: var(--font-family);
-}
-
-.actionButton:active { transform: translateY(4px); border-bottom: 0; margin-top: 4px; }
-.actionButton:disabled { background: #e5e5e5; border-bottom: 4px solid #cfcfcf; color: #afafaf; cursor: default; transform: none; margin-top: 0; }
-.actionButton.wrongState { background: #ff4b4b; border-bottom: 4px solid #ea2b2b; }
-
-/* --- TF Buttons --- */
 .tfContainer {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
-  direction: rtl;
+  direction: ltr;
 }
-
 .tfBtn {
   flex: 1;
-  padding: 30px;
+  padding: 20px;
   border-radius: 16px;
   border: 2px solid #e5e5e5;
   border-bottom: 4px solid #e5e5e5;
   background: #fff;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  color: #3c3c3c;
 }
-.tfBtn.selected { border-color: var(--secondary-color); background: #fff5e6; }
+.tfBtn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
-/* --- Modal Styles (للقصة) --- */
-.modalOverlay {
+/* --- Footer --- */
+.footerArea {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
+  padding: 20px;
+  background: #fff;
+  border-top: 2px solid #e5e5e5;
   display: flex;
   justify-content: center;
+  z-index: 100;
+}
+.footerArea.correct { background: #d7ffb8; border-top-color: #d7ffb8; }
+.footerArea.wrong { background: #ffdfe0; border-top-color: #ffdfe0; }
+
+.footerContent {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  animation: fadeIn 0.3s ease;
+}
+
+.feedbackMessage { display: flex; align-items: center; gap: 15px; }
+.feedbackIcon {
+  background: #fff; width: 50px; height: 50px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+}
+.feedbackText h3 { margin: 0 0 5px 0; font-size: 1.4rem; font-weight: 800; }
+.feedbackText p { margin: 0; font-size: 1.1rem; font-weight: 600; direction: ltr; }
+
+.actionButton {
+  background: #58cc02; color: white; border: none; border-bottom: 4px solid #58a700;
+  border-radius: 16px; padding: 14px 24px; font-size: 1.2rem; font-weight: 800;
+  cursor: pointer; transition: all 0.1s; min-width: 120px;
+}
+.actionButton:active { transform: translateY(4px); border-bottom-width: 0; }
+.actionButton.wrongState { background: #ff4b4b; border-bottom-color: #ea2b2b; }
+
+/* --- Modal Story --- */
+/* .modalOverlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6); z-index: 200;
+  display: flex; justify-content: center; align-items: center; padding: 20px;
+}
+.storyModal {
+  background: #fff; width: 100%; max-width: 500px; max-height: 80vh;
+  border-radius: 20px; display: flex; flex-direction: column; overflow: hidden;
+}
+.modalHeader { padding: 15px 20px; border-bottom: 2px solid #eee; display: flex; justify-content: space-between; align-items: center;}
+.modalHeader h3 { margin: 0; font-size: 1.2rem; color: #3c3c3c;}
+.closeModalBtn { background: none; border: none; font-size: 1.2rem; color: #a0aab5; cursor: pointer;}
+.modalBody { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+.storyImage { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
+.audioPlayer { width: 100%; height: 40px; outline: none; }
+.storyText { background: #f0f7ff; padding: 15px; border-radius: 12px; font-size: 1.1rem; line-height: 1.6; direction: ltr; text-align: left;} */
+
+/* --- Modal Story (Clean & Premium) --- */
+
+.modalOverlay {
+  position: fixed; 
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.5); /* خلفية داكنة شفافة حديثة */
+  backdrop-filter: blur(8px); /* تأثير الزجاج */
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   padding: 20px;
 }
 
 .storyModal {
-  background: #fff;
-  width: 100%;
-  max-width: 600px;
-  max-height: 80vh;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
+  background: #ffffff; 
+  width: 100%; 
+  max-width: 480px; 
+  max-height: 85vh;
+  border-radius: 24px; 
+  display: flex; 
+  flex-direction: column; 
   overflow: hidden;
-  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* ظل ناعم وعميق */
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
-.modalHeader {
-  padding: 20px;
-  border-bottom: 2px solid #f0f0f0;
-  display: flex;
-  justify-content: space-between;
+/* Header */
+.modalHeader { 
+  padding: 20px 24px; 
+  border-bottom: 1px solid #f1f5f9; 
+  display: flex; 
+  justify-content: space-between; 
   align-items: center;
+  background: #ffffff;
+}
+
+.modalHeader h3 { 
+  margin: 0; 
+  font-size: 1.25rem; 
+  color: #0f172a; 
+  font-weight: 800;
+}
+
+.closeModalBtn { 
+  background: #f8fafc; 
+  border: none; 
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 1.1rem; 
+  color: #64748b; 
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.closeModalBtn:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* Body */
+.modalBody { 
+  padding: 24px; 
+  overflow-y: auto; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 20px; 
+}
+
+/* Scrollbar Customization */
+.modalBody::-webkit-scrollbar { width: 6px; }
+.modalBody::-webkit-scrollbar-track { background: transparent; }
+.modalBody::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+.modalBody::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Image */
+.storyImage { 
+  width: 100%; 
+  height: 180px; 
+  object-fit: cover; 
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* --- تصميم المكون الصوتي (الجديد) --- */
+.audioContainer {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); /* خلفية متدرجة زوينة */
+  padding: 15px 20px;
+  border-radius: 20px;
+  border: 1px solid #bae6fd;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.08); /* ظل أزرق خفيف */
+}
+
+.audioLabel {
+  font-size: 1rem;
+  color: #0284c7;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   direction: rtl;
 }
 
-.modalHeader h3 { margin: 0; color: var(--dark-color); }
-
-.closeModalBtn {
-  background: #f5f5f5;
-  border: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  font-size: 1.2rem;
-  transition: all 0.2s;
+.audioPlayer { 
+  width: 100%; 
+  height: 44px; 
+  outline: none; 
 }
 
-.closeModalBtn:hover { background: #ff4b4b; color: #fff; }
+/* تجميل المشغل الداخلي للمتصفحات (Chrome/Safari) */
+.audioPlayer::-webkit-media-controls-panel {
+  background-color: #ffffff;
+  border-radius: 50px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.audioPlayer::-webkit-media-controls-current-time-display,
+.audioPlayer::-webkit-media-controls-time-remaining-display {
+  color: #334155;
+  font-weight: 600;
+}
 
-.modalBody {
-  padding: 25px;
-  overflow-y: auto;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #333;
+/* Text */
+.storyText { 
+  background: #f8fafc; 
+  padding: 20px; 
+  border-radius: 16px; 
+  border-left: 4px solid #3b82f6; /* خط أزرق فـ الجنب */
+  font-size: 1.1rem; 
+  line-height: 1.7; 
+  direction: ltr; 
   text-align: left;
-  direction: ltr; /* النص الإنجليزي يسار */
+  color: #334155;
+}
+
+/* --- Custom Audio Player --- */
+.customPlayer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  padding: 10px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  width: 100%;
+}
+
+.playBtn {
+  background: #1cb0f6;
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(28, 176, 246, 0.3);
+}
+
+.playBtn:hover { 
+  background: #1899d6; 
+  transform: scale(1.05); 
+}
+
+.playBtn:active {
+  transform: scale(0.95);
+}
+
+/* شريط التمرير (Range Input) */
+.progressBar {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  direction: ltr; /* ديما خاصو يكون من اليسار لليمين */
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1cb0f6;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.progressBar::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }
 
 /* Animations */
-@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scaleUp { from { transform: scale(0.9); } to { transform: scale(1); } }
-
-
-
-/* بعض التعديلات */
-/* Practice.module.css */
-
-/* --- 1. Container: حرر السكرول --- */
-.container {
-  max-width: 700px;
-  margin: 0 auto;
-  min-height: 100vh; /* شد الطول كامل */
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  direction: rtl;
-  text-align: right;
-  font-family: var(--font-family);
-  /* ❌ مسح هادي: overflow: hidden; */
-  /* ✅ دير هادي: */
-  overflow: visible; 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
 }
-
-/* --- 2. Top Bar: خليه لاصق (Sticky) --- */
-.topBar {
-  padding: var(--spacing-md) var(--spacing-lg);
-  display: flex;
-  align-items: center;
-  margin-top: 10px; /* مسافة صغيرة من الفوق */
-  border-radius: var(--spacing-md);
-  gap: 15px;
-  background: var(--primary-color);
-  
-  /* ✅ باش يلصق الفوق ملي تهبط */
-  position: sticky; 
-  top: 10px; 
-  z-index: 100;
-  
-  width: 95%; /* عرض مناسب */
-  margin: 10px auto;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* ظل باش يبان مفروز */
-}
-
-/* ... (باقي الستايلات ديال CloseButton و ProgressContainer خليهم) ... */
-
-/* --- 3. Practice Card & Body: حيد القيود --- */
-.practiceCard {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  
-  /* ✅ مساحة كبيرة لتحت باش الفوتر ما يغطيش المحتوى */
-  padding-bottom: 120px; 
-}
-
-.cardBody {
-  flex: 1;
-  padding: var(--spacing-lg) var(--spacing-xl);
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* سنطر المحتوى إلا كان قليل */
-  align-items: center;
-  
-  /* ❌ مسح هادو بجوج: */
-  /* overflow-y: auto; */
-  /* max-height: calc(100vh - 180px); */
-  
-  /* ✅ خليه طبيعي: */
-  height: auto; 
-  min-height: 50vh; /* أقل طول باش يجي الوسط */
-}
-
-/* ... (باقي الستايلات ديال Typography و Inputs خليهم) ... */
-
-/* --- 4. Footer Area: تأكد أنه تابت لتحت --- */
-.footerArea {
-  position: fixed; /* لاصق فالشاشة */
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: #fff; /* ضروري خلفية باش يغطي لي وراه */
-  border-top: 2px solid #e5e5e5;
-  z-index: 1000; /* فوق كلشي */
-  display: flex;
-  justify-content: center;
-  animation: slideUp 0.3s ease;
-  direction: rtl;
-  box-shadow: 0 -5px 20px rgba(0,0,0,0.05); /* ظل خفيف من الفوق */
-}
-.audioPlayer {
-  width: 100%;
-  margin-top: 15px;
-  display: block !important; /* فرض الظهور */
-  height: 40px; /* نعطوه طول باش يبان واخا ما خدامش */
-}
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* ظلام أكثر للتركيز */
-  backdrop-filter: blur(4px);
-  z-index: 2000; /* فوق كلشي */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.3s ease;
-  padding: 20px;
-}
-
-.storyModal {
-  background: #fff;
-  width: 100%;
-  max-width: 500px; /* عرض مناسب للقراءة */
-  max-height: 85vh;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.modalHeader {
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  direction: rtl;
-  background: #f9f9f9;
-}
-
-.modalHeader h3 { margin: 0; color: var(--dark-color); font-size: 1.1rem; }
-
-.closeModalBtn {
-  background: #eee;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #555;
-  transition: 0.2s;
-}
-.closeModalBtn:hover { background: #ff4b4b; color: #fff; }
-
-.modalBody {
-  padding: 20px;
-  overflow-y: auto; /* سكرول للنص الطويل */
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.storyImage {
-  width: 30%;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid #eee;
-}
-
-.storyText {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #333;
-  background: #f0f7ff;
-  padding: 15px;
-  border-radius: 12px;
-  border-left: 4px solid var(--primary-color);
-  direction: ltr; /* الإنجليزية يسار */
-  text-align: left;
-}
-
-/* 🟢 إصلاح الأوديو */
-.audioPlayer {
-  width: 100%;
-  height:  70px; /* ارتفاع ثابت */
-  border-radius: 50px; /* تدويرة زوينة */
-  margin-top: 10px;
-  display: block !important; /* فرض الظهور */
-  margin: 10px 0;
-  outline: none;
-}
-
-/* تحسين شكل الأوديو في Chrome */
-.audioPlayer::-webkit-media-controls-panel {
-  background-color: #f1f3f4;
-}
+.shake { animation: shake 0.4s ease-in-out; border-color: #ff4b4b !important; background: #ffdfe0; }

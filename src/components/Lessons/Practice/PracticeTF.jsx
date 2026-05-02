@@ -8,14 +8,10 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
   const [status, setStatus] = useState("idle");
 
   const handleSelect = (value) => {
-    if (status !== "idle") return; // منع النقر المتكرر
-
+    if (status !== "idle") return; 
     setSelected(value);
-
-    // التحقق الفوري
     const isCorrect = value === questions[current].answer;
     setStatus(isCorrect ? "correct" : "wrong");
-    
     if (isCorrect) onAnswer();
   };
 
@@ -29,26 +25,19 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
   return (
     <>
       <div className={styles.cardBody}>
-        <div className={styles.instructionTitle}>قرا وفكر واش صحيح ولا غلط ؟</div>
-        <h2 className={styles.questionText}>{questions[current].question}</h2>
+        <div className={styles.instructionTitle}>صحيح أم خطأ؟</div>
+        <h2 className={styles.questionText} style={{direction: 'ltr'}}>{questions[current].question}</h2>
         
         <div className={styles.tfContainer}>
-          <div 
-            className={`${styles.tfBtn} ${selected === true ? styles.selected : ''}`}
-            onClick={() => handleSelect(true)} // تحقق فوري
-          >
-            <span style={{fontSize:'2rem'}}>👍</span> بصح
-          </div>
-          <div 
-            className={`${styles.tfBtn} ${selected === false ? styles.selected : ''}`}
-            onClick={() => handleSelect(false)} // تحقق فوري
-          >
-            <span style={{fontSize:'2rem'}}>👎</span> لا غلط
-          </div>
+          <button className={`${styles.tfBtn} ${selected === true ? styles.selected : ''}`} onClick={() => handleSelect(true)} disabled={status !== 'idle'}>
+            <span style={{fontSize:'2rem'}}>👍</span> True
+          </button>
+          <button className={`${styles.tfBtn} ${selected === false ? styles.selected : ''}`} onClick={() => handleSelect(false)} disabled={status !== 'idle'}>
+            <span style={{fontSize:'2rem'}}>👎</span> False
+          </button>
         </div>
       </div>
 
-      {/* الفوتر يظهر فقط بعد الإجابة */}
       <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`} style={{display: status === 'idle' ? 'none' : 'flex'}}>
         <div className={styles.footerContent}>
              <div className={styles.feedbackMessage}>
@@ -56,7 +45,7 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
                  {status === 'correct' ? <FaCheck /> : <FaTimes />}
                </div>
                <div className={styles.feedbackText}>
-                 <h3>{status === 'correct' ? 'صحيح!' : 'للأسف خطأ'}</h3>
+                 <h3>{status === 'correct' ? 'جواب صحيح!' : 'جواب خاطئ'}</h3>
                </div>
              </div>
 
@@ -68,5 +57,4 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
     </>
   );
 };
-
 export default PracticeTF;
