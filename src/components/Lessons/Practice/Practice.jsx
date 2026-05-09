@@ -1,10 +1,11 @@
+// Practice/Practice.jsx
 import React, { useState, useEffect } from "react"; 
 import PracticeIntro from "./PracticeIntro";
 import PracticeQuiz from "./PracticeQuiz";
 import PracticeWrite from "./PracticeWrite";
 import PracticeTF from "./PracticeTF";
-import CustomAudioPlayer from "./CustomAudioPlayer";
 import PracticeResult from "./PracticeResult";
+import StoryModal from "./StoryModal"; // 👈 استدعاء المكون الجديد
 import styles from "./Practice.module.css";
 import UpgradePlan from "../../landing/UpgradePlan"; 
 
@@ -19,7 +20,8 @@ const Practice = () => {
   const [lessonIndex, setLessonIndex] = useState(0);
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
-  const [introDone, setIntroDone] = useState(false);
+  const [introDone, setIntroDone] = useState(false); 
+  
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [userRole, setUserRole] = useState('free');
   const [showUpgrade, setShowUpgrade] = useState(false);
@@ -28,8 +30,6 @@ const Practice = () => {
   const currentLesson = lessons.length > 0 ? lessons[lessonIndex] : null;
   const totalExercises = currentLesson ? (currentLesson.quiz.length + currentLesson.write.length + currentLesson.tf.length) : 0;
   
-  // Progress Logic
-  // step ranges from 0 to 3 (Intro doesn't count in exercises progress)
   const totalSections = 4; // 0:Quiz, 1:Write, 2:TF, 3:Result
   const progressPercent = introDone ? ((step) / (totalSections - 1)) * 100 : 0;
 
@@ -63,7 +63,7 @@ const Practice = () => {
              setLessonIndex(lastLesson);
            }
            setStep(0); 
-           setIntroDone(true); 
+           setIntroDone(false); 
         }
       } 
       setIsLoading(false); 
@@ -123,10 +123,10 @@ const Practice = () => {
   return (
     <div className={styles.container}>
       <div className={styles.topBar}>
-        <button className={styles.closeButton}><FaTimes /></button>
         <div className={styles.progressContainer}>
           <div className={styles.progressFill} style={{ width: `${progressPercent}%` }}></div>
         </div>
+        
         {introDone && step < 3 && (
           <button className={styles.storyToggleBtn} onClick={() => setShowStory(true)}>
             <FaBookOpen /> النص
@@ -153,57 +153,16 @@ const Practice = () => {
         )}
       </div>
 
-      {/* {showStory && (
-        <div className={styles.modalOverlay} onClick={() => setShowStory(false)}>
-          <div className={styles.storyModal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <h3>📖 النص المرجعي</h3>
-              <button className={styles.closeModalBtn} onClick={() => setShowStory(false)}><FaTimes /></button>
-            </div>
-            <div className={styles.modalBody}>
-              <img src={currentLesson.intro.image} alt="Story" className={styles.storyImage} />
-              <audio controls className={styles.audioPlayer}>
-                  <source src={currentLesson.intro.audio} type="audio/mpeg" />
-              </audio>
-              <div className={styles.storyText}>{currentLesson.intro.story}</div>
-            </div>
-          </div>
-        </div>
-      )} */}
+      {/* 👈 استخدام المكون المفصول ديال المودال */}
       {showStory && (
-        <div className={styles.modalOverlay} onClick={() => setShowStory(false)}>
-          <div className={styles.storyModal} onClick={(e) => e.stopPropagation()}>
-            
-            <div className={styles.modalHeader}>
-              <h3>📖 النص المرجعي</h3>
-              <button className={styles.closeModalBtn} onClick={() => setShowStory(false)}>
-                <FaTimes />
-              </button>
-            </div>
-            
-            <div className={styles.modalBody}>
-              <img src={currentLesson.intro.image} alt="Story" className={styles.storyImage} />
-              
-              {/* المكون الصوتي الجديد */}
-              <div className={styles.audioContainer}>
-                <div className={styles.audioLabel}>
-                  🎧 استمع للنص:
-                </div>
-                
-                {/* هنا عيطنا على المشغل ديالنا */}
-                <CustomAudioPlayer audioSrc={currentLesson.intro.audio} />
-                
-              </div>
-
-              <div className={styles.storyText}>
-                <p style={{margin:0}}>{currentLesson.intro.story}</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
+        <StoryModal 
+          intro={currentLesson.intro} 
+          onClose={() => setShowStory(false)} 
+        />
       )}
+
     </div>
   );
 };
+
 export default Practice;

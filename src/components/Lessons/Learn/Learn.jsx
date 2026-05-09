@@ -488,7 +488,6 @@ export default function Learn() {
   return (
     <div className={styles.container}>
       <div className={styles.topBar}>
-        <button className={styles.closeButton}><FaTimes /></button>
         <div className={styles.progressContainer}>
           <div className={styles.progressFill} style={{ width: `${progressPercent}%` }}></div>
         </div>

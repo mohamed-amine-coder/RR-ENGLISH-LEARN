@@ -1,6 +1,7 @@
+// Practice/PracticeWrite.jsx
 import React, { useState, useRef, useEffect } from "react";
-import { FaCheck, FaTimes } from "react-icons/fa";
 import styles from "./Practice.module.css";
+import FeedbackFooter from "./FeedbackFooter";
 
 const PracticeWrite = ({ questions, onNext, onAnswer }) => {
   const [current, setCurrent] = useState(0);
@@ -12,7 +13,7 @@ const PracticeWrite = ({ questions, onNext, onAnswer }) => {
   const cleanText = (text) => text.trim().toLowerCase().replace(/[.,?!]/g, "");
 
   const handleCheck = () => {
-    if (!input.trim()) return;
+    if (!input.trim() || status !== 'idle') return;
     const isCorrect = cleanText(input) === cleanText(questions[current].answer);
 
     if (isCorrect) {
@@ -52,29 +53,13 @@ const PracticeWrite = ({ questions, onNext, onAnswer }) => {
         />
       </div>
 
-      <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`}>
-        <div className={styles.footerContent}>
-          {status !== 'idle' ? (
-            <div className={styles.feedbackMessage}>
-              <div className={styles.feedbackIcon} style={{color: status === 'correct' ? '#58a700' : '#ea2b2b'}}>
-                {status === 'correct' ? <FaCheck /> : <FaTimes />}
-              </div>
-              <div className={styles.feedbackText}>
-                <h3>{status === 'correct' ? 'ممتاز!' : 'الجواب الصحيح:'}</h3>
-                {status === 'wrong' && <p>{questions[current].answer}</p>}
-              </div>
-            </div>
-          ) : <div/>}
-
-          <button 
-            className={`${styles.actionButton} ${status === 'wrong' ? styles.wrongState : ''}`} 
-            onClick={status === 'idle' ? handleCheck : handleContinue}
-            disabled={status === 'idle' && !input.trim()}
-          >
-            {status === 'idle' ? 'تحقق' : 'تابع'}
-          </button>
-        </div>
-      </div>
+      <FeedbackFooter 
+        status={status}
+        correctAnswer={questions[current].answer}
+        onCheck={handleCheck}
+        onNext={handleContinue}
+        disabledCheck={!input.trim()}
+      />
     </>
   );
 };

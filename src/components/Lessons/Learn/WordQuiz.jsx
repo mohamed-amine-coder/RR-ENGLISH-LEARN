@@ -141,7 +141,7 @@ export default function WordQuiz({ lesson, onComplete }) {
                {status === 'correct' ? <FaCheck /> : <FaTimes />}
              </div>
              <div className={styles.feedbackText}>
-               <h3>{status === 'correct' ? 'عمل ممتاز!' : 'الجواب خاطئ'}</h3>
+               <h3>{status === 'correct' ? 'ماعلكش' : 'زير معانا'}</h3>
                {status === 'wrong' && <p>الجواب الصحيح: {currentWord.darija}</p>}
              </div>
           </div>

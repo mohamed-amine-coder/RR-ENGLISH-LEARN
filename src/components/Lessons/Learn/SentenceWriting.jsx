@@ -1,105 +1,25 @@
-// import { useState } from 'react';
-// import styles from './Learn.module.css';
-// import { FaCheck, FaTimes } from 'react-icons/fa';
-
-// export default function SentenceWriting({ lesson, onComplete }) {
-//   const sentences = lesson.sentences;
-//   const [index, setIndex] = useState(0);
-//   const [input, setInput] = useState('');
-//   const [status, setStatus] = useState("idle");
-//   const [isShaking, setIsShaking] = useState(false);
-
-//   const current = sentences[index];
-
-//   const cleanText = (t) => t.trim().toLowerCase().replace(/[.,?!]/g, "");
-
-//   const handleCheck = () => {
-//     if (!input.trim()) return;
-//     const isCorrect = cleanText(input) === cleanText(current.en);
-    
-//     if (isCorrect) {
-//       setStatus("correct");
-//     } else {
-//       setStatus("wrong");
-//       setIsShaking(true);
-//       setTimeout(() => setIsShaking(false), 500);
-//     }
-//   };
-
-//   const handleNext = () => {
-//     setInput('');
-//     setStatus("idle");
-//     if (index < sentences.length - 1) {
-//       setIndex(index + 1);
-//     } else {
-//       onComplete();
-//     }
-//   };
-
-//   return (
-//     <>
-//       <div className={styles.cardBody}>
-//         <div className={styles.instructionTitle}>ترجم الجملة</div>
-//         <h2 className={styles.subWord} style={{marginBottom: '30px'}}>{current.darija}</h2>
-
-//         <textarea
-//           className={`${styles.writeTextarea} ${isShaking ? styles.shake : ''}`}
-//           value={input}
-//           onChange={(e) => setInput(e.target.value)}
-//           placeholder="Type the sentence in English..."
-//           disabled={status === "correct"}
-//         />
-//       </div>
-
-//       <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`}>
-//         <div className={styles.footerContent}>
-//           {status !== 'idle' && (
-//             <div className={styles.feedbackMessage}>
-//               <div className={styles.feedbackIcon} style={{color: status === 'correct' ? '#58a700' : '#ea2b2b'}}>
-//                  {status === 'correct' ? <FaCheck /> : <FaTimes />}
-//               </div>
-//               <div className={styles.feedbackText}>
-//                  <h3>{status === 'correct' ? 'صحيح!' : 'الجواب:'}</h3>
-//                  {status === 'wrong' && <p style={{margin:0, direction:'ltr'}}>{current.en}</p>}
-//               </div>
-//             </div>
-//           )}
-          
-//           <button 
-//             className={styles.actionButton} 
-//             onClick={status === 'wrong' || status === 'correct' ? handleNext : handleCheck}
-//           >
-//             {status === 'wrong' || status === 'correct' ? 'تابع' : 'تحقق'}
-//           </button>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
+// Learn/WordWriting.jsx
 import { useState, useRef, useEffect } from 'react';
 import styles from './Learn.module.css';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import FeedbackFooter from './FeedbackFooter'; // 👈 استدعاء الفوتر الجديد
 
-export default function SentenceWriting({ lesson, onComplete }) {
-  const sentences = lesson.sentences;
+export default function WordWriting({ lesson, onComplete }) {
+  const words = lesson.words;
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState('');
   const [status, setStatus] = useState("idle");
   const [isShaking, setIsShaking] = useState(false);
   const inputRef = useRef(null);
 
-  const current = sentences[index];
+  const currentWord = words[index];
 
   useEffect(() => {
     inputRef.current?.focus();
   }, [index]);
 
-  const cleanText = (t) => t.trim().toLowerCase().replace(/[.,?!]/g, "");
-
   const handleCheck = () => {
     if (!input.trim()) return;
-    const isCorrect = cleanText(input) === cleanText(current.en);
+    const isCorrect = input.trim().toLowerCase() === currentWord.en.toLowerCase();
     
     if (isCorrect) {
       setStatus("correct");
@@ -113,7 +33,7 @@ export default function SentenceWriting({ lesson, onComplete }) {
   const handleNext = () => {
     setInput('');
     setStatus("idle");
-    if (index < sentences.length - 1) {
+    if (index < words.length - 1) {
       setIndex(index + 1);
     } else {
       onComplete();
@@ -123,42 +43,29 @@ export default function SentenceWriting({ lesson, onComplete }) {
   return (
     <>
       <div className={styles.cardBody}>
-        <div className={styles.instructionTitle}>ترجم الجملة</div>
-        <h2 className={styles.subWord} style={{marginBottom: '30px'}}>{current.darija}</h2>
-
-        <textarea
+        <div className={styles.instructionTitle}>اكتب الكلمة بالإنجليزية</div>
+        <h2 className={styles.subWord}>{currentWord.darija}</h2>
+        
+        <input
           ref={inputRef}
-          className={`${styles.writeTextarea} ${isShaking ? styles.shake : ''}`}
+          type="text"
+          className={`${styles.writeInput} ${isShaking ? styles.shake : ''}`}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type the sentence in English..."
+          placeholder="اكتب هنا..."
           disabled={status === "correct"}
+          onKeyDown={(e) => e.key === 'Enter' && (status === 'idle' ? handleCheck() : handleNext())}
         />
       </div>
 
-      <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`}>
-        <div className={styles.footerContent}>
-          {status !== 'idle' ? (
-            <div className={styles.feedbackMessage}>
-              <div className={styles.feedbackIcon} style={{color: status === 'correct' ? '#58a700' : '#ea2b2b'}}>
-                 {status === 'correct' ? <FaCheck /> : <FaTimes />}
-              </div>
-              <div className={styles.feedbackText}>
-                 <h3>{status === 'correct' ? 'عمل ممتاز!' : 'الجواب الصحيح:'}</h3>
-                 {status === 'wrong' && <p>{current.en}</p>}
-              </div>
-            </div>
-          ) : <div />}
-          
-          <button 
-            className={`${styles.actionButton} ${status === 'wrong' ? styles.wrongState : ''}`} 
-            onClick={status === 'idle' ? handleCheck : handleNext}
-            disabled={status === 'idle' && !input.trim()}
-          >
-            {status === 'idle' ? 'تحقق' : 'تابع'}
-          </button>
-        </div>
-      </div>
+      {/* 👈 هنا استخدمنا المكون الجديد، الكود ولا نقي ومختصر! */}
+      <FeedbackFooter 
+        status={status}
+        correctAnswer={currentWord.en}
+        onCheck={handleCheck}
+        onNext={handleNext}
+        disabledCheck={!input.trim()}
+      />
     </>
   );
 }

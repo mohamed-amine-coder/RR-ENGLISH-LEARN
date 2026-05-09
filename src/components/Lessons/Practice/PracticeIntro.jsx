@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Practice.module.css";
+import CustomAudioPlayer from "./CustomAudioPlayer"; // 👈 المشغل المخصص ديالك
 
 const PracticeIntro = ({ title, story, image, audio, onNext }) => {
   return (
@@ -8,9 +9,9 @@ const PracticeIntro = ({ title, story, image, audio, onNext }) => {
         <div className={styles.instructionTitle}>{title}</div>
         <img src={image} alt="Story" style={{width: '100%', maxWidth: '300px', borderRadius: '16px', marginBottom: '20px', border: '2px solid #eee'}} />
         
-        <audio controls style={{width: '100%', maxWidth: '300px', marginBottom: '20px', outline: 'none'}}>
-           <source src={audio} type="audio/mpeg" />
-        </audio>
+        <div style={{width: '100%', maxWidth: '300px', marginBottom: '20px'}}>
+           <CustomAudioPlayer audioSrc={audio} />
+        </div>
 
         <div style={{background: '#f0f7ff', padding: '20px', borderRadius: '16px', width: '100%', maxWidth: '400px'}}>
            <p style={{fontSize: '1.2rem', lineHeight: '1.8', margin: 0, textAlign: 'left', direction: 'ltr', color: '#333'}}>
@@ -21,7 +22,11 @@ const PracticeIntro = ({ title, story, image, audio, onNext }) => {
 
       <div className={styles.footerArea}>
         <div className={styles.footerContent} style={{justifyContent: 'center'}}>
-           <button className={styles.actionButton} onClick={onNext}>
+           <button 
+             className={styles.actionButton} 
+             onClick={onNext}
+             style={{ width: '100%', maxWidth: '300px' }}
+           >
              فهمت القصة، لنبدأ
            </button>
         </div>

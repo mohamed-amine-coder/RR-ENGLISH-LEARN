@@ -1,6 +1,7 @@
+// Practice/PracticeQuiz.jsx
 import React, { useState, useEffect } from "react";
-import { FaCheck, FaTimes } from "react-icons/fa";
 import styles from "./Practice.module.css";
+import FeedbackFooter from "./FeedbackFooter"; // 👈 استدعاء الفوتر
 
 const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
   const [current, setCurrent] = useState(0);
@@ -9,16 +10,14 @@ const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    // Shuffle options only when the question changes
     if (questions && questions[current]) {
        setOptions([...questions[current].options].sort(() => 0.5 - Math.random()));
     }
   }, [current, questions]);
 
-  const handleSelect = (opt) => {
-    if (status !== "idle") return; 
-    setSelected(opt);
-    const isCorrect = opt === questions[current].answer;
+  const handleCheck = () => {
+    if (!selected || status !== "idle") return; 
+    const isCorrect = selected === questions[current].answer;
     setStatus(isCorrect ? "correct" : "wrong");
     if (isCorrect) onAnswer();
   };
@@ -44,7 +43,12 @@ const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
              if (status === 'wrong' && selected === opt) btnClass += ` ${styles.wrong}`;
 
              return (
-              <button key={opt} className={btnClass} onClick={() => handleSelect(opt)} disabled={status !== 'idle'}>
+              <button 
+                key={opt} 
+                className={btnClass} 
+                onClick={() => {if(status === 'idle') setSelected(opt)}} 
+                disabled={status !== 'idle'}
+              >
                 {opt}
               </button>
              );
@@ -52,22 +56,13 @@ const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
         </div>
       </div>
 
-      <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`} style={{display: status === 'idle' ? 'none' : 'flex'}}>
-        <div className={styles.footerContent}>
-          <div className={styles.feedbackMessage}>
-            <div className={styles.feedbackIcon} style={{color: status === 'correct' ? '#58a700' : '#ea2b2b'}}>
-              {status === 'correct' ? <FaCheck /> : <FaTimes />}
-            </div>
-            <div className={styles.feedbackText}>
-              <h3>{status === 'correct' ? 'ماعلكش' : 'إجابة خاطئة'}</h3>
-              {status === 'wrong' && <p>Correct: {questions[current].answer}</p>}
-            </div>
-          </div>
-          <button className={`${styles.actionButton} ${status === 'wrong' ? styles.wrongState : ''}`} onClick={handleContinue}>
-            تابع
-          </button>
-        </div>
-      </div>
+      <FeedbackFooter 
+        status={status}
+        correctAnswer={questions[current].answer}
+        onCheck={handleCheck}
+        onNext={handleContinue}
+        disabledCheck={!selected}
+      />
     </>
   );
 };

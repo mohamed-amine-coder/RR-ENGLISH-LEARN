@@ -1,0 +1,31 @@
+const styles = {
+  container: "mx-auto flex min-h-screen max-w-[600px] flex-col bg-white font-[var(--font-family)]",
+  topBar: "sticky top-0 z-10 flex items-center gap-4 bg-white p-5",
+  closeButton: "flex items-center justify-center bg-transparent p-0 text-2xl text-[#a0aab5] hover:text-[#526577]",
+  progressContainer: "h-4 flex-1 overflow-hidden rounded-[10px] bg-[#e5e5e5]",
+  progressFill: "h-full rounded-[10px] bg-[#58cc02] transition-all duration-300",
+  learnCard: "flex flex-1 flex-col pb-[120px]",
+  cardBody: "flex flex-1 flex-col items-center justify-center p-5",
+  instructionTitle: "mb-[30px] w-full text-right text-2xl font-extrabold text-[#3c3c3c]",
+  mainWord: "my-2 text-center text-5xl font-black text-[#3c3c3c] ltr",
+  subWord: "mb-5 text-2xl font-semibold text-[#777]",
+  sentenceText: "my-5 text-center text-[1.8rem] font-bold leading-relaxed text-[#3c3c3c] ltr",
+  speakerBtn: "mx-auto mb-[30px] mt-2.5 flex h-[70px] w-[70px] cursor-pointer items-center justify-center rounded-[20px] border-b-4 border-b-[#1899d6] bg-[#1cb0f6] text-3xl text-white",
+  writeInput: "w-full rounded-2xl border-2 border-[#e5e5e5] bg-[#f7f7f7] p-5 text-center text-2xl text-[#3c3c3c] outline-none focus:border-[#1cb0f6] focus:bg-white ltr",
+  writeTextarea: "min-h-[120px] w-full resize-none rounded-2xl border-2 border-[#e5e5e5] bg-[#f7f7f7] p-5 text-left text-2xl text-[#3c3c3c] outline-none focus:border-[#1cb0f6] focus:bg-white ltr",
+  optionsGrid: "grid w-full grid-cols-2 gap-4",
+  optionCard: "cursor-pointer rounded-2xl border-2 border-b-4 border-[#e5e5e5] bg-white p-5 text-center text-[1.3rem] font-bold text-[#3c3c3c]",
+  selected: "border-[#1cb0f6] bg-[#ddf4ff] text-[#1cb0f6]",
+  correct: "border-[#58cc02] border-b-[#58a700] bg-[#d7ffb8] text-[#58a700]",
+  wrong: "border-[#ff4b4b] border-b-[#ea2b2b] bg-[#ffdfe0] text-[#ea2b2b]",
+  footerArea: "fixed bottom-0 left-0 right-0 z-[100] flex justify-center border-t-2 border-[#e5e5e5] bg-white p-5",
+  footerContent: "flex w-full max-w-[600px] items-center justify-between",
+  feedbackMessage: "flex items-center gap-4",
+  feedbackIcon: "flex h-[60px] w-[60px] items-center justify-center rounded-full bg-white text-3xl",
+  feedbackText: "",
+  actionButton: "min-w-[150px] cursor-pointer rounded-2xl border-none border-b-4 border-b-[#58a700] bg-[#58cc02] px-[30px] py-4 text-[1.2rem] font-extrabold text-white",
+  wrongState: "border-b-[#ea2b2b] bg-[#ff4b4b]",
+  shake: "animate-pulse border-[#ff4b4b] bg-[#ffdfe0]"
+};
+
+export default styles;

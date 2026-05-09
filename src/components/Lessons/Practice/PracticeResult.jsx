@@ -9,17 +9,17 @@ const PracticeResult = ({ score, total, onNext }) => {
     <>
       <div className={styles.cardBody}>
         <FaTrophy size={80} color="#ffc107" style={{marginBottom: '20px'}} />
-        <h2 style={{fontSize: '2rem', marginBottom: '10px', color: 'var(--primary-color)'}}>أكملت الدرس!</h2>
+        <h2 style={{fontSize: '2.2rem', marginBottom: '10px', color: '#3c3c3c'}}>أكملت التمارين!</h2>
         
-        <div style={{background: '#f7f7f7', padding: '30px', borderRadius: '20px', width: '100%', marginTop: '20px'}}>
+        <div style={{background: '#f7f7f7', padding: '30px', borderRadius: '20px', width: '100%', marginTop: '20px', border: '2px solid #e5e5e5'}}>
            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
               <div style={{textAlign: 'center'}}>
-                 <div style={{fontSize: '1rem', color: '#666'}}>النتيجة</div>
-                 <div style={{fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--success-color)'}}>{score} / {total}</div>
+                 <div style={{fontSize: '1.2rem', color: '#777', fontWeight: 'bold'}}>النتيجة</div>
+                 <div style={{fontSize: '2rem', fontWeight: '900', color: '#58cc02'}}>{score} / {total}</div>
               </div>
               <div style={{textAlign: 'center'}}>
-                 <div style={{fontSize: '1rem', color: '#666'}}>الدقة</div>
-                 <div style={{fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--secondary-color)'}}>{percentage}%</div>
+                 <div style={{fontSize: '1.2rem', color: '#777', fontWeight: 'bold'}}>الدقة</div>
+                 <div style={{fontSize: '2rem', fontWeight: '900', color: '#1cb0f6'}}>{percentage}%</div>
               </div>
            </div>
         </div>
@@ -27,8 +27,12 @@ const PracticeResult = ({ score, total, onNext }) => {
 
       <div className={styles.footerArea}>
         <div className={styles.footerContent} style={{justifyContent: 'center'}}>
-          <button className={styles.actionButton} onClick={onNext}>
-            الدرس التالي
+          <button 
+            className={styles.actionButton} 
+            onClick={onNext}
+            style={{ width: '100%', maxWidth: '300px' }}
+          >
+            التمرين التالي
           </button>
         </div>
       </div>

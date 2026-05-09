@@ -128,10 +128,26 @@
 .optionCard:hover:not(:disabled) { background: #f7f7f7; }
 .optionCard:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 
-.optionCard.selected { border-color: #1cb0f6; background: #ddf4ff; color: #1cb0f6; border-bottom-color: #1899d6; }
-.optionCard.correct { border-color: #58cc02; background: #d7ffb8; color: #58a700; border-bottom-color: #58a700; }
-.optionCard.wrong { border-color: #ff4b4b; background: #ffdfe0; color: #ea2b2b; border-bottom-color: #ea2b2b; }
+.optionCard.selected, .tfBtn.selected { 
+  border-color: #1cb0f6; 
+  background: #ddf4ff; 
+  color: #1cb0f6; 
+  border-bottom-color: #1899d6; 
+}
 
+.optionCard.correct, .tfBtn.correct { 
+  border-color: #58cc02; 
+  background: #d7ffb8; 
+  color: #58a700; 
+  border-bottom-color: #58a700; 
+}
+
+.optionCard.wrong, .tfBtn.wrong { 
+  border-color: #ff4b4b; 
+  background: #ffdfe0; 
+  color: #ea2b2b; 
+  border-bottom-color: #ea2b2b; 
+}
 .writeInput {
   width: 100%;
   padding: 18px;
@@ -168,6 +184,7 @@
   align-items: center;
   gap: 10px;
   color: #3c3c3c;
+  transition: all 0.1s; /* 👈 هاد السطر لي تـزاد باش يعطي حركة رطبة */
 }
 .tfBtn:active { transform: translateY(2px); border-bottom-width: 2px; }
 

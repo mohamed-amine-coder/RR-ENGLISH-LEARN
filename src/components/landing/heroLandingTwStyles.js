@@ -1,0 +1,30 @@
+const styles = {
+  wrapper: "min-h-[90vh] overflow-hidden bg-white px-5 py-[30px]",
+  container: "mx-auto grid w-full max-w-[1100px] items-center gap-[60px] md:[grid-template-columns:0.8fr_1.2fr] max-md:grid-cols-1 max-md:gap-10 max-md:text-center",
+  visualSide: "relative flex items-center justify-center max-md:order-first",
+  phoneFrame: "relative z-[2] h-[500px] w-[280px] overflow-hidden rounded-[40px] border-8 border-[#1a1a1a] bg-[#1a1a1a] shadow-2xl max-md:h-[520px] max-md:w-[260px]",
+  notch: "absolute left-1/2 top-0 z-[3] h-[25px] w-[150px] -translate-x-1/2 rounded-b-[18px] bg-[#1a1a1a]",
+  screen: "relative h-full w-full overflow-hidden rounded-[32px] bg-white",
+  slideImg: "absolute left-0 top-0 h-full w-full object-cover opacity-0 transition-opacity duration-700",
+  active: "opacity-100",
+  floatingCaption: "absolute bottom-[30px] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-[20px] bg-black/80 px-4 py-2 text-[0.85rem] font-bold text-white backdrop-blur",
+  blob: "absolute h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(0,119,255,0.1)_0%,rgba(255,255,255,0)_70%)]",
+  contentSide: "z-[2]",
+  antiInstitute: "mb-5 flex flex-wrap gap-2.5 text-[0.85rem] font-bold max-md:justify-center",
+  badWay: "flex items-center gap-1 rounded-[20px] bg-[#fef2f2] px-2.5 py-1 text-[#ef4444] line-through opacity-80",
+  goodWay: "flex items-center gap-1 rounded-[20px] border border-[#d1fae5] bg-[#ecfdf5] px-3 py-1 text-[#10b981]",
+  title: "mb-4 text-[2rem] font-black leading-tight text-[var(--dark-color)]",
+  highlight: "bg-[linear-gradient(120deg,#e0f2fe_0%,#e0f2fe_100%)] bg-[length:100%_40%] bg-[position:0_90%] bg-no-repeat text-[var(--primary-color)]",
+  subtitle: "mb-[30px] max-w-[95%] text-[1.15rem] leading-[1.7] text-[#555]",
+  uniqueValue: "rounded bg-[#fff7ed] px-1 py-0.5 font-bold text-[#c2410c]",
+  powerPoints: "mb-[30px] grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(200px,1fr))] max-md:text-right",
+  pointItem: "flex items-start gap-3 rounded-xl border border-[#f3f4f6] bg-white p-4 transition hover:-translate-y-1 hover:border-[var(--primary-color)] hover:shadow-[0_4px_10px_rgba(0,0,0,0.03)]",
+  pIcon: "flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-[10px] bg-[#fafafa] text-[1.4rem]",
+  actionArea: "mt-2.5",
+  loginBox: "max-w-[400px] rounded-2xl border-2 border-[#eff6ff] bg-white p-5 text-center shadow-[0_10px_30px_-5px_rgba(0,119,255,0.1)] max-md:mx-auto",
+  ctaText: "mb-4 text-[1.1rem] font-extrabold text-[var(--primary-color)]",
+  welcomeBack: "max-w-[400px] rounded-2xl border border-[#dcfce7] bg-[#f0fdf4] p-5",
+  resumeBtn: "inline-flex items-center gap-2 rounded-full bg-[var(--secondary-color)] px-4 py-2 text-[0.9rem] font-bold text-white no-underline transition hover:-translate-y-0.5"
+};
+
+export default styles;

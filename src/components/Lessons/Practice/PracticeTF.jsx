@@ -1,16 +1,16 @@
+// Practice/PracticeTF.jsx
 import React, { useState } from "react";
-import { FaCheck, FaTimes } from "react-icons/fa";
 import styles from "./Practice.module.css";
+import FeedbackFooter from "./FeedbackFooter";
 
 const PracticeTF = ({ questions, onNext, onAnswer }) => {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState(null);
   const [status, setStatus] = useState("idle");
 
-  const handleSelect = (value) => {
-    if (status !== "idle") return; 
-    setSelected(value);
-    const isCorrect = value === questions[current].answer;
+  const handleCheck = () => {
+    if (selected === null || status !== "idle") return; 
+    const isCorrect = selected === questions[current].answer;
     setStatus(isCorrect ? "correct" : "wrong");
     if (isCorrect) onAnswer();
   };
@@ -29,31 +29,30 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
         <h2 className={styles.questionText} style={{direction: 'ltr'}}>{questions[current].question}</h2>
         
         <div className={styles.tfContainer}>
-          <button className={`${styles.tfBtn} ${selected === true ? styles.selected : ''}`} onClick={() => handleSelect(true)} disabled={status !== 'idle'}>
+          <button 
+            className={`${styles.tfBtn} ${selected === true ? styles.selected : ''} ${status !== 'idle' && questions[current].answer === true ? styles.correct : ''} ${status === 'wrong' && selected === true ? styles.wrong : ''}`} 
+            onClick={() => {if(status === 'idle') setSelected(true)}} 
+            disabled={status !== 'idle'}
+          >
             <span style={{fontSize:'2rem'}}>👍</span> True
           </button>
-          <button className={`${styles.tfBtn} ${selected === false ? styles.selected : ''}`} onClick={() => handleSelect(false)} disabled={status !== 'idle'}>
+          <button 
+            className={`${styles.tfBtn} ${selected === false ? styles.selected : ''} ${status !== 'idle' && questions[current].answer === false ? styles.correct : ''} ${status === 'wrong' && selected === false ? styles.wrong : ''}`} 
+            onClick={() => {if(status === 'idle') setSelected(false)}} 
+            disabled={status !== 'idle'}
+          >
             <span style={{fontSize:'2rem'}}>👎</span> False
           </button>
         </div>
       </div>
 
-      <div className={`${styles.footerArea} ${status !== 'idle' ? styles[status] : ''}`} style={{display: status === 'idle' ? 'none' : 'flex'}}>
-        <div className={styles.footerContent}>
-             <div className={styles.feedbackMessage}>
-               <div className={styles.feedbackIcon} style={{color: status === 'correct' ? '#58a700' : '#ea2b2b'}}>
-                 {status === 'correct' ? <FaCheck /> : <FaTimes />}
-               </div>
-               <div className={styles.feedbackText}>
-                 <h3>{status === 'correct' ? 'جواب صحيح!' : 'جواب خاطئ'}</h3>
-               </div>
-             </div>
-
-            <button className={`${styles.actionButton} ${status === 'wrong' ? styles.wrongState : ''}`} onClick={handleContinue}>
-              تابع
-            </button>
-        </div>
-      </div>
+      <FeedbackFooter 
+        status={status}
+        correctAnswer={questions[current].answer ? "True" : "False"}
+        onCheck={handleCheck}
+        onNext={handleContinue}
+        disabledCheck={selected === null}
+      />
     </>
   );
 };
