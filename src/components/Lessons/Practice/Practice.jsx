@@ -126,7 +126,23 @@ const Practice = () => {
     }
   };
 
-  if (isLoading || (firebaseUser && lessons.length === 0)) return <div className={styles.container} style={{ justifyContent: 'center', alignItems:'center' }}><h2>جار التحميل...</h2></div>;
+  // if (isLoading || (firebaseUser && lessons.length === 0)) return <div className={styles.container} style={{ justifyContent: 'center', alignItems:'center' }}><h2>جار التحميل...</h2></div>;
+  if (isLoading || (firebaseUser && lessons.length === 0)) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.loaderWrapper}>
+          {/* هادا هو الـ Spinner اللي كيدور */}
+          <div className={styles.customSpinner}></div>
+          
+          {/* النصوص */}
+          <div className={styles.textWrapper}>
+            <h2 className={styles.mainTitle}>جارِ التحميل...</h2>
+            <p className={styles.subTitle}>كنجمعو ليك الدروس، شوية د الصبر 🚀</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (showUpgrade) return <UpgradePlan />;
   if (!firebaseUser) return <div className={styles.container} style={{ justifyContent: 'center', alignItems:'center' }}><h2>المرجو تسجيل الدخول</h2></div>;
   if (!currentLesson) return <div className={styles.container} style={{ justifyContent: 'center', alignItems:'center' }}><h2>خطأ: لم يتم العثور على التمرين.</h2></div>;

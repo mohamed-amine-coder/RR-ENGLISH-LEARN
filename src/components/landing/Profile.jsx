@@ -84,7 +84,16 @@ export default function Profile() {
     return Math.ceil(diff / (1000 * 60 * 60 * 24));
   };
 
-  if (loading) return <div className={styles.loading}>جارٍ تحميل بياناتك...</div>;
+  // if (loading) return <div className={styles.loading}>جارٍ تحميل بياناتك...</div>;
+  if (loading) return (
+    <div className={styles.profileLoaderContainer}>
+      <div className={styles.identityPulse}>
+        <div></div>
+        <div></div>
+      </div>
+      <p>جارٍ تحميل بياناتك...</p>
+    </div>
+  );
   if (!userData) return <div className={styles.error}>يرجى تسجيل الدخول.</div>;
 
   const roleInfo = userData.role === 'premium' 

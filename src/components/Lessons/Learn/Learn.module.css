@@ -241,6 +241,64 @@
 .feedbackText h3 { margin: 0 0 5px 0; font-size: 1.6rem; font-weight: 800; color: #3c3c3c; }
 .feedbackText p { margin: 0; font-size: 1.2rem; font-weight: 700; color: #ea2b2b; direction: ltr; }
 
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* باش يشد الوسط ديال الصفحة */
+  width: 100%;
+  background-color: transparent;
+  direction: rtl;
+}
+
+.loaderWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ستايل الـ Spinner العصري */
+.customSpinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f1f5f9; /* لون فاتح */
+  border-top: 5px solid #2563eb; /* لون أزرق ناصع (Primary) */
+  border-right: 5px solid #60a5fa; /* لون أزرق فاتح باش يعطي تدرج */
+  border-radius: 50%;
+  animation: rotateSpinner 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.textWrapper {
+  text-align: center;
+}
+
+.mainTitle {
+  font-size: 1.4rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subTitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 8px;
+  animation: pulseFade 2s infinite ease-in-out;
+}
+
+/* أنيمايشن الدوران */
+@keyframes rotateSpinner {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* أنيمايشن نبض النص */
+@keyframes pulseFade {
+  0%, 100% { opacity: 0.5; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
 /* Animations */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }

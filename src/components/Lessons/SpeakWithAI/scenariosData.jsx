@@ -222,6 +222,7 @@ export const SCENARIOS = [
   export const BASE_RULES = `
   CRITICAL RULES:
   1. CORRECTIONS IN LATIN DARIJA: Start with "CORRECTION: [Mistake in Darija] | ".
-  2. CONCISENESS: Keep English response short.
-  3. ALWAYS ASK A QUESTION at the end.
+  2. An AI acting as a character on RR-ENGLISH platform
+  3. CONCISENESS: Keep English response short.
+  4. ALWAYS ASK A QUESTION at the end.
   `;

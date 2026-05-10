@@ -28,7 +28,14 @@ export default function SpeakWithAI() {
     fetchUserRole();
   }, []);
 
-  if (loading) return <div className={styles.loadingScreen}>جاري التحميل...</div>;
+  // if (loading) return <div className={styles.loadingScreen}>جاري التحميل...</div>;
+  if (loading) return (
+    <div className={styles.loadingScreen}>
+      <div className={styles.loaderBox}>
+        <div className={styles.spinner}></div>
+      </div>
+    </div>
+  );
 
   return (
     <div className={styles.layoutContainer} dir="rtl">

@@ -75,7 +75,7 @@ export default function PremiumChat({ selectedScenario }) {
       setMessages(prev => [...prev, { role: 'model', text: mainText, correction: correctionText }]);
     } catch (error) {
       console.error("Gemini API Error:", error);
-      setMessages(prev => [...prev, { role: 'model', text: 'Sorry, connection error. Please try again.', correction: null }]);
+      setMessages(prev => [...prev, { role: 'model', text: 'الروبو كياخد استراحة، عاود صيفط ميساج من بعد 10 ثواني', correction: null }]);
     } finally {
       setIsLoading(false);
     }

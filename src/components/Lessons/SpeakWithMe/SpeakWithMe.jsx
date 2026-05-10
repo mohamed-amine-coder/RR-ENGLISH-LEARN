@@ -32,8 +32,19 @@ function SpeakWithMe() {
     return () => unsubscribe();
   }, []);
 
-  if (loading) return <div className={styles.loader}>جارٍ تحميل البيانات... ⏳</div>;
-
+  // if (loading) return <div className={styles.loader}>جارٍ تحميل البيانات... ⏳</div>;
+  if (loading) return (
+    <div className={styles.loadingOverlay}>
+      <div className={styles.loadingContent}>
+        {/* هاد الدائرة هي اللودر العصري */}
+        <div className={styles.premiumRing}>
+          <div></div><div></div><div></div><div></div>
+        </div>
+        <h2 className={styles.loadingText}>جارٍ تحميل البيانات...</h2>
+        <p className={styles.loadingStatus}>كنوجدو ليك تجربة ذكية 🧠✨</p>
+      </div>
+    </div>
+  );
   const { role: rawRole, name } = userData || { role: 'free', name: 'زائر' };
   const role = rawRole ? rawRole.toLowerCase() : 'free';
 

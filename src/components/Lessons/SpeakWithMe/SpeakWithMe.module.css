@@ -224,6 +224,77 @@
 }
 .statusDot { width: 10px; height: 10px; border-radius: 50%; }
 
+/* الخلفية لي كتشد الشاشة كاملة مع ضبابة خفيفة */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px); /* تأثير الضبابة العصري */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  direction: rtl;
+}
+
+.loadingContent {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* لودر بـ 4 دوائر كيدوروا بتناغم */
+.premiumRing {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+.premiumRing div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 6px solid #2563eb; /* لون البراند ديالك */
+  border-radius: 50%;
+  animation: premiumRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #2563eb transparent transparent transparent;
+}
+.premiumRing div:nth-child(1) { animation-delay: -0.45s; }
+.premiumRing div:nth-child(2) { animation-delay: -0.3s; }
+.premiumRing div:nth-child(3) { animation-delay: -0.15s; }
+
+.loadingText {
+  font-size: 1.5rem;
+  color: #1e293b;
+  font-weight: 800;
+  margin: 10px 0 5px 0;
+}
+
+.loadingStatus {
+  font-size: 1rem;
+  color: #64748b;
+  animation: pulse 1.5s infinite;
+}
+
+/* الأنيمايشنز */
+@keyframes premiumRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .visualSection { grid-template-columns: 1fr; text-align: center; }
