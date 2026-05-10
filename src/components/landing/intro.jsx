@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { signInWithGoogle } from "../../../Auth/authService"; 
+import { signInWithGoogle } from "../../Auth/authService"; 
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../../Auth/firebaseConfig'; 
+import { auth } from '../../Auth/firebaseConfig'; 
 
 // استيراد الصور
-import homeImage from '../../../assets/intro-img-1.jpg'; // صورة الهيرو (Hero)
-import platformImage from '../../../assets/intro-img-2.jpg'; // صورة المنصة (Features)
-import callImage from '../../../assets/intro-img-3.jpg'; // صورة المكالمة (Call)
+import homeImage from '../../assets/intro-img-1.jpg'; // صورة الهيرو (Hero)
+import platformImage from '../../assets/intro-img-2.jpg'; // صورة المنصة (Features)
+import callImage from '../../assets/intro-img-3.jpg'; // صورة المكالمة (Call)
 
 export default function App() {
   const navigate = useNavigate();

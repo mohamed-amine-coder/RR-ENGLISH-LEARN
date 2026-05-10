@@ -1,16 +1,17 @@
-// Practice/Practice.jsx
+// src/components/Lessons/Practice/Practice.jsx
 import React, { useState, useEffect } from "react"; 
 import PracticeIntro from "./PracticeIntro";
 import PracticeQuiz from "./PracticeQuiz";
 import PracticeWrite from "./PracticeWrite";
 import PracticeTF from "./PracticeTF";
 import PracticeResult from "./PracticeResult";
-import StoryModal from "./StoryModal"; // 👈 استدعاء المكون الجديد
+import StoryModal from "./StoryModal"; 
 import styles from "./Practice.module.css";
 import UpgradePlan from "../../landing/UpgradePlan"; 
 
+// 🔴 زدنا increment
 import { db, auth } from "../../../Auth/firebaseConfig"; 
-import { doc, getDoc, updateDoc, collection, getDocs, query, orderBy } from "firebase/firestore"; 
+import { doc, getDoc, updateDoc, collection, getDocs, query, orderBy, increment } from "firebase/firestore"; 
 import { onAuthStateChanged } from "firebase/auth";
 import { FaTimes, FaBookOpen } from "react-icons/fa";
 
@@ -22,6 +23,9 @@ const Practice = () => {
   const [score, setScore] = useState(0);
   const [introDone, setIntroDone] = useState(false); 
   
+  // 🆕 حالة (State) لتخزين النقط
+  const [userXp, setUserXp] = useState(0); 
+
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [userRole, setUserRole] = useState('free');
   const [showUpgrade, setShowUpgrade] = useState(false);
@@ -30,7 +34,7 @@ const Practice = () => {
   const currentLesson = lessons.length > 0 ? lessons[lessonIndex] : null;
   const totalExercises = currentLesson ? (currentLesson.quiz.length + currentLesson.write.length + currentLesson.tf.length) : 0;
   
-  const totalSections = 4; // 0:Quiz, 1:Write, 2:TF, 3:Result
+  const totalSections = 4;
   const progressPercent = introDone ? ((step) / (totalSections - 1)) * 100 : 0;
 
   const FREE_LESSONS_LIMIT = 5; 
@@ -55,6 +59,8 @@ const Practice = () => {
       if (docSnap.exists()) {
         const data = docSnap.data();
         setUserRole(data.role || 'free');
+        setUserXp(data.xp || 0); // 🆕 جلب النقط
+
         const lastLesson = data.lastLessonPractice; 
         if (typeof lastLesson === 'number' && lastLesson >= 0) { 
            if (data.role === 'free' && lastLesson >= FREE_LESSONS_LIMIT) {
@@ -90,7 +96,12 @@ const Practice = () => {
       if (!firebaseUser?.uid) return; 
       try {
         const docRef = doc(db, "users", firebaseUser.uid); 
-        await updateDoc(docRef, { lastLessonPractice: newLessonIndex });
+        // 🆕 زيادة 5 نقط فالتمرين
+        await updateDoc(docRef, { 
+          lastLessonPractice: newLessonIndex,
+          xp: increment(5) 
+        });
+        setUserXp(prev => prev + 5); // 🆕 تحديث محلي
       } catch (error) { console.error("Error saving progress: ", error); }
   };
 
@@ -123,8 +134,14 @@ const Practice = () => {
   return (
     <div className={styles.container}>
       <div className={styles.topBar}>
+        <button className={styles.closeButton}><FaTimes /></button>
         <div className={styles.progressContainer}>
           <div className={styles.progressFill} style={{ width: `${progressPercent}%` }}></div>
+        </div>
+
+        {/* 🆕 عرض النقط */}
+        <div style={{ fontWeight: '900', color: '#f4c150', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '1.2rem', margin: '0 10px', direction: 'ltr' }}>
+          <span>{userXp}</span> 🌟
         </div>
         
         {introDone && step < 3 && (
@@ -148,12 +165,16 @@ const Practice = () => {
             {step === 0 && <PracticeQuiz questions={currentLesson.quiz} onNext={handleNextStep} onAnswer={handleAnswer} />}
             {step === 1 && <PracticeWrite questions={currentLesson.write} onNext={handleNextStep} onAnswer={handleAnswer} />}
             {step === 2 && <PracticeTF questions={currentLesson.tf} onNext={handleNextStep} onAnswer={handleAnswer} />}
-            {step === 3 && <PracticeResult score={score} total={totalExercises} onNext={handleNextLesson} />}
+            {step === 3 && (
+               <div>
+                  <PracticeResult score={score} total={totalExercises} onNext={handleNextLesson} />
+                  <p style={{textAlign: 'center', color: '#58cc02', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '-10px'}}>+5 نقط XP 🌟</p>
+               </div>
+            )}
           </>
         )}
       </div>
 
-      {/* 👈 استخدام المكون المفصول ديال المودال */}
       {showStory && (
         <StoryModal 
           intro={currentLesson.intro} 

@@ -1,5 +1,5 @@
 // Learn/SentenceViewer.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Learn.module.css';
 import { FaVolumeUp } from 'react-icons/fa';
 
@@ -7,13 +7,40 @@ export default function SentenceViewer({ lesson, onComplete }) {
   const sentences = lesson.sentences;
   const [index, setIndex] = useState(0);
 
+  // 1. حالة (State) لتخزين الأصوات الإنجليزية
+  const [englishVoices, setEnglishVoices] = useState([]);
+
+  // 2. تحميل الأصوات وعزل الأصوات ذات الجودة العالية
+  useEffect(() => {
+    const loadVoices = () => {
+      const allVoices = window.speechSynthesis.getVoices();
+      
+      const goodVoices = allVoices.filter(v => 
+        v.lang.startsWith("en") && 
+        (v.name.includes("Google") || v.name.includes("Microsoft") || v.name.includes("Apple") || v.name.includes("Samantha") || v.name.includes("Daniel"))
+      );
+
+      setEnglishVoices(goodVoices.length > 0 ? goodVoices : allVoices.filter(v => v.lang.startsWith("en")));
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }, []);
+
   const handleSpeak = (text) => {
+    // توقيف أي صوت كان خدام باش ما يتخلطوش
+    window.speechSynthesis.cancel(); 
+
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "en-US";
-    utter.rate = 0.7; 
-    const voices = window.speechSynthesis.getVoices();
-    const preferredVoice = voices.find(v => v.lang === "en-US" && !v.name.includes("Google"));
-    if (preferredVoice) utter.voice = preferredVoice;
+    utter.rate = 0.85; // سرعة 0.85 كتكون طبيعية ومفهومة فالجمل
+    
+    // 3. اختيار صوت عشوائي من الأصوات المزيانة
+    if (englishVoices.length > 0) {
+      const randomVoice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
+      utter.voice = randomVoice;
+    }
+
     window.speechSynthesis.speak(utter);
   };
 
@@ -23,6 +50,7 @@ export default function SentenceViewer({ lesson, onComplete }) {
   };
 
   const current = sentences[index];
+  
   return (
     <>
       <div className={styles.cardBody}>

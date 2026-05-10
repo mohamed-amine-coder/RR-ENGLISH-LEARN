@@ -1,7 +1,7 @@
-
+// src/components/landing/Profile.jsx
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../../Auth/firebaseConfig"; 
-import { doc, getDoc, updateDoc } from "firebase/firestore"; // زدت updateDoc
+import { doc, getDoc, updateDoc } from "firebase/firestore"; 
 import { onAuthStateChanged } from "firebase/auth";
 import { 
   FaUserCircle, FaCrown, FaBookOpen, FaTasks, FaEnvelope, 
@@ -13,7 +13,6 @@ export default function Profile() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // 🆕 State لوضع التعديل
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({ displayName: "", phoneNumber: "" });
 
@@ -27,7 +26,6 @@ export default function Profile() {
           if (docSnap.exists()) {
             const data = docSnap.data();
             
-            // تحويل التاريخ
             let endDate = null;
             if (data.subscriptionEndDate) {
                const dateObj = data.subscriptionEndDate.toDate ? data.subscriptionEndDate.toDate() : new Date(data.subscriptionEndDate);
@@ -41,16 +39,16 @@ export default function Profile() {
               phoneNumber: data.phoneNumber || "",
               role: data.role || 'free',
               planType: data.planType || 'none',
-              whatsappGroup: data.whatsappGroup || '-',
               createdAt: data.createdAt ? new Date(data.createdAt).toLocaleDateString('ar-MA') : 'غير معروف',
               subscriptionEndDate: endDate,
               lastLessonLearn: data.lastLessonLearn || 0,
               lastLessonPractice: data.lastLessonPractice || 0,
-              streak: data.streak || 1, // 🆕 عداد الأيام (افتراضي 1)
+              streak: data.streak || 1, 
+              xp: data.xp || 0, // 🆕 جلب النقاط
             };
 
             setUserData(profileData);
-            setEditForm({ displayName: profileData.displayName, phoneNumber: profileData.phoneNumber }); // ملء الفورم
+            setEditForm({ displayName: profileData.displayName, phoneNumber: profileData.phoneNumber }); 
           }
         } catch (error) {
           console.error("Error fetching profile:", error);
@@ -62,7 +60,6 @@ export default function Profile() {
     return () => unsubscribe();
   }, []);
 
-  // 🆕 دالة حفظ التعديلات
   const handleSave = async () => {
     if (!userData) return;
     try {
@@ -104,7 +101,6 @@ export default function Profile() {
         <div className={styles.header}>
           <div className={styles.avatar}>
             <FaUserCircle size={80} color="var(--primary-color)" />
-            {/* 🆕 زر التعديل */}
             <button className={styles.editBtn} onClick={() => isEditing ? handleSave() : setIsEditing(true)}>
               {isEditing ? <FaSave /> : <FaPen />}
             </button>
@@ -126,15 +122,15 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* 🆕 Gamification Bar (التحفيز) */}
-        {/* <div className={styles.gamificationBar}>
-           <div className={styles.streakBadge}>
-             <FaFire color="#ff7b00" /> {userData.streak} أيام متتالية
+        {/* 🆕 Gamification Bar (عرض النقاط والحماس) */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '15px', flexWrap: 'wrap' }}>
+           <div style={{ background: '#fffbeb', color: '#b45309', padding: '10px 20px', borderRadius: '15px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
+             <FaFire color="#ff7b00" size={20} /> {userData.streak} أيام متتالية
            </div>
-           <div className={styles.levelBadge}>
-             <FaMedal color="#FFD700" /> المستوى 1
+           <div style={{ background: '#f0fdf4', color: '#15803d', padding: '10px 20px', borderRadius: '15px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
+             <span style={{fontSize:'1.3rem'}}>🌟</span> {userData.xp} نقطة (XP)
            </div>
-        </div> */}
+        </div>
 
         {/* Subscription Info */}
         {userData.role === 'premium' && (

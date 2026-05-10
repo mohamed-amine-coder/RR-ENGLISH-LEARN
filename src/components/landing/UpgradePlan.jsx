@@ -1,331 +1,340 @@
+import React from 'react';
+import { FaCheckCircle, FaWhatsapp, FaArrowRight, FaQuestionCircle, FaStar, FaShieldAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
-import React, { useState } from 'react';
-// تأكد أنك متبث المكتبة: npm install react-icons
-import { FaWhatsapp, FaCheckCircle, FaCrown, FaUnlockAlt, FaFire, FaClock } from 'react-icons/fa';
+export default function UpgradePlan() {
+  const navigate = useNavigate();
+  const whatsappNumber = "212600000000"; // 🔴 دير رقمك هنا
 
-const UpgradePlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState(2);
-  const [hoveredPlan, setHoveredPlan] = useState(null); // زدنا هادي باش نديرو تأثير الهوفر بالكود
-
-  const plans = [
-    { 
-      id: 1, 
-      name: 'Start',
-      sessions: '1 حصة فالسيمانة',
-      totalSessions: '4 حصص فالشهر',
-      price: 99, 
-      originalPrice: 149,
-      badge: 'اقتصادي',
-      color: '#4CAF50'
-    },
-    { 
-      id: 2, 
-      name: 'Pro',
-      sessions: '2 حصص فالسيمانة',
-      totalSessions: '8 حصص فالشهر',
-      price: 149, 
-      originalPrice: 199,
-      badge: 'الأكثر طلباً 🔥',
-      popular: true,
-      color: '#0077ff'
-    },
-    { 
-      id: 3, 
-      name: 'Turbo',
-      sessions: '3 حصص فالسيمانة',
-      totalSessions: '12 حصة فالشهر',
-      price: 199, 
-      originalPrice: 249,
-      badge: 'أفضل قيمة 💎',
-      color: '#ff7b00'
-    }
-  ];
-
-  const currentPlan = plans.find(p => p.id === selectedPlan);
-
-  const handleSubscribe = () => {
-    const phoneNumber = "212718090887"; 
-    const message = `السلام عليكم، بغيت نستافد من تخفيض *عرض ${currentPlan.name}* بـ *${currentPlan.price} درهم* واش باقي متاح ؟`;
-    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  const handleSubscribe = (planName) => {
+    const message = `مرحباً! بغيت نبدا نتعلم الإنجليزية واختاريت *${planName}*. كيفاش نقدر نخلص عافاك؟`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
     <div style={styles.container}>
-      <div style={styles.card}>
+      
+      {/* رأس الصفحة: التركيز على النتيجة */}
+      <div style={styles.header}>
+        <button style={styles.backButton} onClick={() => navigate(-1)}>
+          <FaArrowRight /> رجوع
+        </button>
+        <h1 style={styles.title}>مستعد تهضر بالإنجليزية بثقة؟ 🚀</h1>
+        <p style={styles.subtitle}>استثمر فمستقبلك بأقل تكلفة. اختار الخطة لي تناسبك وبدا اليوم.</p>
+      </div>
+
+      {/* البطاقات */}
+      <div style={styles.cardsContainer}>
         
-        {/* 1. مقدمة */}
-        <div style={styles.introHeader}>
-          <div style={styles.iconWrapper}><FaUnlockAlt size={24} color="#0077ff" /></div>
-          <h2 style={styles.title}>إلا كان الفابور داير هكا، كيفاش غايكون المدفوع؟ هادشي غير 1% 😍</h2>
-          <p style={styles.subtitle}>
-            راك جربتي الطريقة وشتي السهولة. دابا تخيل معايا تفتح <strong>المنصة كاملة</strong> وتستافد من:
-          </p>
-          
-          <div style={styles.bigStats}>
-            <div style={styles.statBox}>
-              <strong style={styles.statNumber}>+2000</strong> <span style={styles.statLabel}>كلمة</span>
-            </div>
-            <div style={styles.statBox}>
-              <strong style={styles.statNumber}>+3000</strong> <span style={styles.statLabel}>جملة</span>
-            </div>
-            <div style={styles.statBox}>
-              <strong style={styles.statNumber}>+500</strong> <span style={styles.statLabel}>نص</span>
-            </div>
-            <div style={styles.statBox}>
-              <strong style={styles.statNumber}>+500</strong> <span style={styles.statLabel}>تسجيل صوتي</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 2. المفاجأة الكبرى */}
-        <div style={styles.surpriseBox}>
-          <div style={styles.surpriseHeader}>
-            <FaCrown color="#FFD700" /> <span>المفاجأة الكبرى: Speak With Me</span>
-          </div>
-          <p style={{margin: 0, fontSize: '0.95rem', color: '#555'}}>
-            ماشي غير الدروس! الاشتراك كيعطيك حق الوصول لحصص مباشرة فين غاطبق هادشي كامل مع 
-            <strong> متعلم بحالك وأستاذ\ة كتشرف عليكم</strong>.
-          </p>
-        </div>
-
-        {/* 3. العرض المحدود */}
-        <div style={styles.offerBanner}>
-          <FaClock />
-          <span>تخفيض -50 درهم صالح لأول 500 مشترك</span>
-        </div>
-
-        {/* 4. شبكة العروض */}
-        <div style={styles.grid}>
-          {plans.map((plan) => (
-            <div 
-              key={plan.id}
-              onClick={() => setSelectedPlan(plan.id)}
-              onMouseEnter={() => setHoveredPlan(plan.id)}
-              onMouseLeave={() => setHoveredPlan(null)}
-              style={{
-                ...styles.planCard,
-                borderColor: selectedPlan === plan.id ? plan.color : '#eee',
-                backgroundColor: selectedPlan === plan.id ? `${plan.color}08` : '#fff',
-                transform: selectedPlan === plan.id || hoveredPlan === plan.id ? 'scale(1.03)' : 'scale(1)',
-                boxShadow: selectedPlan === plan.id ? `0 10px 30px -10px ${plan.color}40` : 'none'
-              }}
-            >
-              {plan.badge && (
-                <div style={{...styles.badge, backgroundColor: plan.color}}>
-                  {plan.badge}
-                </div>
-              )}
-              
-              <h3 style={{...styles.planName, color: plan.color}}>{plan.name}</h3>
-              
-              <div style={styles.priceTag}>
-                <span style={styles.originalPrice}>{plan.originalPrice} DH</span>
-                <div style={{display:'flex', alignItems:'baseline', gap:'5px', justifyContent:'center'}}>
-                  <span style={styles.currency}>{plan.price}</span>
-                  <span style={styles.unit}>DH</span>
-                </div>
-              </div>
-
-              <div style={styles.details}>
-                <p style={{fontWeight: 'bold', color: '#333', fontSize:'0.9rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px'}}>
-                  <FaCheckCircle style={{color: plan.color}}/> 
-                  {plan.sessions}
-                </p>
-                <p style={{fontSize: '0.8rem', color: '#666', marginTop: '5px'}}>
-                  {/* ({plan.totalSessions}) */}
-                </p>
-              </div>
-
-              {/* Radio Circle */}
-              <div style={{
-                ...styles.radio,
-                borderColor: selectedPlan === plan.id ? plan.color : '#ccc',
-                background: selectedPlan === plan.id ? plan.color : 'transparent'
-              }}></div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <div style={styles.ctaSection}>
-          <div style={styles.summary}>
-            باختيارك لـ <strong>{currentPlan.name}</strong>، راك غادي تستفد من <strong style={{backgroundColor: selectedPlan ? plans.find(plan => plan.id === selectedPlan)?.color : '#000', padding: '2px 6px', borderRadius: '4px', color: '#fff'}}>{plans.find(plan => plan.id === selectedPlan)?.totalSessions} + فتح جميع دروس المنصة في Learn & Practice</strong> 
+        {/* الباقة 1: التعلم الذاتي */}
+        <div style={styles.card}>
+          <div style={styles.cardTop}>
+            <h2 style={styles.planName}>التعلم المستقل</h2>
+            <p style={styles.planTarget}>مثالية للبداية والمراجعة بالوتيرة ديالك</p>
           </div>
           
-          <button 
-            style={styles.whatsappButton}
-            onClick={handleSubscribe}
-          >
-            <FaWhatsapp size={24} />
-              تواصل معانا
+          <div style={styles.priceBox}>
+            <span style={styles.price}>49</span>
+            <span style={styles.currency}>درهم / للشهر</span>
+          </div>
+          
+          <ul style={styles.featuresList}>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#1cb0f6" size={18} style={{marginTop: '4px'}}/> 
+              <span><b>تعلم على خاطرك:</b> دخول مفتوح لجميع الدروس والتمارين.</span>
+            </li>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#1cb0f6" size={18} style={{marginTop: '4px'}}/> 
+              <span><b>طور الاستماع:</b> قصص تفاعلية ومقاطع صوتية ممتعة.</span>
+            </li>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#1cb0f6" size={18} style={{marginTop: '4px'}}/> 
+              <span><b>راجع فأي وقت:</b> تحميل جميع الملخصات (PDF) لتليفونك.</span>
+            </li>
+          </ul>
+
+          <button style={styles.basicBtn} onClick={() => handleSubscribe('باقة التعلم المستقل (49 درهم)')}>
+            ابــــدأ الآن
           </button>
-          <p style={styles.guarantee}>جميع الحقوق محفوظة © 2024</p>
+        </div>
+
+        {/* الباقة 2: التحدث المباشر (الأكثر إقناعاً) */}
+        <div style={{...styles.card, ...styles.proCard}}>
+          <div style={styles.badge}><FaStar color="#fff" size={14}/> الأكثر مبيعاً</div>
+          <div style={styles.cardTop}>
+            <h2 style={{...styles.planName, color: '#58cc02'}}>الممارسة والتحدث</h2>
+            <p style={styles.planTarget}>أحسن خطوة باش تهرس عقدة النطق وتزعم</p>
+          </div>
+          
+          <div style={styles.priceBox}>
+            <span style={{...styles.price, color: '#58cc02'}}>149</span>
+            <span style={styles.currency}>درهم / للشهر</span>
+          </div>
+          
+          <ul style={styles.featuresList}>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <span>جميع ميزات باقة <b>"التعلم المستقل"</b>.</span>
+            </li>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <span><b>4 حصص مكالمات واتساب</b> (ساعة ونصف كل أسبوع).</span>
+            </li>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <span><b>بيئة مريحة وبدون إحراج:</b> مجموعات صغيرة (5 طلبة فقط).</span>
+            </li>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <span><b>تصحيح الأخطاء بلطافة:</b> من طرف ميسرة لغة متفوقة.</span>
+            </li>
+            <li style={styles.featureItem}>
+              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <span><b>مواضيع من الحياة:</b> (السفر، العمل، التعارف...).</span>
+            </li>
+          </ul>
+
+          <button style={styles.proBtn} onClick={() => handleSubscribe('باقة الممارسة والتحدث Pro (149 درهم)')}>
+            <FaWhatsapp size={22} /> احجز مقعدك الآن
+          </button>
         </div>
 
       </div>
+
+      {/* الأسئلة الشائعة - مصاغة بطريقة تبني الثقة */}
+      <div style={styles.faqSection}>
+        <h3 style={styles.faqTitle}><FaShieldAlt color="#1cb0f6" /> عندك شي تساؤل؟ حنا نجاوبوك:</h3>
+        
+        <div style={styles.faqGrid}>
+          <div style={styles.faqItem}>
+            <h4 style={styles.faqQ}>أنا مبتدئ بزاف وعندي مشكل فالحشمة، واش هادشي غيصلح ليا؟</h4>
+            <p style={styles.faqA}>أكيد! المنصة ديالنا مصممة خصيصاً ليك. فحصص الواتساب غتكون مع ناس فنفس المستوى ديالك (5 أشخاص فقط)، والميسرة مهمتها هي تخليك ترتاح وتزعم تهضر بدون أي إحراج أو خوف من الخطأ.</p>
+          </div>
+          
+          <div style={styles.faqItem}>
+            <h4 style={styles.faqQ}>كيفاش غنخلص الاشتراك ديالي؟</h4>
+            <p style={styles.faqA}>العملية ساهلة وآمنة. يكفي تضغط على زر الاشتراك، غيحولك للواتساب ديالنا، وغنعطيوك المعلومات باش تخلص بكل سهولة (عبر CIH، التجاري، وافابنك، أو أي وكالة كاش بلوس/وفاكاش).</p>
+          </div>
+          
+          <div style={styles.faqItem}>
+            <h4 style={styles.faqQ}>واش أنا ملزم نجدد الاشتراك كل شهر؟</h4>
+            <p style={styles.faqA}>لا نهائياً. الاشتراك ديالنا شهري وبدون أي التزامات. كتقرا شهر بشهر، وتقدر توقف الاشتراك ديالك فأي وقت بكل حرية.</p>
+          </div>
+          
+          <div style={styles.faqItem}>
+            <h4 style={styles.faqQ}>شنو كيوقع يلا غبت على شي حصة ديال الواتساب؟</h4>
+            <p style={styles.faqA}>كنحاولو نتفهمو ظروف الطلبة. الميسرة كتحط ملخص ديال داكشي لي تناقش فالمجموعة باش تبقى ديما متبع معانا وما يفوتك والو.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
-};
+}
 
-// الستايلات الصحيحة (بدون Selectors معقدة)
+// === Styles ===
 const styles = {
   container: {
+    maxWidth: '1000px',
+    margin: '0 auto',
     padding: '40px 20px',
-    display: 'flex',
-    justifyContent: 'center',
-    direction: 'rtl',
-    fontFamily: 'var(--font-family)',
-    backgroundColor: '#f8f9fa',
     minHeight: '100vh',
+    fontFamily: 'var(--font-family), sans-serif',
+    direction: 'rtl',
+    backgroundColor: '#f8fafc' // خلفية مريحة جدا للعين
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: '50px',
+    position: 'relative'
+  },
+  backButton: {
+    position: 'absolute',
+    right: '0',
+    top: '0',
+    background: 'none',
+    border: 'none',
+    color: '#64748b',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  title: {
+    fontSize: '2.2rem',
+    color: '#0f172a',
+    fontWeight: '900',
+    margin: '0 0 10px 0',
+    lineHeight: '1.4'
+  },
+  subtitle: {
+    fontSize: '1.1rem',
+    color: '#475569',
+    margin: '0'
+  },
+  cardsContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '25px',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    marginBottom: '60px'
   },
   card: {
-    backgroundColor: '#fff',
+    flex: '1 1 320px',
+    maxWidth: '420px',
+    backgroundColor: '#ffffff',
+    border: '2px solid #e2e8f0',
     borderRadius: '24px',
-    boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-    padding: '40px',
-    maxWidth: '900px',
-    width: '100%',
-    textAlign: 'center',
-  },
-  
-  // Intro
-  introHeader: { marginBottom: '30px' },
-  iconWrapper: {
-    width: '60px',
-    height: '60px',
-    background: '#e3f2fd',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0 auto 15px',
-  },
-  title: { fontSize: '1.8rem', fontWeight: '900', color: '#333', margin: '0 0 10px 0' },
-  subtitle: { fontSize: '1.1rem', color: '#666', lineHeight: '1.6', maxWidth:'600px', margin:'0 auto' },
-  
-  // Stats
-  bigStats: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '20px',
-    margin: '30px 0',
-    flexWrap: 'wrap',
-  },
-  statBox: {
-    background: '#f9f9f9',
-    padding: '15px 25px',
-    borderRadius: '12px',
+    padding: '35px 30px',
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid #eee',
-    minWidth: '100px',
-  },
-  statNumber: { fontSize: '1.5rem', color: '#0077ff', display: 'block', direction: 'ltr' },
-  statLabel: { fontSize: '0.9rem', color: '#555' },
-
-  // Surprise Box
-  surpriseBox: {
-    background: 'linear-gradient(135deg, #fff8f0 0%, #fff 100%)',
-    border: '2px solid #ffecb3',
-    borderRadius: '16px',
-    padding: '20px',
-    marginBottom: '30px',
-    textAlign: 'center',
-  },
-  surpriseHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-    fontSize: '1.1rem',
-    fontWeight: '800',
-    color: '#ff8f00',
-    marginBottom: '8px',
-  },
-
-  // Offer Banner
-  offerBanner: {
-    background: '#ffebee',
-    color: '#c62828',
-    padding: '10px',
-    borderRadius: '8px',
-    fontSize: '0.9rem',
-    fontWeight: '700',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-    marginBottom: '30px',
-    border: '1px dashed #ef5350',
-  },
-
-  // Grid
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-    gap: '20px',
-    marginBottom: '40px',
-  },
-  planCard: {
-    border: '2px solid #eee',
-    borderRadius: '20px',
-    padding: '25px 15px',
-    cursor: 'pointer',
     position: 'relative',
-    transition: 'all 0.3s ease',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    minHeight: '280px',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+  },
+  proCard: {
+    borderColor: '#58cc02',
+    borderWidth: '2px',
+    boxShadow: '0 20px 25px -5px rgba(88, 204, 2, 0.1), 0 8px 10px -6px rgba(88, 204, 2, 0.1)'
   },
   badge: {
     position: 'absolute',
-    top: '-12px',
+    top: '-16px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    backgroundColor: '#58cc02',
     color: '#fff',
-    padding: '4px 12px',
+    padding: '6px 20px',
     borderRadius: '20px',
-    fontSize: '0.75rem',
-    fontWeight: 'bold',
-    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+    fontSize: '0.95rem',
+    fontWeight: '800',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    boxShadow: '0 4px 6px rgba(88, 204, 2, 0.2)'
   },
-  planName: { fontSize: '1.4rem', fontWeight: '900', marginBottom: '10px' },
-  
-  priceTag: { marginBottom: '15px' },
-  originalPrice: { textDecoration: 'line-through', color: '#999', fontSize: '1rem', display: 'block' },
-  currency: { fontSize: '2.2rem', fontWeight: '900', color: '#333', lineHeight: '1' },
-  unit: { fontSize: '1rem', color: '#555', fontWeight:'700' },
-  
-  details: { marginBottom: '20px', width: '100%' },
-  radio: {
-    width: '24px',
-    height: '24px',
-    borderRadius: '50%',
-    border: '2px solid #ccc',
-    marginTop: 'auto',
+  cardTop: {
+    textAlign: 'center',
+    marginBottom: '25px'
   },
-  
-  // CTA
-  ctaSection: { borderTop: '1px solid #eee', paddingTop: '30px' },
-  summary: { fontSize: '1.1rem', color: '#333', marginBottom: '20px' },
-  whatsappButton: {
-    backgroundColor: '#25D366',
-    border: 'none',
-    color: '#fff',
-    padding: '18px 40px',
-    borderRadius: '50px',
+  planName: {
+    fontSize: '1.6rem',
+    color: '#1e293b',
+    fontWeight: '800',
+    margin: '0 0 8px 0'
+  },
+  planTarget: {
+    fontSize: '0.95rem',
+    color: '#64748b',
+    margin: '0',
+    fontWeight: '600'
+  },
+  priceBox: {
+    textAlign: 'center',
+    marginBottom: '30px',
+    backgroundColor: '#f8fafc',
+    padding: '15px',
+    borderRadius: '16px'
+  },
+  price: {
+    fontSize: '3.5rem',
+    fontWeight: '900',
+    color: '#0f172a',
+    lineHeight: '1'
+  },
+  currency: {
+    fontSize: '1rem',
+    color: '#64748b',
+    fontWeight: '700',
+    marginLeft: '5px'
+  },
+  featuresList: {
+    listStyle: 'none',
+    padding: '0',
+    margin: '0 0 35px 0',
+    flex: '1'
+  },
+  featureItem: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '12px',
+    fontSize: '1.05rem',
+    color: '#334155',
+    fontWeight: '500',
+    marginBottom: '16px',
+    lineHeight: '1.5'
+  },
+  basicBtn: {
+    width: '100%',
+    padding: '16px',
+    borderRadius: '16px',
     fontSize: '1.2rem',
     fontWeight: '800',
     cursor: 'pointer',
-    display: 'inline-flex',
+    backgroundColor: '#f1f5f9',
+    color: '#0f172a',
+    border: 'none',
+    borderBottom: '4px solid #cbd5e1',
+    transition: 'all 0.1s ease'
+  },
+  proBtn: {
+    width: '100%',
+    padding: '16px',
+    borderRadius: '16px',
+    fontSize: '1.2rem',
+    fontWeight: '800',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
     gap: '10px',
-    boxShadow: '0 10px 25px rgba(37, 211, 102, 0.3)',
-    transition: 'transform 0.2s',
-    width: '100%',
-    justifyContent: 'center',
-    maxWidth: '400px',
+    backgroundColor: '#58cc02',
+    color: '#fff',
+    border: 'none',
+    borderBottom: '4px solid #46a302',
+    transition: 'all 0.1s ease'
   },
-  guarantee: { fontSize: '0.8rem', color: '#999', marginTop: '15px' }
+  faqSection: {
+    backgroundColor: '#ffffff',
+    padding: '40px',
+    borderRadius: '24px',
+    border: '1px solid #e2e8f0',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+  },
+  faqTitle: {
+    fontSize: '1.6rem',
+    color: '#0f172a',
+    marginBottom: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    fontWeight: '800'
+  },
+  faqGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gap: '25px'
+  },
+  faqItem: {
+    backgroundColor: '#f8fafc',
+    padding: '25px',
+    borderRadius: '20px',
+    border: '1px solid #f1f5f9'
+  },
+  faqQ: {
+    fontSize: '1.15rem',
+    color: '#0f172a',
+    margin: '0 0 12px 0',
+    fontWeight: '800',
+    lineHeight: '1.4'
+  },
+  faqA: {
+    fontSize: '1rem',
+    color: '#475569',
+    margin: '0',
+    lineHeight: '1.7'
+  }
 };
-
-export default UpgradePlan;

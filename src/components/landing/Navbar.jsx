@@ -106,7 +106,7 @@ export default function Navbar() {
               <Link to="/speak-with-me" onClick={closeMenu}>
                 <FaMicrophoneAlt size={16} /> Speak
               </Link>
-              <Link to="/speak-with-me-ai" onClick={closeMenu}>
+              <Link to="/speak-with-ai" onClick={closeMenu}>
                 <FaRobot size={16} /> AI-Chat
               </Link>
               
