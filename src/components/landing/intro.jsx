@@ -90,7 +90,7 @@ export default function App() {
           font-size: clamp(2rem, 5vw, 3rem);
           font-weight: 900; 
           line-height: 1.2; 
-          margin-bottom: 20px; 
+          margin: 20px 0; 
         }
         .hero h1 span { color: var(--orange); }
         .hero p { font-size: 1.1rem; color: var(--gray-text); margin-bottom: 30px; max-width: 95%; }

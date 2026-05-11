@@ -24,10 +24,10 @@ export default function FreeTeaser({ selectedScenario }) {
         <FaLock size={50} color="#ffb703" style={{ marginBottom: '15px' }} />
         <h2>تحدث مع {selectedScenario?.title} 👑</h2>
         <p>
-          هاد الميزة حصرية للمشتركين. تقدر تهضر بالصوت مع {selectedScenario?.title + " "} 
+          هاد الميزة مفتوحة للمشتركين. تقدر تهضر مع {selectedScenario?.title + " "} 
           و يصحح ليك أخطاءك بالدارجة فالبلاصة!
         </p>
-        <button className={styles.upgradeBtn} onClick={() => navigate('/upgrade')}>
+        <button className={styles.upgradeBtn} onClick={() => navigate('/upgrade-plan')}>
           <FaCrown /> اكتشف الباقات دابا
         </button>
       </div>

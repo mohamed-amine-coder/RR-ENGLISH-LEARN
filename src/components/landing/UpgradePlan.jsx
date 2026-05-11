@@ -35,7 +35,7 @@ export default function UpgradePlan() {
           </div>
           
           <div style={styles.priceBox}>
-            <span style={styles.price}>49</span>
+            <span style={styles.price}>79</span>
             <span style={styles.currency}>درهم / للشهر</span>
           </div>
           
@@ -54,7 +54,7 @@ export default function UpgradePlan() {
             </li>
           </ul>
 
-          <button style={styles.basicBtn} onClick={() => handleSubscribe('باقة التعلم المستقل (49 درهم)')}>
+          <button style={styles.basicBtn} onClick={() => handleSubscribe('باقة التعلم المستقل (79 درهم)')}>
             ابــــدأ الآن
           </button>
         </div>
@@ -63,39 +63,39 @@ export default function UpgradePlan() {
         <div style={{...styles.card, ...styles.proCard}}>
           <div style={styles.badge}><FaStar color="#fff" size={14}/> الأكثر مبيعاً</div>
           <div style={styles.cardTop}>
-            <h2 style={{...styles.planName, color: '#58cc02'}}>الممارسة والتحدث</h2>
+            <h2 style={{...styles.planName, color: '#0077ff'}}>الممارسة والتحدث</h2>
             <p style={styles.planTarget}>أحسن خطوة باش تهرس عقدة النطق وتزعم</p>
           </div>
           
           <div style={styles.priceBox}>
-            <span style={{...styles.price, color: '#58cc02'}}>149</span>
+            <span style={{...styles.price, color: '#0077ff'}}>249</span>
             <span style={styles.currency}>درهم / للشهر</span>
           </div>
           
           <ul style={styles.featuresList}>
             <li style={styles.featureItem}>
-              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <FaCheckCircle color="#0077ff" size={18} style={{marginTop: '4px'}}/> 
               <span>جميع ميزات باقة <b>"التعلم المستقل"</b>.</span>
             </li>
             <li style={styles.featureItem}>
-              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <FaCheckCircle color="#0077ff" size={18} style={{marginTop: '4px'}}/> 
               <span><b>4 حصص مكالمات واتساب</b> (ساعة ونصف كل أسبوع).</span>
             </li>
             <li style={styles.featureItem}>
-              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <FaCheckCircle color="#0077ff" size={18} style={{marginTop: '4px'}}/> 
               <span><b>بيئة مريحة وبدون إحراج:</b> مجموعات صغيرة (5 طلبة فقط).</span>
             </li>
             <li style={styles.featureItem}>
-              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <FaCheckCircle color="#0077ff" size={18} style={{marginTop: '4px'}}/> 
               <span><b>تصحيح الأخطاء بلطافة:</b> من طرف ميسرة لغة متفوقة.</span>
             </li>
             <li style={styles.featureItem}>
-              <FaCheckCircle color="#58cc02" size={18} style={{marginTop: '4px'}}/> 
+              <FaCheckCircle color="#0077ff" size={18} style={{marginTop: '4px'}}/> 
               <span><b>مواضيع من الحياة:</b> (السفر، العمل، التعارف...).</span>
             </li>
           </ul>
 
-          <button style={styles.proBtn} onClick={() => handleSubscribe('باقة الممارسة والتحدث Pro (149 درهم)')}>
+          <button style={styles.proBtn} onClick={() => handleSubscribe('باقة الممارسة والتحدث Pro (249 درهم)')}>
             <FaWhatsapp size={22} /> احجز مقعدك الآن
           </button>
         </div>
@@ -196,7 +196,7 @@ const styles = {
     boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
   },
   proCard: {
-    borderColor: '#58cc02',
+    borderColor: '#0077ff',
     borderWidth: '2px',
     boxShadow: '0 20px 25px -5px rgba(88, 204, 2, 0.1), 0 8px 10px -6px rgba(88, 204, 2, 0.1)'
   },
@@ -205,7 +205,7 @@ const styles = {
     top: '-16px',
     left: '50%',
     transform: 'translateX(-50%)',
-    backgroundColor: '#58cc02',
+    backgroundColor: '#0077ff',
     color: '#fff',
     padding: '6px 20px',
     borderRadius: '20px',
@@ -291,10 +291,10 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     gap: '10px',
-    backgroundColor: '#58cc02',
+    backgroundColor: '#0077ff',
     color: '#fff',
     border: 'none',
-    borderBottom: '4px solid #46a302',
+    borderBottom: '4px solid #0077ff',
     transition: 'all 0.1s ease'
   },
   faqSection: {

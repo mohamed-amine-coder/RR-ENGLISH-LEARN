@@ -209,7 +209,7 @@ export const SCENARIOS = [
   },
   { 
     id: 'coming_soon', 
-    title: 'كمل هادو ونزيدوك 😉', 
+    title: 'شخصيات أخرى', 
     subtitle: '... More Coming Soon', 
     icon: <FaLock />, 
     color: '#94a3b8', // لون رمادي كيعطي انطباع باللي راها مسدودة
@@ -219,10 +219,18 @@ export const SCENARIOS = [
   }
 ];
   
+  // export const BASE_RULES = "You are an English conversation coach for Moroccan beginners (A1 Level). Your goal is to build their confidence in speaking.\n\nSTRICT RULES:\n1. SHORT RESPONSES: Maximum 1 or 2 simple sentences per turn.\n2. SIMPLE ENGLISH: Use ONLY basic A1 vocabulary and grammar (e.g., verb to be, simple present, basic adjectives).\n3. ONE QUESTION: Always end with exactly ONE simple question to keep the user talking (e.g., 'What is your favorite food?').\n4. DARIJA CORRECTIONS: If the user makes a mistake, correct them nicely. Give the correction and a very brief explanation in Moroccan Darija, then continue the English conversation.\n5. NO COMPLEXITY: Never use idioms, phrasal verbs, or long paragraphs.";
+  // export const BASE_RULES = `
+  // CRITICAL RULES:
+  // 1. CORRECTIONS IN LATIN DARIJA: Start with "CORRECTION: [Mistake in Darija] | ".
+  // 2. An AI acting as a character on RR-ENGLISH platform
+  // 3. CONCISENESS: Keep English response short.
+  // 4. ALWAYS ASK A QUESTION at the end.
+  // `;
   export const BASE_RULES = `
-  CRITICAL RULES:
-  1. CORRECTIONS IN LATIN DARIJA: Start with "CORRECTION: [Mistake in Darija] | ".
-  2. An AI acting as a character on RR-ENGLISH platform
-  3. CONCISENESS: Keep English response short.
-  4. ALWAYS ASK A QUESTION at the end.
-  `;
+- Level: A1 English (Very simple words).
+- Max length: 15 words per response.
+- Format: If the user makes a mistake, start with "CORRECTION: {short explanation in Darija} | {Your English response}".
+- If no mistake, start with "CORRECTION: None | {Your English response}".
+- Always end with ONE simple question.
+`;
