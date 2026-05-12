@@ -1,0 +1,49 @@
+Project Structure Analysis
+RR English Learn is a React-based language learning application built with modern web technologies. Here's the breakdown:
+
+Tech Stack
+Framework: React 19 with Vite (bundler)
+Backend: Firebase (Firestore, Authentication)
+AI: Google Generative AI integration
+Styling: Tailwind CSS + CSS Modules
+Routing: React Router v7
+Build: Vite with ESLint
+Project Architecture
+Root Level
+
+Configuration files: firebase.json, firestore.rules, firestore.indexes.json, vite.config.js
+Monorepo setup: pnpm-workspace.yaml
+src Directory Structure:
+
+/Auth - Authentication & Firebase configuration
+
+firebaseConfig.js - Firebase initialization
+authService.js - Auth logic
+/components - Reusable UI components organized by feature
+
+/landing - Landing page UI (Navbar, Hero, Login, Profile, Footer)
+/Lessons - Core learning modules:
+/Learn - Vocabulary/sentence learning (WordViewer, SentenceViewer, etc.)
+/Practice - Practice exercises with audio, quizzes, true/false
+/SpeakWithMe - Speaking practice with admin/premium/free views
+/SpeakWithAI - AI-powered conversation (Gemini integration)
+/Admin - Administration dashboard
+
+User management (AdminPanel.jsx)
+Lesson management (AdminLessons.jsx)
+Custom hooks for admin functionality
+Utilities for user data management
+/pages - Page-level components (LandingPage, NotFound, etc.)
+
+/routes - Route guards (AdminRoute for role-based access)
+
+public & data_seeding - Static assets and seed data (TEXTS.js, THEMES.js)
+
+Key Features
+📚 Multiple learning modes (Learn, Practice, Speak with Me, Speak with AI)
+🎯 Quiz and interactive exercises
+🎙️ Audio practice functionality
+🤖 AI-powered conversation scenarios
+👤 User authentication & profiles
+💳 Premium plan upgrade system
+📊 Admin dashboard for user/lesson management
