@@ -1,30 +1,33 @@
 /* Learn.module.css */
+
+/* === الأساسيات والخلفية === */
 .container {
-  max-width: 600px;
+  width: 100%;
+  max-width: 100%; /* حيدنا 600px باش يشد الشاشة كاملة */
   margin: 0 auto;
-  min-height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color:rgb(251, 250, 249);
   font-family: 'Nunito', var(--font-family), sans-serif;
   direction: rtl;
+  overflow: hidden;
 }
 
+/* === الشريط العلوي === */
 .topBar {
   padding: 20px;
   display: flex;
   align-items: center;
   gap: 15px;
-  position: sticky;
-  top: 0;
-  background: white;
+  background: transparent;
   z-index: 10;
 }
 
 .progressContainer {
   flex: 1;
-  background: #e5e5e5;
-  height: 18px;
+  background: #e2e8f0; /* لون خفيف للبروجريس بار */
+  height: 16px;
   border-radius: 20px;
   overflow: hidden;
   direction: ltr;
@@ -35,153 +38,213 @@
   background: #58cc02;
   border-radius: 20px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: inset 0 -4px 0 rgba(0,0,0,0.15);
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15); /* 3D خفيف */
 }
 
+/* === البطاقة الرئيسية (Card) === */
 .learnCard {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-bottom: 140px;
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 800px; /* باش مايعواش فالحواسيب الكبيرة، كيبقى مجموع وزوين */
+  width: 100%;
+  margin: 0 auto 15px auto; /* هكا كيبقى ديما فالوسط */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  padding-bottom: 100px;
+  overflow-y: auto;
 }
 
 .cardBody {
   flex: 1;
-  padding: 20px 30px;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+/* 2. زيد هاد الكلاسات الجداد للبطاقة ديال الكلمات/الجمل (Word Box) */
+.wordBox {
+  position: relative;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); /* خلفية متدرجة زرقاء فاتحة */
+  border: 2px solid #bae6fd; /* حدود متناسقة */
+  border-radius: 24px;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.15); /* شادو زوين كيعطي عمق */
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+/* الأيقونة الشفافة اللي غتبان فالخلفية ديال البطاقة */
+.wordBoxIconBg {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  font-size: 9rem;
+  color: rgba(186, 230, 253, 0.4); /* لون شفاف باش مايبرزطش القراية */
+  z-index: 0;
+  transform: rotate(-15deg);
+}
+
+.wordBoxContent {
+  position: relative;
+  z-index: 1; /* باش المحتوى يجي فوق الأيقونة الشفافة */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* === النصوص (Typography) === */
 .instructionTitle {
-  font-size: 1.8rem;
-  color: #3c3c3c;
+  font-size: 1.6rem;
+  color: #4b5563;
   font-weight: 800;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   width: 100%;
   text-align: right;
 }
 
-/* === الستايل اللي كان ناقص ديال الكلمات والجمل === */
 .mainWord {
-  font-size: 3.5rem;
-  color: #3c3c3c;
-  font-weight: 900;
+  font-size: 2.8rem; /* صغرناها باش تبان أنيقة */
+  color: #1f2937;
+  font-weight: 800;
   margin: 10px 0;
   text-align: center;
   direction: ltr;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .subWord {
-  font-size: 1.6rem;
-  color: #777;
+  font-size: 1.4rem;
+  color: #6b7280;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
 .sentenceText {
-  font-size: 2rem;
-  line-height: 1.5;
-  color: #3c3c3c;
-  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #334155;
+  font-weight: 700;
   text-align: center;
-  margin: 20px 0;
+  margin: 15px 0;
   direction: ltr;
 }
 
+/* === زر الصوت === */
 .speakerBtn {
   background: #1cb0f6;
   color: white;
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 2.5rem;
-  border-bottom: 6px solid #1899d6;
-  margin: 10px auto 30px;
-  transition: all 0.1s;
+  font-size: 2rem;
+  border-bottom: 4px solid #1899d6;
+  margin: 0 auto 20px;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 10px rgba(28, 176, 246, 0.2);
 }
 
 .speakerBtn:active {
-  transform: translateY(6px);
+  transform: translateY(4px);
   border-bottom-width: 0;
 }
-/* ============================================== */
 
-/* الأزرار العادية والمربعات (WordQuiz) */
+/* === الاختيارات (WordQuiz) === */
 .optionsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 12px;
   width: 100%;
+  max-width: 400px; /* باش مايجيوش مشتتين بزاف */
+  margin: 0 auto;
 }
 
 .optionCard {
   background: #fff;
-  border: 2px solid #e5e5e5;
-  border-bottom: 6px solid #e5e5e5;
+  border: 2px solid #e2e8f0;
+  border-bottom: 4px solid #e2e8f0;
   border-radius: 16px;
-  padding: 20px;
-  font-size: 1.4rem;
+  padding: 16px;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #3c3c3c;
+  color: #475569;
   cursor: pointer;
   text-align: center;
-  transition: all 0.1s ease;
+  transition: all 0.15s ease;
 }
 
-.optionCard:hover:not(:disabled) { background: #f7f7f7; }
-.optionCard:active:not(:disabled) { transform: translateY(4px); border-bottom-width: 2px; }
+.optionCard:hover:not(:disabled) { background: #f8fafc; }
+.optionCard:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 
 .optionCard.selected { border-color: #84d8ff; background: #ddf4ff; color: #1cb0f6; border-bottom-color: #1899d6; }
 .optionCard.correct { border-color: #58cc02; background: #d7ffb8; color: #58a700; border-bottom-color: #58a700; }
 .optionCard.wrong { border-color: #ff4b4b; background: #ffdfe0; color: #ea2b2b; border-bottom-color: #ea2b2b; }
 
-/* Input Fields (WordWriting, SentenceWriting) */
+/* === حقول الكتابة (Input/Textarea) === */
 .writeInput, .writeTextarea {
   width: 100%;
-  padding: 20px;
-  font-size: 1.6rem;
-  background: #f7f7f7;
-  border: 2px solid #e5e5e5;
+  max-width: 400px; /* باش مايجيش طويل بزاف */
+  padding: 16px;
+  font-size: 1.4rem;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
   border-radius: 16px;
   outline: none;
-  color: #3c3c3c;
+  color: #1f2937;
   direction: ltr;
   text-align: center;
   transition: all 0.2s;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
 }
+
 .writeTextarea {
   min-height: 120px;
   resize: none;
   text-align: left;
 }
-.writeInput:focus, .writeTextarea:focus { border-color: #1cb0f6; background: #fff; }
 
-/* الفوتر */
+.writeInput:focus, .writeTextarea:focus { 
+  border-color: #1cb0f6; 
+  background: #fff; 
+  box-shadow: 0 0 0 4px rgba(28,176,246,0.1); /* تأثير عصري فاش كتكليكي */
+}
+
+/* === الفوتر العصري (Footer) === */
 .footerArea {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 25px 20px;
-  background: #fff;
-  border-top: 2px solid #e5e5e5;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px); /* تأثير الزجاج */
+  border-top: none;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -10px 25px rgba(0,0,0,0.04);
   display: flex;
   justify-content: center;
   z-index: 100;
   transition: background-color 0.3s;
 }
 
-.footerArea.correct { background: #d7ffb8; border-top-color: #d7ffb8; }
-.footerArea.wrong { background: #ffdfe0; border-top-color: #ffdfe0; }
+.footerArea.correct { background: rgba(215, 255, 184, 0.95); }
+.footerArea.wrong { background: rgba(255, 223, 224, 0.95); }
 
 .footerContent {
   width: 100%;
@@ -191,47 +254,49 @@
   align-items: center;
 }
 
-/* زر المتابعة/التحقق */
+/* زر الأكشن (تحقق / تابع) */
 .actionButton {
   background: #58cc02;
   color: white;
   border: none;
-  border-bottom: 5px solid #58a700;
+  border-bottom: 4px solid #46a302;
   border-radius: 16px;
-  padding: 15px 40px;
-  font-size: 1.3rem;
+  padding: 16px 40px;
+  font-size: 1.2rem;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.1s;
   min-width: 160px;
   text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(88, 204, 2, 0.2);
 }
 
-.actionButton:active:not(:disabled) { transform: translateY(5px); border-bottom-width: 0; }
-.actionButton.wrongState { background: #ff4b4b; border-bottom-color: #ea2b2b; }
-.actionButton:disabled { background: #e5e5e5; border-bottom-color: #e5e5e5; color: #afafaf; cursor: not-allowed; transform: none; }
+.actionButton:active:not(:disabled) { transform: translateY(4px); border-bottom-width: 0; box-shadow: none; }
+.actionButton.wrongState { background: #ff4b4b; border-bottom-color: #ea2b2b; box-shadow: 0 4px 12px rgba(255, 75, 75, 0.2); }
+.actionButton:disabled { background: #e5e5e5; border-bottom-color: #d4d4d4; color: #afafaf; cursor: not-allowed; transform: none; box-shadow: none; }
 
-/* Feedback */
+/* === التغذية الراجعة (Feedback) === */
 .feedbackMessage { display: flex; align-items: center; gap: 15px; }
 .feedbackIcon {
   background: #fff;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 1.6rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
-.feedbackText h3 { margin: 0 0 5px 0; font-size: 1.6rem; font-weight: 800; color: #3c3c3c; }
-.feedbackText p { margin: 0; font-size: 1.2rem; font-weight: 700; color: #ea2b2b; direction: ltr; }
+.feedbackText h3 { margin: 0 0 4px 0; font-size: 1.4rem; font-weight: 800; color: #3c3c3c; }
+.feedbackText p { margin: 0; font-size: 1.1rem; font-weight: 700; color: #ea2b2b; direction: ltr; }
 
+/* === شاشة التحميل (Loading) === */
 .loadingContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; /* باش يشد الوسط ديال الصفحة */
+  height: 100vh;
   width: 100%;
   background-color: transparent;
   direction: rtl;
@@ -244,52 +309,41 @@
   gap: 20px;
 }
 
-/* ستايل الـ Spinner العصري */
 .customSpinner {
   width: 50px;
   height: 50px;
-  border: 5px solid #f1f5f9; /* لون فاتح */
-  border-top: 5px solid #2563eb; /* لون أزرق ناصع (Primary) */
-  border-right: 5px solid #60a5fa; /* لون أزرق فاتح باش يعطي تدرج */
+  border: 5px solid #f1f5f9;
+  border-top: 5px solid #2563eb;
+  border-right: 5px solid #60a5fa;
   border-radius: 50%;
   animation: rotateSpinner 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
 
-.textWrapper {
-  text-align: center;
-}
+.textWrapper { text-align: center; }
+.mainTitle { font-size: 1.4rem; color: #1e293b; font-weight: 700; margin: 0; }
+.subTitle { font-size: 0.95rem; color: #64748b; margin-top: 8px; animation: pulseFade 2s infinite ease-in-out; }
 
-.mainTitle {
-  font-size: 1.4rem;
-  color: #1e293b;
-  font-weight: 700;
-  margin: 0;
-}
-
-.subTitle {
-  font-size: 0.95rem;
-  color: #64748b;
-  margin-top: 8px;
-  animation: pulseFade 2s infinite ease-in-out;
-}
-
-/* أنيمايشن الدوران */
+/* === الأنيميشن (Animations) === */
 @keyframes rotateSpinner {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-/* أنيمايشن نبض النص */
 @keyframes pulseFade {
   0%, 100% { opacity: 0.5; transform: scale(0.98); }
   50% { opacity: 1; transform: scale(1); }
 }
 
-/* Animations */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-10px); }
   50% { transform: translateX(10px); }
   75% { transform: translateX(-10px); }
 }
-.shake { animation: shake 0.4s ease-in-out; border-color: #ff4b4b !important; background: #ffdfe0 !important; color: #ea2b2b !important;}
+
+.shake { 
+  animation: shake 0.4s ease-in-out; 
+  border-color: #ff4b4b !important; 
+  background: #ffdfe0 !important; 
+  color: #ea2b2b !important;
+}

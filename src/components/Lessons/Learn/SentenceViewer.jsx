@@ -1,25 +1,20 @@
 // Learn/SentenceViewer.jsx
 import { useState, useEffect } from 'react';
 import styles from './Learn.module.css';
-import { FaVolumeUp } from 'react-icons/fa';
+import { FaVolumeUp, FaQuoteLeft } from 'react-icons/fa'; // 👈 زدنا أيقونة الإقتباس
 
 export default function SentenceViewer({ lesson, onComplete }) {
   const sentences = lesson.sentences;
   const [index, setIndex] = useState(0);
-
-  // 1. حالة (State) لتخزين الأصوات الإنجليزية
   const [englishVoices, setEnglishVoices] = useState([]);
 
-  // 2. تحميل الأصوات وعزل الأصوات ذات الجودة العالية
   useEffect(() => {
     const loadVoices = () => {
       const allVoices = window.speechSynthesis.getVoices();
-      
       const goodVoices = allVoices.filter(v => 
         v.lang.startsWith("en") && 
         (v.name.includes("Google") || v.name.includes("Microsoft") || v.name.includes("Apple") || v.name.includes("Samantha") || v.name.includes("Daniel"))
       );
-
       setEnglishVoices(goodVoices.length > 0 ? goodVoices : allVoices.filter(v => v.lang.startsWith("en")));
     };
 
@@ -28,19 +23,15 @@ export default function SentenceViewer({ lesson, onComplete }) {
   }, []);
 
   const handleSpeak = (text) => {
-    // توقيف أي صوت كان خدام باش ما يتخلطوش
     window.speechSynthesis.cancel(); 
-
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "en-US";
-    utter.rate = 0.85; // سرعة 0.85 كتكون طبيعية ومفهومة فالجمل
+    utter.rate = 0.85; 
     
-    // 3. اختيار صوت عشوائي من الأصوات المزيانة
     if (englishVoices.length > 0) {
       const randomVoice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
       utter.voice = randomVoice;
     }
-
     window.speechSynthesis.speak(utter);
   };
 
@@ -54,14 +45,21 @@ export default function SentenceViewer({ lesson, onComplete }) {
   return (
     <>
       <div className={styles.cardBody}>
-        <div className={styles.instructionTitle}>جمل تطبيقية</div>
+        <div className={styles.instructionTitle}>جمل تطبيقية 💡</div>
         
-        <div className={styles.speakerBtn} onClick={() => handleSpeak(current.en)}>
-           <FaVolumeUp />
+        {/* 👈 تطبيق البطاقة الجديدة */}
+        <div className={styles.wordBox} style={{background: 'linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%)', borderColor: '#f5d0fe', boxShadow: '0 8px 25px rgba(217, 70, 239, 0.15)'}}>
+          <FaQuoteLeft className={styles.wordBoxIconBg} style={{color: 'rgba(245, 208, 254, 0.5)'}} /> {/* لون أيقونة مختلف شويا للجمل */}
+          
+          <div className={styles.wordBoxContent}>
+            <div className={styles.speakerBtn} onClick={() => handleSpeak(current.en)} style={{background: '#d946ef', borderBottomColor: '#c026d3', boxShadow: '0 4px 10px rgba(217, 70, 239, 0.2)'}}>
+               <FaVolumeUp />
+            </div>
+            
+            <p className={styles.sentenceText}>"{current.en}"</p>
+            <h3 className={styles.subWord} style={{fontWeight: 'normal', color: '#86198f'}}>{current.darija}</h3>
+          </div>
         </div>
-        
-        <p className={styles.sentenceText}>"{current.en}"</p>
-        <h3 className={styles.subWord} style={{fontWeight: 'normal'}}>{current.darija}</h3>
       </div>
 
       <div className={styles.footerArea}>
@@ -69,7 +67,7 @@ export default function SentenceViewer({ lesson, onComplete }) {
           <button 
             className={styles.actionButton} 
             onClick={handleNext}
-            style={{ width: '100%', maxWidth: '300px' }} /* توحيد حجم الزر مع باقي المكونات */
+            style={{ width: '100%', maxWidth: '300px' }}
           >
             تابع
           </button>

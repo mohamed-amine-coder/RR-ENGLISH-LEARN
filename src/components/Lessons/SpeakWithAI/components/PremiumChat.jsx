@@ -64,18 +64,26 @@ export default function PremiumChat({ selectedScenario }) {
       let correctionText = null;
       let mainText = aiResponseText;
 
-      // كنقلبو واش Gemini صيفط لينا شي تصحيح (حسب القواعد اللي عطيناه)
-      if (aiResponseText.includes('CORRECTION:') && aiResponseText.includes('|')) {
-        const parts = aiResponseText.split('|');
-        correctionText = parts[0].replace('CORRECTION:', '').trim();
-        mainText = parts[1].trim();
-      }
+// كنقلبو واش Gemini صيفط لينا شي تصحيح (حسب القواعد اللي عطيناه)
+if (aiResponseText.includes('CORRECTION:') && aiResponseText.includes('|')) {
+  const parts = aiResponseText.split('|');
+  const extractedCorrection = parts[0].replace('CORRECTION:', '').trim();
+  
+  // إذا كان التصحيح هو "None"، غنردوه null باش مايبانش فـ الشاشة
+  if (extractedCorrection.toLowerCase() === 'none') {
+    correctionText = null;
+  } else {
+    correctionText = extractedCorrection;
+  }
+  
+  mainText = parts[1].trim();
+}
 
       // كنزيدو جواب الذكاء الاصطناعي فالشاشة
       setMessages(prev => [...prev, { role: 'model', text: mainText, correction: correctionText }]);
     } catch (error) {
       console.error("Gemini API Error:", error);
-      setMessages(prev => [...prev, { role: 'model', text: 'الروبو كياخد استراحة، عاود صيفط ميساج من بعد 10 ثواني', correction: null }]);
+      setMessages(prev => [...prev, { role: 'model', text: '(الأسبقية للمشتركين) الروبو كياخد استراحة، عاود صيفط ميساج من بعد 15 ثانية', correction: null }]);
     } finally {
       setIsLoading(false);
     }
