@@ -161,6 +161,11 @@
   border: 1px solid #f1f5f9;
 }
 
+.infoItem {
+  padding: 10px 0;
+  border-bottom: 1px inset #f9f9f9;
+}
+
 .statLabel { color: #64748b; font-size: 0.85rem; }
 .statValue { display: block; font-size: 1.8rem; font-weight: 800; margin: 5px 0; }
 
