@@ -1,5 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { UserProvider } from "./Auth/UserContext";
 import AdminPanel from "./Admin/AdminPanel.jsx"
 import AdminRoute from "./routes/AdminRoute";
 import Profile from "./components/landing/Profile.jsx";
@@ -17,23 +18,25 @@ import ScrollToTop from "./components/landing/ScrollToTop.jsx";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/lessons/learn" element={<Learn />} />
-        <Route path="/lessons/practice" element={<Practice />} />
-        <Route path="/speak-with-me" element={<SpeakWithMe />} />
-        <Route path="/speak-with-AI" element={<SpeakWithAI />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/start" element={<StartSection />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/upgrade-plan" element={<UpgradePlan />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/admin" element={<AdminRoute> <AdminPanel /> </AdminRoute>} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Navbar />
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/lessons/learn" element={<Learn />} />
+          <Route path="/lessons/practice" element={<Practice />} />
+          <Route path="/speak-with-me" element={<SpeakWithMe />} />
+          <Route path="/speak-with-AI" element={<SpeakWithAI />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/start" element={<StartSection />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/upgrade-plan" element={<UpgradePlan />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/admin" element={<AdminRoute> <AdminPanel /> </AdminRoute>} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 

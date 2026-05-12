@@ -216,42 +216,46 @@
   background-color: #f8fafc;
 }
 
-.blurredChat {
-  padding: 40px;
-  filter: blur(6px); /* السر ديال الغموض */
-  opacity: 0.6;
+/* هاد الـ Class غنعطيوه للمحادثة الوهمية */
+.fakeChatContainer {
+  height: 100%;
+  width: 100%;
+  /* هاهي الضبابية هنا، نقصناها لـ 0.8px */
+  filter: blur(0.4px); 
+  opacity: 0.95; 
   pointer-events: none;
   user-select: none;
 }
 
-.fakeMessageLeft {
-  background: white; padding: 15px; border-radius: 15px; width: 60%; margin-bottom: 20px; border: 1px solid #e2e8f0; direction: ltr; font-family: sans-serif;
-}
-.fakeMessageRight {
-  background: #e2e8f0; padding: 15px; border-radius: 15px; width: 50%; margin-left: auto; margin-bottom: 20px; direction: ltr; font-family: sans-serif;
-}
-.fakeCorrection {
-  background: #fef3c7; padding: 10px; border-radius: 10px; width: 50%; margin-left: auto; margin-bottom: 10px; text-align: right; font-weight: bold; color: #b45309;
-}
-
+/* طبقة القفل */
 .teaserOverlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end; /* هبطنا المحتوى لتحت باش نخليو الفوق يبان */
   align-items: center;
-  background: rgba(255, 255, 255, 0.85); /* طبقة بيضاء شفافة */
+  
+  /* التدرج اللوني: الفوق شفاف باش تبان المحادثة، وتحت أبيض باش تبان الكتابة ديال القفل */
+  background: linear-gradient(
+    to bottom, 
+    rgba(255, 255, 255, 0.1) 0%,      /* الفوق شبه شفاف */
+    rgba(255, 255, 255, 0.7) 40%,  
+    rgba(255, 255, 255, 1) 100%    /* أبيض لتحت */
+  );
+  
   z-index: 10;
   text-align: center;
   padding: 40px;
+  padding-bottom: 60px;
 }
 
 .teaserOverlay h2 {
-  font-size: 28px;
+  font-size: 26px;
   color: #0f172a;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   font-weight: 900;
+  text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8); 
 }
 
 .teaserOverlay p {
@@ -276,12 +280,12 @@
   gap: 10px;
   box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
   transition: transform 0.3s ease;
+  pointer-events: auto; /* مهمة باش الزر يبقى خدام واخا يكون تحتو شي حاجة */
 }
 
 .upgradeBtn:hover {
   transform: scale(1.05) translateY(-3px);
 }
-
 /* خصائص الصورة (نقصنا الضبابية) */
 .teaserImage {
   width: 100%;
@@ -351,9 +355,9 @@
 
 /* الـ Spinner لي كيدور */
 .spinner {
-  width: 45px;
-  height: 45px;
-  border: 4px solid #e2e8f0;
+  width: 65px;
+  height: 65px;
+  border: 7px solid #e2e8f0;
   border-top: 4px solid #2563eb; /* لون أزرق بريميوم */
   border-radius: 50%;
   animation: spin 1s linear infinite;
