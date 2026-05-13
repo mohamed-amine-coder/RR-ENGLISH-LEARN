@@ -1,5 +1,5 @@
 .container {
-  max-width: 600px;
+  max-width: 850px; /* تم التكبير هنا باش يعطي مساحة للتصميم العريض */
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -103,13 +103,87 @@
   line-height: 1.5;
 }
 
+/* =========================================
+   تنسيقات صفحة القصة (Practice Intro) الجدبدة
+   ========================================= */
+
+.introLayout {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  width: 100%;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+.mediaColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 0 0 320px; 
+}
+
+.introImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+  border: 4px solid #ffffff; 
+}
+
+.audioWrapper {
+  width: 100%;
+}
+
+.textColumn {
+  flex: 1;
+  background: linear-gradient(145deg, #ffffff, #f4f9ff);
+  padding: 25px;
+  border-radius: 20px;
+  border: 2px solid #e2e8f0;
+  box-shadow: inset 0 0 20px rgba(28, 176, 246, 0.03);
+  display: flex;
+  align-items: center; 
+}
+
+.introStoryText {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  margin: 0;
+  text-align: left;
+  direction: ltr; 
+  color: #334155;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* التجاوب مع شاشات الهاتف */
+@media (max-width: 768px) {
+  .introLayout {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mediaColumn {
+    flex: auto;
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .textColumn {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
 /* --- Options & Inputs --- */
 .optionsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   width: 100%;
-  direction: ltr; /* الاختيارات بالانجليزية */
+  direction: ltr; 
 }
 
 .optionCard {
@@ -184,7 +258,7 @@
   align-items: center;
   gap: 10px;
   color: #3c3c3c;
-  transition: all 0.1s; /* 👈 هاد السطر لي تـزاد باش يعطي حركة رطبة */
+  transition: all 0.1s;
 }
 .tfBtn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
@@ -206,7 +280,7 @@
 
 .footerContent {
   width: 100%;
-  max-width: 600px;
+  max-width: 850px; /* تم تعديله باش يتماشى مع الحاوية */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -228,31 +302,13 @@
 .actionButton:active { transform: translateY(4px); border-bottom-width: 0; }
 .actionButton.wrongState { background: #ff4b4b; border-bottom-color: #ea2b2b; }
 
-/* --- Modal Story --- */
-/* .modalOverlay {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6); z-index: 200;
-  display: flex; justify-content: center; align-items: center; padding: 20px;
-}
-.storyModal {
-  background: #fff; width: 100%; max-width: 500px; max-height: 80vh;
-  border-radius: 20px; display: flex; flex-direction: column; overflow: hidden;
-}
-.modalHeader { padding: 15px 20px; border-bottom: 2px solid #eee; display: flex; justify-content: space-between; align-items: center;}
-.modalHeader h3 { margin: 0; font-size: 1.2rem; color: #3c3c3c;}
-.closeModalBtn { background: none; border: none; font-size: 1.2rem; color: #a0aab5; cursor: pointer;}
-.modalBody { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-.storyImage { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
-.audioPlayer { width: 100%; height: 40px; outline: none; }
-.storyText { background: #f0f7ff; padding: 15px; border-radius: 12px; font-size: 1.1rem; line-height: 1.6; direction: ltr; text-align: left;} */
-
 /* --- Modal Story (Clean & Premium) --- */
 
 .modalOverlay {
   position: fixed; 
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.5); /* خلفية داكنة شفافة حديثة */
-  backdrop-filter: blur(8px); /* تأثير الزجاج */
+  background: rgba(15, 23, 42, 0.5); 
+  backdrop-filter: blur(8px); 
   -webkit-backdrop-filter: blur(8px);
   z-index: 200;
   display: flex; 
@@ -270,7 +326,7 @@
   display: flex; 
   flex-direction: column; 
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* ظل ناعم وعميق */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
   border: 1px solid rgba(0,0,0,0.05);
 }
 
@@ -334,14 +390,14 @@
 
 /* --- تصميم المكون الصوتي (الجديد) --- */
 .audioContainer {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); /* خلفية متدرجة زوينة */
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); 
   padding: 15px 20px;
   border-radius: 20px;
   border: 1px solid #bae6fd;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.08); /* ظل أزرق خفيف */
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.08); 
 }
 
 .audioLabel {
@@ -360,7 +416,6 @@
   outline: none; 
 }
 
-/* تجميل المشغل الداخلي للمتصفحات (Chrome/Safari) */
 .audioPlayer::-webkit-media-controls-panel {
   background-color: #ffffff;
   border-radius: 50px;
@@ -377,7 +432,7 @@
   background: #f8fafc; 
   padding: 20px; 
   border-radius: 16px; 
-  border-left: 4px solid #3b82f6; /* خط أزرق فـ الجنب */
+  border-left: 4px solid #3b82f6; 
   font-size: 1.1rem; 
   line-height: 1.7; 
   direction: ltr; 
@@ -434,7 +489,7 @@
   border-radius: 10px;
   outline: none;
   cursor: pointer;
-  direction: ltr; /* ديما خاصو يكون من اليسار لليمين */
+  direction: ltr; 
 }
 
 .progressBar::-webkit-slider-thumb {
@@ -456,7 +511,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; /* باش يشد الوسط ديال الصفحة */
+  min-height: 80vh; 
   width: 100%;
   background-color: transparent;
   direction: rtl;
@@ -473,9 +528,9 @@
 .customSpinner {
   width: 50px;
   height: 50px;
-  border: 5px solid #f1f5f9; /* لون فاتح */
-  border-top: 5px solid #2563eb; /* لون أزرق ناصع */
-  border-right: 5px solid #60a5fa; /* لون أزرق فاتح باش يعطي تدرج */
+  border: 5px solid #f1f5f9; 
+  border-top: 5px solid #2563eb; 
+  border-right: 5px solid #60a5fa; 
   border-radius: 50%;
   animation: rotateSpinner 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
@@ -496,6 +551,22 @@
   color: #64748b;
   margin-top: 8px;
   animation: pulseFade 2s infinite ease-in-out;
+}
+
+/* الأنيمايشن ديال الميساجات الكوميدية (دخول من اليمين لليسار) */
+@keyframes slideInRtl {
+  0% {
+    opacity: 0;
+    transform: translateX(40px); /* كيبدا من اليمين */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* كيرجع لبلاصتو */
+  }
+}
+
+.animatedMessage {
+  animation: slideInRtl 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 
 /* أنيمايشن الدوران */

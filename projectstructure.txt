@@ -47,3 +47,5 @@ Key Features
 👤 User authentication & profiles
 💳 Premium plan upgrade system
 📊 Admin dashboard for user/lesson management
+
+المنصة مافيهاش غير الذكاء الاصطناعي راه فيها حتى learn + practice + speak + chatbot وكتعتمد على التعلم الذاتي وجمع النقط و الممارسة مع الذكاء الاصطناعي بشخصيات مختلفة + الممارسة مع صحابك فالمنصة + استاذة مختصة فالتأطير + قصص كويزات تسجيلات صور وتمارين تفاعلية "تجريبة فريدة لاول مرة فالمغرب"

@@ -1,7 +1,7 @@
 // Practice/PracticeQuiz.jsx
 import React, { useState, useEffect } from "react";
 import styles from "./Practice.module.css";
-import FeedbackFooter from "./FeedbackFooter"; // 👈 استدعاء الفوتر
+import FeedbackFooter from "./FeedbackFooter";
 
 const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
   const [current, setCurrent] = useState(0);
@@ -15,9 +15,11 @@ const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
     }
   }, [current, questions]);
 
-  const handleCheck = () => {
-    if (!selected || status !== "idle") return; 
-    const isCorrect = selected === questions[current].answer;
+  const handleSelection = (opt) => {
+    if (status !== "idle") return; 
+    setSelected(opt);
+    
+    const isCorrect = opt === questions[current].answer;
     setStatus(isCorrect ? "correct" : "wrong");
     if (isCorrect) onAnswer();
   };
@@ -28,6 +30,17 @@ const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
     if (current + 1 < questions.length) setCurrent(current + 1);
     else onNext();
   };
+
+  // 👈 ربط زر Enter بالاستمرار
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter' && status !== 'idle') {
+        handleContinue();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [status, current, questions.length]);
 
   return (
     <>
@@ -46,7 +59,7 @@ const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
               <button 
                 key={opt} 
                 className={btnClass} 
-                onClick={() => {if(status === 'idle') setSelected(opt)}} 
+                onClick={() => handleSelection(opt)} 
                 disabled={status !== 'idle'}
               >
                 {opt}
@@ -59,7 +72,7 @@ const PracticeQuiz = ({ questions, onNext, onAnswer }) => {
       <FeedbackFooter 
         status={status}
         correctAnswer={questions[current].answer}
-        onCheck={handleCheck}
+        onCheck={() => {}}
         onNext={handleContinue}
         disabledCheck={!selected}
       />

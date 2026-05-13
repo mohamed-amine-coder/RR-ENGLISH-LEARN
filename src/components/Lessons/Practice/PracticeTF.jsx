@@ -1,5 +1,5 @@
 // Practice/PracticeTF.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Practice.module.css";
 import FeedbackFooter from "./FeedbackFooter";
 
@@ -8,9 +8,11 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
   const [selected, setSelected] = useState(null);
   const [status, setStatus] = useState("idle");
 
-  const handleCheck = () => {
-    if (selected === null || status !== "idle") return; 
-    const isCorrect = selected === questions[current].answer;
+  const handleSelection = (choice) => {
+    if (status !== "idle") return; 
+    setSelected(choice);
+    
+    const isCorrect = choice === questions[current].answer;
     setStatus(isCorrect ? "correct" : "wrong");
     if (isCorrect) onAnswer();
   };
@@ -22,6 +24,17 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
     else onNext();
   };
 
+  // 👈 إضافة التصنت لزر Enter باش يدوز للسؤال التالي
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter' && status !== 'idle') {
+        handleContinue();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [status, current, questions.length]);
+
   return (
     <>
       <div className={styles.cardBody}>
@@ -31,14 +44,14 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
         <div className={styles.tfContainer}>
           <button 
             className={`${styles.tfBtn} ${selected === true ? styles.selected : ''} ${status !== 'idle' && questions[current].answer === true ? styles.correct : ''} ${status === 'wrong' && selected === true ? styles.wrong : ''}`} 
-            onClick={() => {if(status === 'idle') setSelected(true)}} 
+            onClick={() => handleSelection(true)} 
             disabled={status !== 'idle'}
           >
             <span style={{fontSize:'2rem'}}>👍</span> True
           </button>
           <button 
             className={`${styles.tfBtn} ${selected === false ? styles.selected : ''} ${status !== 'idle' && questions[current].answer === false ? styles.correct : ''} ${status === 'wrong' && selected === false ? styles.wrong : ''}`} 
-            onClick={() => {if(status === 'idle') setSelected(false)}} 
+            onClick={() => handleSelection(false)} 
             disabled={status !== 'idle'}
           >
             <span style={{fontSize:'2rem'}}>👎</span> False
@@ -49,7 +62,7 @@ const PracticeTF = ({ questions, onNext, onAnswer }) => {
       <FeedbackFooter 
         status={status}
         correctAnswer={questions[current].answer ? "True" : "False"}
-        onCheck={handleCheck}
+        onCheck={() => {}}
         onNext={handleContinue}
         disabledCheck={selected === null}
       />

@@ -1,22 +1,32 @@
+// Practice/PracticeIntro.jsx
 import React from "react";
 import styles from "./Practice.module.css";
-import CustomAudioPlayer from "./CustomAudioPlayer"; // 👈 المشغل المخصص ديالك
+import CustomAudioPlayer from "./CustomAudioPlayer"; 
 
 const PracticeIntro = ({ title, story, image, audio, onNext }) => {
   return (
     <>
       <div className={styles.cardBody}>
         <div className={styles.instructionTitle}>{title}</div>
-        <img src={image} alt="Story" style={{width: '100%', maxWidth: '300px', borderRadius: '16px', marginBottom: '20px', border: '2px solid #eee'}} />
         
-        <div style={{width: '100%', maxWidth: '300px', marginBottom: '20px'}}>
-           <CustomAudioPlayer audioSrc={audio} />
-        </div>
+        {/* الحاوية الجديدة التي تعرض المحتوى بشكل عريض */}
+        <div className={styles.introLayout}>
+          
+          {/* العمود الأول: الصورة والمشغل الصوتي */}
+          <div className={styles.mediaColumn}>
+            <img src={image} alt="Story" className={styles.introImage} />
+            <div className={styles.audioWrapper}>
+               <CustomAudioPlayer audioSrc={audio} />
+            </div>
+          </div>
 
-        <div style={{background: '#f0f7ff', padding: '20px', borderRadius: '16px', width: '100%', maxWidth: '400px'}}>
-           <p style={{fontSize: '1.2rem', lineHeight: '1.8', margin: 0, textAlign: 'left', direction: 'ltr', color: '#333'}}>
-             {story}
-           </p>
+          {/* العمود الثاني: نص القصة */}
+          <div className={styles.textColumn}>
+             <p className={styles.introStoryText}>
+               {story}
+             </p>
+          </div>
+
         </div>
       </div>
 
