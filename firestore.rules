@@ -7,24 +7,35 @@ service cloud.firestore {
       return request.auth != null && request.auth.token.email == "rrenglish66@gmail.com";
     }
 
-    // 1. أي واحد مسجل كيقرا ويعدل غير البروفايل ديالو، والأدمن عندو الحق فكلشي
+    // 1. حماية بيانات المستخدمين
     match /users/{userId} {
-      allow read, write: if (request.auth != null && request.auth.uid == userId) || isSuperAdmin();
+      // القراءة مسموحة لمول الحساب وللأدمن
+      allow read: if (request.auth != null && request.auth.uid == userId) || isSuperAdmin();
+      
+      // الإنشاء (ملي يالاه كيتسجل) مسموح
+      allow create: if request.auth != null && request.auth.uid == userId;
+      
+      // التعديل: مسموح ولكن ممنوع يقيس الحقل ديال role (إلا يلا كان أدمن)
+      allow update: if (request.auth != null && request.auth.uid == userId 
+                    && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role'])) 
+                    || isSuperAdmin();
+                    
+      allow delete: if isSuperAdmin();
     }
 
-    // 2. كوليكشن Learn: القراءة للجميع، والكتابة حصرياً للسوبر أدمن
+    // 2. كوليكشن Learn
     match /learn_lessons/{document=**} {
-      allow read: if request.auth != null;
+      allow read: if request.auth != null; // باقا فيها ثغرة غنشرحها ليك لتحت
       allow write: if isSuperAdmin();
     }
 
-    // 3. كوليكشن Practice: القراءة للجميع، والكتابة حصرياً للسوبر أدمن
+    // 3. كوليكشن Practice
     match /practice_lessons/{document=**} {
-      allow read: if request.auth != null;
+      allow read: if request.auth != null; // باقا فيها ثغرة غنشرحها ليك لتحت
       allow write: if isSuperAdmin();
     }
 
-    // 4. قاعدة عامة للأدمن باش يقدر يدخل لأي حاجة أخرى (بحال المجلدات اللي يالاه غتكريهوم)
+    // 4. قاعدة عامة للأدمن
     match /{document=**} {
       allow read, write: if isSuperAdmin();
     }
