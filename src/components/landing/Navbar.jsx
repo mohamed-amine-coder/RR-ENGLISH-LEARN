@@ -1,54 +1,33 @@
+// src/components/Navbar/Navbar.jsx
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { auth, db } from "../../Auth/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { useUser } from "../../Auth/useUser"; // 👈 استيراد الروبيني ديالنا
 import { 
   FaShieldAlt, FaBars, FaUser, FaTimes, FaRobot,
-  FaHome, FaBookOpen, FaBrain, FaMicrophoneAlt // 🆕 الأيقونات الجديدة
+  FaHome, FaBookOpen, FaBrain, FaMicrophoneAlt 
 } from "react-icons/fa";
 import Logo from "../../../public/RR-LOGO.png";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
-  const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // 1. جلب البيانات جاهزة من Context (حيدنا useState و useEffect القدام)
+  const { userData, loading, isAuthenticated } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
-  const closeMenu = () => setMenuOpen(false); // دالة مساعدة
+  const closeMenu = () => setMenuOpen(false);
 
-  // 1. إغلاق القائمة أوتوماتيكياً عند الانتقال
+  // إغلاق القائمة أوتوماتيكياً عند الانتقال
   useEffect(() => {
     setMenuOpen(false);
   }, [location]);
 
-  // 2. منع السكرول (Scroll) في الخلفية
+  // منع السكرول في الخلفية
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : 'unset';
   }, [menuOpen]);
 
-  // 3. جلب بيانات المستخدم والدور
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        try {
-          const docRef = doc(db, "users", currentUser.uid);
-          const docSnap = await getDoc(docRef);
-          setRole(docSnap.exists() ? docSnap.data().role : null);
-        } catch (error) {
-          console.error("خطأ في جلب الدور:", error);
-        }
-      } else {
-        setRole(null);
-      }
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
+  // حالة التحميل المركزية (كتظهر فاش يله كيتحل الموقع)
   if (loading) {
     return (
       <div className={styles.loading}>
@@ -75,9 +54,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {user && (
+        {/* كنعرضو القائمة غير إلا كان المستعمل مسجل دخول فعلاً */}
+        {isAuthenticated && userData && (
           <>
-            {/* زر القائمة (همبرغر/إغلاق) */}
             <button 
               className={styles.menuToggle} 
               aria-label={menuOpen ? "Close Menu" : "Open Menu"}
@@ -86,14 +65,11 @@ export default function Navbar() {
               {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
 
-            {/* الخلفية المعتمة (Overlay) */}
             <div 
               className={`${styles.navOverlay} ${menuOpen ? styles.show : ""}`} 
               onClick={closeMenu}
             />
-
             <div className={`${styles.navLinks} ${menuOpen ? styles.open : ""}`}>
-              {/* 🆕 الروابط الإنجليزية مع الأيقونات */}
               <Link to="/" onClick={closeMenu}>
                 <FaHome size={16} /> Home
               </Link>
@@ -110,13 +86,13 @@ export default function Navbar() {
                 <FaRobot size={16} /> AI-Chat
               </Link>
               
-              {/* زر البروفايل */}
               <Link to="/profile" className={styles.profileLink} onClick={closeMenu}>
                 <FaUser size={16} />
-                <span>Profile</span>
+                <span>{userData.name || "Profile"}</span> {/* 🆕 كنعرضو السمية من Context */}
               </Link>
 
-              {role === "admin" && (
+              {/* التحقق من دور المسؤول (Admin) */}
+              {userData.role === "admin" && (
                 <Link to="/admin" className={styles.adminWrapper} onClick={closeMenu}>
                   <button className={styles.adminBtn} aria-label="Admin Panel">
                     <FaShieldAlt size={18} />

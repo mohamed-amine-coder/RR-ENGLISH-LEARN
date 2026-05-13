@@ -1,32 +1,39 @@
-import React from "react";
+// src/components/Login/Login.jsx
+import React, { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithGoogle } from "../../Auth/authService";
+import { useUser } from "../../Auth/useUser"; 
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, loading } = useUser(); 
+
+  useEffect(() => {
+    if (!loading && isAuthenticated) {
+      navigate("/start");
+    }
+  }, [isAuthenticated, loading, navigate]);
 
   const handleLogin = async () => {
     try {
-      const user = await signInWithGoogle();
-      console.log("✅ تسجيل الدخول ناجح:", user);
-
-      // توجه المستخدم مباشرة للـ StartSection
+      await signInWithGoogle();
       navigate("/start");
     } catch (error) {
-      console.error(error);
-      // alert("فشل تسجيل الدخول!");
+      console.error("❌ خطأ في الدخول:", error);
     }
   };
 
+  if (loading) return <div className={styles.spinnerSmall}></div>;
 
+  if (isAuthenticated) return null;
 
   return (
-      <button className={styles.googleBtn} onClick={handleLogin}>
-        <FcGoogle className={styles.icon} />
-        <span>سجل دخولك مجانا</span>
-      </button>
+    <button className={styles.googleBtn} onClick={handleLogin}>
+      <FcGoogle className={styles.icon} />
+      <span>سجل دخولك مجانا</span>
+    </button>
   );
 };
 

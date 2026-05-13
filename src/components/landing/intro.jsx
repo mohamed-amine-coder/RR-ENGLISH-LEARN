@@ -1,37 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../Auth/authService"; 
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../Auth/firebaseConfig'; 
-
+import { useUser } from "../../Auth/useUser"; // استيراد الروبيني المركزي
+import Login from './Login';
 // استيراد الصور
-import homeImage from '../../assets/intro-img-1.jpg'; // صورة الهيرو (Hero)
-import platformImage from '../../assets/intro-img-2.jpg'; // صورة المنصة (Features)
-import callImage from '../../assets/intro-img-3.jpg'; // صورة المكالمة (Call)
+import homeImage from '../../assets/intro-img-1.jpg'; 
+import platformImage from '../../assets/intro-img-2.jpg'; 
+import callImage from '../../assets/intro-img-3.jpg'; 
 
 export default function App() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  
+  // جلب الحالة من الروبيني المركزي
+  const { userData, isAuthenticated, loading } = useUser();
 
   useEffect(() => {
-    // 1. Load Fonts
+    // Load Fonts
     const link = document.createElement('link');
     link.href = 'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
-
-    // 2. Auth Listener
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
   }, []);
 
   const handleAction = async () => {
-    if (user) {
+    if (isAuthenticated) {
       navigate("/start");
     } else {
       try {
@@ -63,28 +55,27 @@ export default function App() {
         /* --- Hero Section --- */
         .hero { padding: 40px 0; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
         .hero-text { flex: 1.2; min-width: 300px; }
-        /* كلاس موحد للإطارات ديال الصور */
+        
         .img-box { 
           flex: 1; 
           min-width: 300px; 
-          height: 380px; /* طول موحد */
+          height: 380px; 
           border-radius: 30px; 
           display: flex; 
           align-items: center; 
           justify-content: center; 
-          overflow: hidden; /* باش الصورة ما تخرجش من الجناب */
-          box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* ظل خفيف */
+          overflow: hidden; 
+          box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
           background: #f0f0f0;
         }
         
-        /* كلاس موحد للصور باش متبقاش تعاود الستايل */
         .responsive-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.5s ease;
         }
-        .img-box:hover .responsive-img { transform: scale(1.05); } /* زووم خفيف عند التحويم */
+        .img-box:hover .responsive-img { transform: scale(1.05); } 
 
         .hero h1 { 
           font-size: clamp(2rem, 5vw, 3rem);
@@ -157,17 +148,15 @@ export default function App() {
       {/* --- HERO SECTION --- */}
       <section className="hero wrapper">
         <div className="hero-text">
-          <h1>{user ? `مرحباً، ${user.displayName?.split(' ')[0] || 'صديقي'}!` : "خسرتي فلوسك ووقتك؟"} <br /><span>لونكلي مابقاتش "حفاظة"</span></h1>
+          <h1>{isAuthenticated ? `مرحباً، ${userData?.name?.split(' ')[0] || 'صديقي'}!` : "خسرتي فلوسك ووقتك؟"} <br /><span>لونكلي مابقاتش "حفاظة"</span></h1>
           <p>
             حبس عليا داك السيستيم القديم. فـ RR ENGLISH، قلبنا الآية: قرا وقتما بغيتي، وطبق داكشي اللي تعلمتي فحصص حية مع أستاذة وشريك ديالك.
           </p>
-          {/* الزر العائم الذكي */}
           <button className="btn btn-blue" onClick={handleAction}>
-            {user ? "كمل القراية دابا 🚀" : "جربها من دبا نيت 🤩"}
+            {isAuthenticated ? "كمل القراية دابا 🚀" : "جربها من دبا نيت 🤩"}
           </button>
         </div>
         
-        {/* HERO IMAGE */}
         <div className="img-box">
           <img src={homeImage} alt="Happy Moroccan Student" className="responsive-img" />
         </div>
@@ -185,7 +174,6 @@ export default function App() {
           </ul>
         </div>
         
-        {/* PLATFORM IMAGE */}
         <div className="img-box">
           <img src={platformImage} alt="RR English Platform Dashboard" className="responsive-img" loading="lazy" />
         </div>
@@ -230,7 +218,6 @@ export default function App() {
           </ul>
         </div>
 
-        {/* CALL IMAGE */}
         <div className="img-box">
           <img src={callImage} alt="Students talking video call" className="responsive-img" loading="lazy" />
         </div>
