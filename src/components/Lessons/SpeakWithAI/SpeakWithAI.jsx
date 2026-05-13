@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../../../Auth/firebaseConfig';
+// src/components/SpeakWithAI/SpeakWithAI.jsx
+import React, { useState } from 'react';
+import { useUser } from '../../../Auth/useUser'; // 👈 استيراد الروبيني المركزي
 import { SCENARIOS } from './scenariosData';
 
 import Sidebar from './components/Sidebar';
@@ -11,24 +11,11 @@ import styles from './SpeakWithAI.module.css';
 
 export default function SpeakWithAI() {
   const [selectedScenario, setSelectedScenario] = useState(SCENARIOS[0]);
-  const [userRole, setUserRole] = useState(null); // 'free', 'premium', 'admin'
-  const [loading, setLoading] = useState(true);
+  
+  // 1. جلب البيانات من Context (عوض Firebase مباشرة)
+  const { userData, loading, isAuthenticated } = useUser();
 
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        setUserRole(userDoc.exists() ? userDoc.data().role : 'free');
-      } else {
-        setUserRole('free');
-      }
-      setLoading(false);
-    };
-    fetchUserRole();
-  }, []);
-
-  // if (loading) return <div className={styles.loadingScreen}>جاري التحميل...</div>;
+  // 2. حالة التحميل المركزية
   if (loading) return (
     <div className={styles.loadingScreen}>
       <div className={styles.loaderBox}>
@@ -36,6 +23,18 @@ export default function SpeakWithAI() {
       </div>
     </div>
   );
+
+  // 3. تحديد الرتبة (إلى ما كانش مسجل كاع، كيتعتبر free أوتوماتيكياً)
+  const userRole = userData?.role || 'free';
+
+  // 4. حماية إضافية (اختيارية): إلى بغيتي تمنع شي حد ما مسجلش من الدخول لهاد الصفحة نهائياً
+  if (!isAuthenticated) {
+    return (
+      <div className={styles.loadingScreen}>
+        <h2>المرجو تسجيل الدخول لاكتشاف هذه الميزة</h2>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.layoutContainer} dir="rtl">
